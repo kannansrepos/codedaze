@@ -1,24 +1,18 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+import { Roboto } from 'next/font/google';
 import './globals.css';
 import Nav from './components/nav/nav';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+const roboto = Roboto({
+  weight: ['400', '900'],
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
   title:
-    'Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More',
+    'Code Daze - Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More',
   description:
-    'Discover the latest tutorials, tips, and in-depth articles on .NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Docker, Microservices, and modern web development. Stay updated with the newest trends and best practices to level up your skills and build scalable applications.',
+    'Welcome to Code Daze, Discover the latest tutorials, tips, and in-depth articles on .NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Docker, Microservices, and modern web development. Stay updated with the newest trends and best practices to level up your skills and build scalable applications.',
 };
 
 export default function RootLayout({
@@ -32,11 +26,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta
           name="title"
-          content="Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More"
+          content="Code Daze -Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More"
         />
         <meta
           name="description"
-          content="Discover the latest tutorials, tips, and in-depth articles on .NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Docker, Microservices, and modern web development. Stay updated with the newest trends and best practices to level up your skills and build scalable applications."
+          content="Welcome to Code Daze, Discover the latest tutorials, tips, and in-depth articles on .NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Docker, Microservices, and modern web development. Stay updated with the newest trends and best practices to level up your skills and build scalable applications."
         />
         <meta
           name="keywords"
@@ -68,9 +62,7 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="/logo.png" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={` ${roboto.className} antialiased`}>
         <Nav />
         {children}
       </body>

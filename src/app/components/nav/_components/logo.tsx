@@ -2,9 +2,16 @@ import Image from 'next/image';
 
 const Logo = () => {
   return (
-    <div className="flex">
-      <Image src={'/logo.png'} alt="logo for codedaze" height={80} width={80} />
-      <p className="font-bold text-lg py-6 text-blue-900">CodeDaze</p>
+    <div className="flex items-center gap-2">
+      <Image
+        src={'/m_logo.png'}
+        alt="logo for codedaze"
+        height={40}
+        width={40}
+      />
+      <p className="font-bold text-lg text-primary-foreground tracking-wider hidden md:flex">
+        Code Daze
+      </p>
     </div>
   );
 };
