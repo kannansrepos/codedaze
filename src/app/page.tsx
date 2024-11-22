@@ -1,3 +1,13 @@
+'use client';
+import Banner from './components/banner';
+import BlogPostComponent from './components/posts/blog-post';
+import { DUMMY_DATA } from './components/posts/dummy-data';
+
 export default function Home() {
-  return <p>Hello</p>;
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Banner />
+      <BlogPostComponent data={DUMMY_DATA} />
+    </div>
+  );
 }

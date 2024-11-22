@@ -5,6 +5,7 @@ import { PhoneIcon } from 'lucide-react';
 
 import MobileNav from './_components/mobile-nav';
 import { navMenuData } from '@/lib/data';
+import { ThemeTogglerButton } from '@/components/theme-toggler';
 
 const Nav = () => {
   return (
@@ -30,7 +31,7 @@ const Nav = () => {
             <PhoneIcon className="h-5 w-5" />
             <span className="">+91 9369663350</span>
           </div>
-          <p>Theme</p>
+          <ThemeTogglerButton />
           <MobileNav />
         </div>
       </div>
