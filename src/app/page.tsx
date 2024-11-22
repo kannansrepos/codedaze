@@ -5,7 +5,7 @@ import { DUMMY_DATA } from './components/posts/dummy-data';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <Banner />
       <BlogPostComponent data={DUMMY_DATA} />
     </div>
