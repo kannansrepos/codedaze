@@ -1,9 +1,11 @@
 import Image from 'next/image';
+import { MailIcon } from 'lucide-react';
+
 import { DUMMY_DATA } from '../../components/posts/dummy-data';
 import { Language } from '../../components/posts/types/Language';
 import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
-import { MailIcon } from 'lucide-react';
+import CodeView from '../../components/posts/_components/code-view';
 
 const PostDetail = async ({
   params,
@@ -16,8 +18,8 @@ const PostDetail = async ({
   return (
     <div className="min-h-screen container m-auto">
       {post ? (
-        <div className="flex gap-4 my-4">
-          <div className="flex flex-col gap-2  w-3/4">
+        <div className="flex gap-4 my-4 md:flex-row flex-col">
+          <div className="flex flex-col gap-2 w-full md:w-3/4 p-4">
             <div className="relative text-center">
               <Image
                 src={`/banner/${Language[post.language]}.png`}
@@ -49,11 +51,13 @@ const PostDetail = async ({
                   ></div>
                   {section.code && (
                     <div className="bg-gray-100 p-4 rounded-lg">
-                      <div
+                      <CodeView code={section.code} language={post.language} />
+
+                      {/* <div
                         dangerouslySetInnerHTML={{
                           __html: section.code,
                         }}
-                      ></div>
+                      ></div> */}
                     </div>
                   )}
                   {section.image && (
@@ -82,7 +86,7 @@ const PostDetail = async ({
               ))}
             </div>
           </div>
-          <div className="w-1/4 min-h-screen bg-primary/10 flex flex-col gap-2 p-4">
+          <div className="w-full md:w-1/4 h-auto md:min-h-screen bg-primary/10 flex flex-col gap-2 p-4">
             <div className="flex flex-col gap-2 items-center justify-center">
               <h2 className="font-bold text-lg text-primary">News Letter</h2>
               <p>

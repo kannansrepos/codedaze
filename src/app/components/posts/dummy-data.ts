@@ -22,7 +22,7 @@ export const DUMMY_DATA: BlogPost[] = [
         title: 'How to Use HybridCache',
         content:
           '<p>To use HybridCache, you need to configure it in your application. Here is an example of how to configure HybridCache in your ASP.NET Core application:</p>',
-        code: '<pre><code>services.AddHybridCache(options => { options.UseInMemoryCache(); options.UseDistributedCache(); });</code></pre>',
+        code: 'services.AddHybridCache(options => { options.UseInMemoryCache(); options.UseDistributedCache(); });',
         video: {
           url: 'rjMfDUP4-eQ',
           title: 'Introducing HybridCache in ASP.NET Core',

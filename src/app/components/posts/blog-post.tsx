@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link2Icon, SearchIcon } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface BlogPostProps {
   data: BlogPost[];
@@ -45,19 +46,22 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
                 <CardTitle className="p-8">
                   <div
                     className={cn(
-                      `bg-[url('/banner/${
-                        Language[post.language]
-                      }_short.png')] w-full h-36 bg-cover object-fill bg-center bg-no-repeat flex items-center justify-center text-primary text-3xl font-extrabold`
+                      // `bg-[url('/banner/${
+                      //   Language[post.language]
+                      //}_short.png')]
+                      `relative`
                     )}
                   >
-                    {/* <Image
-                    src={`/banner/${Language[post.language]}.png`}
-                    alt={Language[post.language]}
-                    width={100}
-                    height={100}
-                    className="w-full h-full object-cover"
-                  /> */}
-                    {post.shortTitle.toUpperCase()}
+                    <Image
+                      src={`/banner/${Language[post.language]}.png`}
+                      alt={Language[post.language]}
+                      width={1200}
+                      height={1200}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-4xl font-bold text-primary">
+                      {post.shortTitle.toUpperCase()}
+                    </div>
                   </div>
                 </CardTitle>
                 <CardHeader className="text-lg font-bold text-primary">
