@@ -19,7 +19,7 @@ const PostDetail = async ({
   return (
     <div className="min-h-screen container m-auto">
       {post ? (
-        <div className="flex gap-4 my-4 md:flex-row flex-col">
+        <div className="flex gap-4 md:flex-row flex-col">
           <Head>
             <title>Code Daze: {post.shortTitle}</title>
             <link
@@ -35,13 +35,13 @@ const PostDetail = async ({
                 alt="banner"
                 width={1000}
                 height={1000}
-                className="w-full h-[450px] object-fill"
+                className="w-full h-[300px] object-fill"
               />
-              <div className="absolute top-0 left-0 w-full h-[450px] text-center flex justify-center items-center text-4xl font-bold text-primary">
+              <div className="absolute top-0 left-0 w-full h-[300px] text-center flex justify-center items-center text-4xl font-bold text-primary">
                 {post.shortTitle.toUpperCase()}
               </div>
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 my-5">
               <h2 className="font-bold text-2xl text-primary">{post.title}</h2>
               <div className="flex justify-between items-center text-primary/60 font-bold text-sm">
                 <p>{post.readMin} min read</p>
@@ -50,10 +50,11 @@ const PostDetail = async ({
               <div className="text-lg text-justify">{post.description}</div>
               {post.section.map((section, index) => (
                 <div key={index}>
-                  <div className="font-semibold text-xl text-black/60 dark:text-white/60">
+                  <div className="font-semibold text-xl text-black/60 dark:text-white/60 my-4">
                     {section.title}
                   </div>
                   <div
+                    className="my-4"
                     dangerouslySetInnerHTML={{
                       __html: section.content,
                     }}
@@ -95,7 +96,7 @@ const PostDetail = async ({
               ))}
             </div>
           </div>
-          <div className="w-full md:w-1/4 h-auto md:min-h-screen bg-primary/10 flex flex-col gap-2 p-4">
+          <div className="w-full md:w-1/4 h-auto md:min-h-screen bg-primary/10 flex flex-col gap-2 p-4 mt-4">
             <div className="flex flex-col gap-2 items-center justify-center">
               <h2 className="font-bold text-lg text-primary">News Letter</h2>
               <p>

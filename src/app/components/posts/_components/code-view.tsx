@@ -1,5 +1,5 @@
 'use client';
-// import { CopyBlock, dracula } from 'react-code-blocks';
+import { CopyBlock, dracula } from 'react-code-blocks';
 import { Language } from '../types/Language';
 type CodeViewProps = {
   code: string;
@@ -8,19 +8,14 @@ type CodeViewProps = {
 
 const CodeView = ({ code, language }: CodeViewProps) => {
   return (
-    // <CopyBlock
-    //   text={code}
-    //   language={'typescript'}
-    //   theme={dracula}
-    //   showLineNumbers={false}
-    //   wrapLongLines={true}
-    //   codeBlock
-    // />
-    <div>
-      <p>
-        {language}: {code}
-      </p>
-    </div>
+    <CopyBlock
+      text={code}
+      language={'typescript'}
+      theme={dracula}
+      showLineNumbers={false}
+      wrapLongLines={true}
+      codeBlock
+    />
   );
 };
 

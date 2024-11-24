@@ -1,5 +1,6 @@
 'use client';
 import { cn } from '@/lib/utils';
+import { useDebouncedCallback } from 'use-debounce';
 import { BlogPost } from './types/BlogPost';
 import { Language } from './types/Language';
 import {
@@ -11,18 +12,36 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Link2Icon, SearchIcon } from 'lucide-react';
+import { Link2Icon } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 
 interface BlogPostProps {
   data: BlogPost[];
 }
 
 const BlogPostComponent = ({ data }: BlogPostProps) => {
+  const [filteredData, setFilteredData] = useState(data);
+  const handleSearch = useDebouncedCallback((term) => {
+    if (!term) {
+      setFilteredData(data);
+      return;
+    }
+    setFilteredData(
+      data.filter(
+        (d) =>
+          d.title.indexOf(term) >= 0 ||
+          d.description.indexOf(term) >= 0 ||
+          d.section.findIndex(
+            (s) => s.title.indexOf(term) >= 0 || s.content.indexOf(term) >= 0
+          ) >= 0
+      )
+    );
+  }, 300);
   return (
     <div className="container m-auto flex gap-2 flex-col">
-      <div className="flex items-center justify-center bg-primary/10 p-4 mt-4 gap-2 flex-col">
+      <div className="flex items-center justify-center bg-primary/10 p-4  gap-2 flex-col">
         <h1 className="text-lg font-bold text-primary p-4">
           Search the Post What you need
         </h1>
@@ -31,15 +50,19 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
             type="text"
             placeholder="Search articles"
             className="text-primary placeholder:text-primary border-primary border-2"
+            onChange={(e) => {
+              handleSearch(e.target.value);
+            }}
           />
-          <Button type="submit" variant={'default'}>
-            <SearchIcon />
-            Search
-          </Button>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {data.map((post) => {
+        {filteredData.length === 0 && (
+          <div className="col-span-full flex justify-center items-center">
+            <p className="text-primary text-lg">No data found</p>
+          </div>
+        )}
+        {filteredData.map((post: BlogPost) => {
           return (
             <div key={post.id}>
               <Card className="">
