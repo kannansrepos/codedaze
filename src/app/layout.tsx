@@ -12,9 +12,9 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title:
-    'Code Daze - Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More',
+    'Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud',
   description:
-    'Welcome to Code Daze, Discover the latest tutorials, tips, and in-depth articles on .NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Docker, Microservices, and modern web development. Stay updated with the newest trends and best practices to level up your skills and build scalable applications.',
+    'Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices.',
 };
 
 export default function RootLayout({
@@ -28,11 +28,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta
           name="title"
-          content="Code Daze -Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More"
+          content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"
         />
         <meta
           name="description"
-          content="Welcome to Code Daze, Discover the latest tutorials, tips, and in-depth articles on .NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Docker, Microservices, and modern web development. Stay updated with the newest trends and best practices to level up your skills and build scalable applications."
+          content="Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices."
         />
         <meta
           name="keywords"
@@ -40,11 +40,11 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More"
+          content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"
         />
         <meta
           property="og:description"
-          content="Explore tutorials and tips on .NET, Angular, React.js, Node.js, Microservices, Docker, and modern web development to advance your skills."
+          content="Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices."
         />
         <meta
           property="og:image"
@@ -54,11 +54,11 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta
           name="twitter:title"
-          content="Ultimate Developer Blog: .NET, Angular, React, Node.js, Microservices, Docker, Tailwind CSS, and More"
+          content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"
         />
         <meta
           name="twitter:description"
-          content="Stay up-to-date with tutorials and best practices on .NET, Angular, Node.js, Docker, and more to build scalable web applications."
+          content="Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices."
         />
         <meta name="twitter:image" content="URL_of_an_image_for_Twitter_card" />
         <meta name="twitter:card" content="summary_large_image" />

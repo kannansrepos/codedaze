@@ -23,9 +23,9 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
   return (
     <div className="container m-auto flex gap-2 flex-col">
       <div className="flex items-center justify-center bg-primary/10 p-4 mt-4 gap-2 flex-col">
-        <p className="text-lg font-bold text-primary p-4">
+        <h1 className="text-lg font-bold text-primary p-4">
           Search the Post What you need
-        </p>
+        </h1>
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input
             type="text"
