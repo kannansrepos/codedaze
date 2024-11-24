@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="canonical" href="https://codedaze.tech" key="canonical" />
         <meta
           name="title"
           content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"

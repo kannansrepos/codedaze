@@ -6,6 +6,7 @@ import { Language } from '../../components/posts/types/Language';
 import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
 import CodeView from '../../components/posts/_components/code-view';
+import Head from 'next/head';
 
 const PostDetail = async ({
   params,
@@ -19,6 +20,14 @@ const PostDetail = async ({
     <div className="min-h-screen container m-auto">
       {post ? (
         <div className="flex gap-4 my-4 md:flex-row flex-col">
+          <Head>
+            <title>Code Daze: {post.shortTitle}</title>
+            <link
+              rel="canonical"
+              href={`https://codedaze.tech/posts/${postId}`}
+              key="canonical"
+            />
+          </Head>
           <div className="flex flex-col gap-2 w-full md:w-3/4 p-4">
             <div className="relative text-center">
               <Image
