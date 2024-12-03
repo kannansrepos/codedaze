@@ -14,7 +14,7 @@ const AdminPage = () => {
         <CardContent>
           <div>
             <div className="flex justify-end items-center bg-primary/10 p-4">
-              <Button onClick={() => router.push('/skadedit/add-new-post')}>
+              <Button onClick={() => router.push('/skadedit/newpost')}>
                 <PlusIcon />
                 Add New Post
               </Button>

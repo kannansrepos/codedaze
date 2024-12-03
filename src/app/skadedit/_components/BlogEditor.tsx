@@ -68,7 +68,7 @@ const BlogEditor = () => {
         onSubmit={form.handleSubmit(onSubmit, onErrors)}
         className="space-y-2"
       >
-        <div className="flex justify-end items-center bg-primary/10 p-4">
+        <div className="flex justify-end items-center bg-primary/10 p-4 gap-3">
           <Button onClick={() => router.push('/skadedit')}>
             <MoveLeftIcon />
             Back To Post
