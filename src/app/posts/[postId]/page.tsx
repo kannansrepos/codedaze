@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import { MailIcon } from 'lucide-react';
-
-import { DUMMY_DATA } from '../../components/posts/dummy-data';
-import { Language } from '../../components/posts/types/Language';
-import { Input } from '../../../components/ui/input';
-import { Button } from '../../../components/ui/button';
-import CodeView from '../../components/posts/_components/code-view';
 import Head from 'next/head';
+
+import { DUMMY_DATA } from '@/app/components/posts/dummy-data';
+import { Language } from '@/app/components/posts/types/Language';
+import CodeView from '@/app/components/posts/_components/code-view';
+
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const PostDetail = async ({
   params,
@@ -61,7 +62,7 @@ const PostDetail = async ({
                   ></div>
                   {section.code && (
                     <div className="bg-gray-100 p-4 rounded-lg">
-                      <CodeView code={section.code} language={post.language} />
+                      <CodeView code={section.code} />
 
                       {/* <div
                         dangerouslySetInnerHTML={{

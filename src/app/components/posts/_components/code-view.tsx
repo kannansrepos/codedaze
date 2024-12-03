@@ -1,12 +1,10 @@
 'use client';
 import { CopyBlock, dracula } from 'react-code-blocks';
-import { Language } from '../types/Language';
 type CodeViewProps = {
   code: string;
-  language: Language;
 };
 
-const CodeView = ({ code, language }: CodeViewProps) => {
+const CodeView = ({ code }: CodeViewProps) => {
   return (
     <CopyBlock
       text={code}
