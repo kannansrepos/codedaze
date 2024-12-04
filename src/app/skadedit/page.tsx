@@ -15,17 +15,12 @@ import {
 import { Label } from '../../components/ui/label';
 import { Input } from '../../components/ui/input';
 import { useState } from 'react';
-import { useToast } from '../../hooks/use-toast';
 
 const AdminPage = () => {
   const [language, setLanguage] = useState('dotnet');
-  const { toast } = useToast();
   const CreateAutoPosts = async () => {
     const res = await fetch(`/api/autopost?lang=${language}`);
     if (res.ok) {
-      toast({
-        description: 'Post Published',
-      });
     }
     return [];
   };
