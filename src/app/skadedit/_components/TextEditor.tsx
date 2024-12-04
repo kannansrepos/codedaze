@@ -1,6 +1,6 @@
 'use client';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import ReactQuill from 'react-quill';
+// import 'react-quill/dist/quill.snow.css';
 const modules = {
   toolbar: {
     container: [
@@ -20,14 +20,20 @@ interface TextEditorProps {
 }
 const TextEditor = ({ value, onChange }: TextEditorProps) => {
   // const [value, setValue] = useState('');
+  console.log(value);
+  console.log(onChange);
+  console.log(modules);
+
   return (
     <>
-      <ReactQuill
+      {/* <ReactQuill
         theme="snow"
         value={value}
         onChange={onChange}
         modules={modules}
-      />
+      /> */}
+
+      <p>Editor</p>
     </>
   );
 };
