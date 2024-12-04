@@ -56,8 +56,7 @@ const BlogEditor = () => {
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.info('values', values);
-    console.log(values);
+    console.info('values', JSON.stringify(values));
   }
   function onErrors(errors: unknown) {
     console.log('errors', errors);

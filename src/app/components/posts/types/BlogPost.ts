@@ -1,13 +1,11 @@
-import { Language } from './Language';
-
 export type BlogPost = {
   id: string;
-  language: Language;
+  language: string;
   shortTitle: string;
   title: string;
   description: string;
   category: string;
-  date?: Date;
+  date?: string;
   readMin: number;
   section: BlogPostSection[];
 };

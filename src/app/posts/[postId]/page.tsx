@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import { MailIcon } from 'lucide-react';
-import Head from 'next/head';
 
 import { DUMMY_DATA } from '@/app/components/posts/dummy-data';
-import { Language } from '@/app/components/posts/types/Language';
 import CodeView from '@/app/components/posts/_components/code-view';
 
 import { Input } from '@/components/ui/input';
@@ -16,23 +14,24 @@ const PostDetail = async ({
 }) => {
   const postId = (await params).postId;
   const post = DUMMY_DATA.find((post) => post.id === postId);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const metadata = {
+    title: `Code Daze: ${post?.shortTitle}`,
+    links: [
+      {
+        rel: 'canonical',
+        href: `https://codedaze.tech/posts/${postId}`,
+      },
+    ],
+  };
   return (
     <div className="min-h-screen container m-auto">
       {post ? (
         <div className="flex gap-4 md:flex-row flex-col">
-          <Head>
-            <title>Code Daze: {post.shortTitle}</title>
-            <link
-              rel="canonical"
-              href={`https://codedaze.tech/posts/${postId}`}
-              key="canonical"
-            />
-          </Head>
           <div className="flex flex-col gap-2 w-full md:w-3/4 p-4">
             <div className="relative text-center">
               <Image
-                src={`/banner/${Language[post.language]}.png`}
+                src={`/banner/${post.language}.png`}
                 alt="banner"
                 width={1000}
                 height={1000}
@@ -46,7 +45,7 @@ const PostDetail = async ({
               <h2 className="font-bold text-2xl text-primary">{post.title}</h2>
               <div className="flex justify-between items-center text-primary/60 font-bold text-sm">
                 <p>{post.readMin} min read</p>
-                <p>22 November, 2024</p>
+                <p>{post.date}</p>
               </div>
               <div className="text-lg text-justify">{post.description}</div>
               {post.section.map((section, index) => (
@@ -71,7 +70,7 @@ const PostDetail = async ({
                       ></div> */}
                     </div>
                   )}
-                  {section.image && (
+                  {/* {section.image && (
                     <div className="flex justify-center">
                       <Image
                         src={section.image}
@@ -79,10 +78,14 @@ const PostDetail = async ({
                         width={1000}
                         height={1000}
                         className="w-full h-auto"
+                        // onError={(e) => {
+                        //   e.currentTarget.src =
+                        //     'https://media.istockphoto.com/id/2085507701/photo/close-up-hand-of-asian-prompt-engineer-developer-coding-app-with-software-data-sitting-in.jpg?s=2048x2048&w=is&k=20&c=uLnBYcrt08x0lU4TYs9a3NX_xuzLV26_KfSXbfwH3Ac=';
+                        // }}
                       />
                     </div>
-                  )}
-                  {section.video && (
+                  )} */}
+                  {section.video?.url && (
                     <div className="flex justify-center">
                       <iframe
                         className="w-full h-[500px]"

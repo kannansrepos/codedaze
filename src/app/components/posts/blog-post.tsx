@@ -2,7 +2,6 @@
 import { cn } from '@/lib/utils';
 import { useDebouncedCallback } from 'use-debounce';
 import { BlogPost } from './types/BlogPost';
-import { Language } from './types/Language';
 import {
   Card,
   CardContent,
@@ -15,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Link2Icon } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface BlogPostProps {
   data: BlogPost[];
@@ -39,6 +38,9 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
       )
     );
   }, 300);
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
   return (
     <div className="container m-auto flex gap-2 flex-col">
       <div className="flex items-center justify-center bg-primary/10 p-4  gap-2 flex-col">
@@ -76,13 +78,13 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
                     )}
                   >
                     <Image
-                      src={`/banner/${Language[post.language]}.png`}
-                      alt={Language[post.language]}
+                      src={`/banner/${post.language}.png`}
+                      alt={post.language}
                       width={1200}
                       height={1200}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-4xl font-bold text-primary">
+                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary">
                       {post.shortTitle.toUpperCase()}
                     </div>
                   </div>

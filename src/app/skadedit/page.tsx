@@ -4,8 +4,31 @@ import { PlusIcon } from 'lucide-react';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../../components/ui/dialog';
+import { Label } from '../../components/ui/label';
+import { Input } from '../../components/ui/input';
+import { useState } from 'react';
+import { useToast } from '../../hooks/use-toast';
 
 const AdminPage = () => {
+  const [language, setLanguage] = useState('dotnet');
+  const { toast } = useToast();
+  const CreateAutoPosts = async () => {
+    const res = await fetch(`/api/autopost?lang=${language}`);
+    if (res.ok) {
+      toast({
+        description: 'Post Published',
+      });
+    }
+    return [];
+  };
   const router = useRouter();
   return (
     <div className="h-screen w-screen flex items-start justify-start p-4 container mx-auto">
@@ -13,7 +36,43 @@ const AdminPage = () => {
         <CardHeader>Blog Posts for your Blog</CardHeader>
         <CardContent>
           <div>
-            <div className="flex justify-end items-center bg-primary/10 p-4">
+            <div className="flex justify-end items-center bg-primary/10 p-4 gap-3">
+              <Dialog>
+                <DialogTrigger>Create Auto Post</DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      your account and remove your data from our servers.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex items-center space-x-2">
+                    <div className="grid flex-1 gap-2">
+                      <Label htmlFor="link" className="sr-only">
+                        Language
+                      </Label>
+                      <Input
+                        id="language"
+                        defaultValue="dotnet"
+                        onChange={(e) => {
+                          setLanguage(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      size="sm"
+                      className="px-3"
+                      onClick={async () => {
+                        await CreateAutoPosts();
+                      }}
+                    >
+                      Create Post
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
               <Button onClick={() => router.push('/skadedit/newpost')}>
                 <PlusIcon />
                 Add New Post
