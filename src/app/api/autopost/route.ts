@@ -48,11 +48,9 @@ const GET = async (req: Request) => {
       text: 'Blog Posted',
       response: responseFromFirebase,
     });
-  } catch {
-    return NextResponse.json(
-      { error: 'Unable to fetch data' },
-      { status: 500 }
-    );
+  } catch (e) {
+    console.log(e);
+    return NextResponse.json({ error: e }, { status: 500 });
   }
 };
 
