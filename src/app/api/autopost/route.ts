@@ -50,7 +50,10 @@ const GET = async (req: Request) => {
     });
   } catch (e) {
     console.log(e);
-    return NextResponse.json({ error: e }, { status: 500 });
+    return NextResponse.json(
+      { error: e, apikey: process.env.API_KEY },
+      { status: 500 }
+    );
   }
 };
 
