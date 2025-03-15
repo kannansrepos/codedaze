@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import createNewPost, { getPosts } from '../../../db/service';
-import { DUMMY_DATA } from '../../components/posts/dummy-data';
+import createNewPost, { getPosts } from '@/db/service';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
