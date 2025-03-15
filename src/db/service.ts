@@ -8,11 +8,9 @@ import {
   InsertSection,
 } from '../db/schema';
 import { BlogPost } from '../types/BlogPost';
-import { PgTransaction } from 'drizzle-orm/pg-core';
-
 const createNewPost = async (data: BlogPost) => {
   // Start a transaction
-  return await db.transaction(async (tx) => {
+  return await db.transaction(async () => {
     // Create the post and get the ID
     const postId = await createPost({
       url: data.url,
