@@ -4,7 +4,7 @@ import { Roboto } from 'next/font/google';
 import './globals.css';
 import Nav from './components/nav/nav';
 import { ThemeProvider } from '@/components/theme-provider';
-
+import { ToastContainer } from 'react-toastify';
 const roboto = Roboto({
   weight: ['400', '900'],
   subsets: ['latin'],
@@ -74,6 +74,7 @@ export default function RootLayout({
         >
           <Nav />
           {children}
+          <ToastContainer />
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { useDebouncedCallback } from 'use-debounce';
-import { BlogPost } from './types/BlogPost';
+import { BlogPost } from '../../../types/BlogPost';
 import {
   Card,
   CardContent,

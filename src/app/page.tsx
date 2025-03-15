@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Banner from './components/banner';
 import BlogPostComponent from './components/posts/blog-post';
-import { BlogPost } from './components/posts/types/BlogPost';
+import { BlogPost } from '../types/BlogPost';
 
 export default function Home() {
   const [posts, setPosts] = useState<BlogPost[]>([]);

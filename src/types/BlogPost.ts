@@ -16,8 +16,6 @@ export type BlogPostSection = {
   code?: string;
   image?: string;
   imageAlt?: string;
-  video?: {
-    url: string;
-    title: string;
-  };
+  videoUrl?: string;
+  videoTitle?: string;
 };

@@ -1,4 +1,4 @@
-import { BlogPost } from './types/BlogPost';
+import { BlogPost } from '../../../types/BlogPost';
 
 export const DUMMY_DATA: BlogPost[] = [
   {
@@ -19,10 +19,8 @@ export const DUMMY_DATA: BlogPost[] = [
         code: '',
         image: 'https://source.unsplash.com/random/800x600/?productivity,code', // Replace with a Pexels image
         imageAlt: 'Image representing developer productivity',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
       {
         title: '1. Leverage Code Generation',
@@ -31,10 +29,8 @@ export const DUMMY_DATA: BlogPost[] = [
         code: 'dotnet ef dbcontext scaffold "Server=(localdb)\\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models',
         image: 'https://source.unsplash.com/random/800x600/?code,generation', // Replace with a Pexels image
         imageAlt: 'Code generation in action',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
       {
         title: '2. Master the Debugger',
@@ -44,10 +40,8 @@ export const DUMMY_DATA: BlogPost[] = [
         image:
           'https://source.unsplash.com/random/800x600/?debugging,VisualStudio', // Replace with a Pexels image
         imageAlt: 'Visual Studio Debugger',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
       {
         title: '3. Embrace NuGet Packages',
@@ -56,10 +50,8 @@ export const DUMMY_DATA: BlogPost[] = [
         code: 'dotnet add package Microsoft.Extensions.Caching.Memory',
         image: 'https://source.unsplash.com/random/800x600/?NuGet,packages', // Replace with a Pexels image
         imageAlt: 'NuGet Package Manager',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
       {
         title: '4. Implement Unit Testing',
@@ -68,10 +60,8 @@ export const DUMMY_DATA: BlogPost[] = [
         code: '[Fact]\npublic void MyTest() {\n  //Test assertions here\n}',
         image: 'https://source.unsplash.com/random/800x600/?unit,testing', // Replace with a Pexels image
         imageAlt: 'Unit Testing Example',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
       {
         title: '5. Utilize IDE Features Effectively',
@@ -81,10 +71,8 @@ export const DUMMY_DATA: BlogPost[] = [
         image:
           'https://source.unsplash.com/random/800x600/?visualstudio,productivity', // Replace with a Pexels image
         imageAlt: 'Visual Studio Productivity Features',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
       {
         title: 'Conclusion:  Unlock Your Potential',
@@ -93,10 +81,8 @@ export const DUMMY_DATA: BlogPost[] = [
         code: '',
         image: 'https://source.unsplash.com/random/800x600/?developer,success', // Replace with a Pexels image
         imageAlt: 'Successful Developer',
-        video: {
-          url: '',
-          title: '',
-        },
+        videoUrl: '',
+        videoTitle: '',
       },
     ],
   },
