@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase only if we have the required config
 let app;
-
+console.info('Firebase config:', firebaseConfig);
 // Make sure we have at least the essential config values
 if (firebaseConfig.apiKey && firebaseConfig.projectId) {
   try {
