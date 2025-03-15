@@ -30,15 +30,18 @@ const GET = async (req: Request) => {
     const blogResult = await model.generateContent(blogPrompt + aditinalPrompt);
     const blogResponse = blogResult.response;
     const blogText = blogResponse.text();
-    console.log(blogText);
     const blogData = ParseMardownText(blogText);
+    console.log(blogData);
     const id = uuidv4();
     const blogPost = JSON.parse(blogData);
+
+    // const sanitizedBlogPost = sanitizeFirestoreData(blogData);
+    // console.log(sanitizedBlogPost);
     blogPost.date = formatDateWithIntl(new Date());
 
     const responseFromFirebase = await setDoc(
-      doc(db, collection_name, id),
-      blogPost,
+      doc(db!, collection_name, id),
+      blogPost, // Use the sanitized data here
       {
         merge: true,
       }
@@ -56,14 +59,16 @@ const GET = async (req: Request) => {
     );
   }
 };
-
 const ParseMardownText = (data: string) => {
+  // Remove markdown code block indicators (```json and ```)
   const result = data
-    .replace(/^```json\n/, '')
-    .replace(/```\n/g, '')
-    .replace(/&#64;/g, '@')
-    .replace(/[]/g, '')
-    .trim();
+    .replace(/^```json\n/, '') // Remove opening ```json tag
+    .replace(/```$/m, '') // Remove closing ``` tag
+    .replace(/```\n/g, '') // Remove any other code block markers
+    .replace(/&#64;/g, '@') // Replace HTML entity for @ symbol
+    .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width spaces and other invisible characters
+    .trim(); // Remove extra whitespace
+
   return result;
 };
 export { GET };

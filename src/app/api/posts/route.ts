@@ -21,10 +21,10 @@ const GET = async (req: Request) => {
     const pageSize = searchParams.get('pageSize');
     const pageToken = searchParams.get('pageToken');
     const pageSizeNum = Number(pageSize);
-    const colRef = collection(db, collection_name);
+    const colRef = collection(db!, collection_name);
     let q = query(colRef, orderBy('date', 'desc'), limit(pageSizeNum));
     if (pageToken) {
-      const startAfterDoc = await getDoc(doc(db, collection_name, pageToken));
+      const startAfterDoc = await getDoc(doc(db!, collection_name, pageToken));
       q = query(
         colRef,
         orderBy('date'),
@@ -49,7 +49,7 @@ const POST = async (request: Request) => {
   try {
     const data = await request.json();
     const id = uuidv4();
-    const result = await setDoc(doc(db, collection_name, id), data, {
+    const result = await setDoc(doc(db!, collection_name, id), data, {
       merge: true,
     });
     return NextResponse.json({ post: result, id });

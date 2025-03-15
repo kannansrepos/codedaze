@@ -27,10 +27,6 @@ const Nav = () => {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-          <div className="hidden items-center gap-2 text-sm font-medium md:flex">
-            <PhoneIcon className="h-5 w-5" />
-            <span className="">+91 9369663350</span>
-          </div>
           <ThemeTogglerButton />
           <MobileNav />
         </div>

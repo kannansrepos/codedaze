@@ -43,15 +43,15 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
   }, [data]);
   return (
     <div className="container m-auto flex gap-2 flex-col">
-      <div className="flex items-center justify-center bg-primary/10 p-4  gap-2 flex-col">
-        <h1 className="text-lg font-bold text-primary p-4">
+      <div className="flex items-center justify-center bg-muted p-4 mt-2 gap-2 flex-col">
+        <h1 className="text-lg font-bold dark:text-primary-foreground p-4">
           Search the Post What you need
         </h1>
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input
             type="text"
             placeholder="Search articles"
-            className="text-primary placeholder:text-primary border-primary border-2"
+            className="dark:text-primary-foreground dark:placeholder:text-primary-foreground dark:border-gray-600 border-2"
             onChange={(e) => {
               handleSearch(e.target.value);
             }}
@@ -84,22 +84,22 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
                       height={1200}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary">
+                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary dark:text-primary-foreground">
                       {post.shortTitle.toUpperCase()}
                     </div>
                   </div>
                 </CardTitle>
-                <CardHeader className="text-lg font-bold text-primary">
+                <CardHeader className="text-lg font-bold text-primary dark:text-primary-foreground">
                   {post.title}
                 </CardHeader>
                 <CardContent className="text-justify">
                   {post.description}
                 </CardContent>
                 <CardFooter className="flex items-end justify-end">
-                  <Button>
+                  <Button className="hover:border-primary border-2 hover:text-primary dark:hover:bg-primary-foreground dark:hover:text-primary">
                     <Link
                       href={`/posts/${post.id}`}
-                      className="flex items-center"
+                      className="flex items-center hover:text-primary dark:hover:text-primary-foreground hover:border-primary border-1"
                     >
                       <Link2Icon className="mr-2 h-4 w-4" />
                       Read More...

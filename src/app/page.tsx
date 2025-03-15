@@ -7,6 +7,7 @@ import { BlogPost } from './components/posts/types/BlogPost';
 export default function Home() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [nextPageToken, setNextPageToken] = useState('');
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const GetAllPosts = async () => {
@@ -23,9 +24,16 @@ export default function Home() {
     };
 
     const fetchPosts = async () => {
-      const posts = await GetAllPosts();
-      setPosts(posts.data);
-      setNextPageToken(posts.nextPageToken);
+      setLoading(true);
+      try {
+        const posts = await GetAllPosts();
+        setPosts(posts.data);
+        setNextPageToken(posts.nextPageToken);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching completes
+      }
     };
     fetchPosts();
   }, []);
@@ -33,7 +41,13 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Banner />
-      {posts && <BlogPostComponent data={posts} />}
+      {loading ? (
+        <div className="flex justify-center items-center content-center py-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      ) : (
+        posts && <BlogPostComponent data={posts} />
+      )}
     </div>
   );
 }
