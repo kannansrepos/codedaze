@@ -34,7 +34,7 @@ const postSectionsTable = pgTable('postSections_table', {
     .$onUpdate(() => new Date()),
 });
 // Helper function to create insert and select types
-type TableTypes<T extends { $inferInsert: any; $inferSelect: any }> = {
+type TableTypes<T extends { $inferInsert: unknown; $inferSelect: unknown }> = {
   Insert: T['$inferInsert'];
   Select: T['$inferSelect'];
 };

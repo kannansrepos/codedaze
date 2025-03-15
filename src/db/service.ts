@@ -8,35 +8,30 @@ import {
   InsertSection,
 } from '../db/schema';
 import { BlogPost } from '../types/BlogPost';
+import { PgTransaction } from 'drizzle-orm/pg-core';
 
 const createNewPost = async (data: BlogPost) => {
   // Start a transaction
   return await db.transaction(async (tx) => {
     // Create the post and get the ID
-    const postId = await createPost(
-      {
-        url: data.url,
-        metadata: data.metadata,
-        language: data.language,
-        shortTitle: data.shortTitle,
-        title: data.title,
-        description: data.description,
-        category: data.category,
-        readMin: data.readMin,
-      },
-      tx
-    );
+    const postId = await createPost({
+      url: data.url,
+      metadata: data.metadata,
+      language: data.language,
+      shortTitle: data.shortTitle,
+      title: data.title,
+      description: data.description,
+      category: data.category,
+      readMin: data.readMin,
+    });
     console.log('postId', postId);
     // Use Promise.all to handle all section creations in parallel
     await Promise.all(
       data.section.map((section) =>
-        createSection(
-          {
-            ...section,
-            postId,
-          },
-          tx
-        )
+        createSection({
+          ...section,
+          postId,
+        })
       )
     );
 
@@ -44,8 +39,8 @@ const createNewPost = async (data: BlogPost) => {
   });
 };
 
-export async function createPost(data: InsertPost, tx?: any) {
-  const queryBuilder = tx || db;
+export async function createPost(data: InsertPost) {
+  const queryBuilder = db;
   const result = await queryBuilder
     .insert(postsTable)
     .values(data)
@@ -143,12 +138,11 @@ export async function getPost(id: SelectPost['id']) {
     section: post.section ? [{ ...post.section }] : [],
   } as unknown as BlogPost;
 }
-export async function createSection(data: InsertSection, tx?: any) {
+export async function createSection(data: InsertSection, tx?: typeof db) {
   const queryBuilder = tx || db;
   return await queryBuilder
     .insert(postSectionsTable)
     .values(data)
     .returning({ id: postSectionsTable.id });
 }
-
 export default createNewPost;
