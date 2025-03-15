@@ -1,4 +1,3 @@
-import { url } from 'inspector';
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
 import {
@@ -7,7 +6,7 @@ import {
   postsTable,
   postSectionsTable,
   InsertSection,
-} from '../db/schema';
+} from '@/db/schema';
 import { BlogPost } from '../types/BlogPost';
 
 const createNewPost = async (data: BlogPost) => {

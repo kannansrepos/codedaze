@@ -7,12 +7,11 @@ import CodeView from '@/app/components/posts/_components/code-view';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { usePost } from '@/context/PostContext';
-import { Metadata, ResolvingMetadata } from 'next';
 import MetaDataComponent from '../../components/metaData';
 
 const PostDetail = ({ params }: { params: { postId: string } }) => {
   console.log('Params:', params);
-  const { viewPost: post, posts, setViewPost, setLoading } = usePost();
+  const { viewPost: post, posts, setViewPost } = usePost();
   if (!post) {
     const postData = posts.find((p) => p.url === params.postId);
     if (!postData) {

@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode, useEffect, useState } from 'react';
-import { BlogContextDefaulrValue, PostContext } from '../context/PostContext';
+import { PostContext } from '../context/PostContext';
 import { BlogPost } from '../types/BlogPost';
 import { toast } from 'react-toastify';
 
@@ -35,7 +35,7 @@ const PostContextProvider = ({ children }: Props) => {
         const posts = await GetAllPosts();
         setPosts(posts.data);
         setNextPageToken(posts.nextPageToken);
-      } catch (error) {
+      } catch {
         toast.error('Error fetching posts');
       } finally {
         setLoading(false);

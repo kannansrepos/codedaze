@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { v4 as uuidv4 } from 'uuid';
 import { Prompt } from '@/lib/data';
 import { formatDateWithIntl } from '@/lib/utils';
 import createNewPost from '@/db/service';
-
-const collection_name = 'codedaze_posts';
 
 const GET = async (req: Request) => {
   try {
