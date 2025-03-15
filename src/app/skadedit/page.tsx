@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { PlusIcon } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,12 +16,31 @@ import {
 import { Label } from '../../components/ui/label';
 import { Input } from '../../components/ui/input';
 import { useState } from 'react';
+import { usePost } from '../../context/PostContext';
 
 const AdminPage = () => {
   const [language, setLanguage] = useState('dotnet');
+  const { setLoading } = usePost();
   const CreateAutoPosts = async () => {
-    const res = await fetch(`/api/autopost?lang=${language}`);
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/autopost?lang=${language}`);
+      if (res.ok) {
+      }
+      return [];
+    } catch {
+      toast.error('Error creating posts');
+    } finally {
+      setLoading(false);
+    }
+  };
+  const CreateSamplePosts = async () => {
+    const res = await fetch(`/api/blogpost`, {
+      method: 'POST',
+      body: JSON.stringify({}),
+    });
     if (res.ok) {
+      toast.success('Created Sample Posts!');
     }
     return [];
   };
@@ -71,6 +91,16 @@ const AdminPage = () => {
               <Button onClick={() => router.push('/skadedit/newpost')}>
                 <PlusIcon />
                 Add New Post
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                className="px-3"
+                onClick={async () => {
+                  await CreateSamplePosts();
+                }}
+              >
+                Create Sample Post
               </Button>
             </div>
           </div>

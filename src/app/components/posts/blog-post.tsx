@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { useDebouncedCallback } from 'use-debounce';
-import { BlogPost } from './types/BlogPost';
+import { BlogPost } from '../../../types/BlogPost';
 import {
   Card,
   CardContent,
@@ -12,23 +12,27 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link2Icon } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { usePost } from '@/context/PostContext';
+import { useRouter } from 'next/navigation';
 
-interface BlogPostProps {
-  data: BlogPost[];
-}
-
-const BlogPostComponent = ({ data }: BlogPostProps) => {
-  const [filteredData, setFilteredData] = useState(data);
+const BlogPostComponent = () => {
+  const router = useRouter();
+  const { setViewPost, posts } = usePost();
+  const [filteredData, setFilteredData] = useState(posts);
+  const ViewPost = (post: BlogPost) => {
+    console.log('Button Clicked!');
+    setViewPost(post);
+    router.push(`/posts/${post.url}`);
+  };
   const handleSearch = useDebouncedCallback((term) => {
     if (!term) {
-      setFilteredData(data);
+      setFilteredData(posts);
       return;
     }
     setFilteredData(
-      data.filter(
+      posts.filter(
         (d) =>
           d.title.indexOf(term) >= 0 ||
           d.description.indexOf(term) >= 0 ||
@@ -39,8 +43,8 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
     );
   }, 300);
   useEffect(() => {
-    setFilteredData(data);
-  }, [data]);
+    setFilteredData(posts);
+  }, [posts]);
   return (
     <div className="container m-auto flex gap-2 flex-col">
       <div className="flex items-center justify-center bg-muted p-4 mt-2 gap-2 flex-col">
@@ -96,14 +100,12 @@ const BlogPostComponent = ({ data }: BlogPostProps) => {
                   {post.description}
                 </CardContent>
                 <CardFooter className="flex items-end justify-end">
-                  <Button className="hover:border-primary border-2 hover:text-primary dark:hover:bg-primary-foreground dark:hover:text-primary">
-                    <Link
-                      href={`/posts/${post.id}`}
-                      className="flex items-center hover:text-primary dark:hover:text-primary-foreground hover:border-primary border-1"
-                    >
-                      <Link2Icon className="mr-2 h-4 w-4" />
-                      Read More...
-                    </Link>
+                  <Button
+                    className="hover:border-primary border-2 hover:text-primary dark:hover:bg-primary-foreground dark:hover:text-primary"
+                    onClick={() => ViewPost(post)}
+                  >
+                    <Link2Icon className="mr-2 h-4 w-4" />
+                    Read More...
                   </Button>
                 </CardFooter>
               </Card>

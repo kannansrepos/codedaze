@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../../../components/ui/select';
-import { Language } from '../../components/posts/types/Language';
+import { Language } from '../../../types/Language';
 import { MoveLeftIcon, SaveIcon } from 'lucide-react';
 const formSchema = z.object({
   pageId: z.string().min(2).max(50),

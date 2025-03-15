@@ -4,7 +4,8 @@ import { Roboto } from 'next/font/google';
 import './globals.css';
 import Nav from './components/nav/nav';
 import { ThemeProvider } from '@/components/theme-provider';
-
+import { ToastContainer } from 'react-toastify';
+import PostContextProvider from '../providers/PostContextProvider';
 const roboto = Roboto({
   weight: ['400', '900'],
   subsets: ['latin'],
@@ -73,7 +74,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Nav />
-          {children}
+          <PostContextProvider>{children}</PostContextProvider>
+          <ToastContainer />
         </ThemeProvider>
       </body>
     </html>

@@ -1,5 +1,7 @@
 export type BlogPost = {
   id: string;
+  url: string;
+  metadata: string;
   language: string;
   shortTitle: string;
   title: string;
@@ -16,8 +18,6 @@ export type BlogPostSection = {
   code?: string;
   image?: string;
   imageAlt?: string;
-  video?: {
-    url: string;
-    title: string;
-  };
+  videoUrl?: string;
+  videoTitle?: string;
 };
