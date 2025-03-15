@@ -1,8 +1,6 @@
 import React from 'react';
 import Logo from './_components/logo';
 import Link from 'next/link';
-import { PhoneIcon } from 'lucide-react';
-
 import MobileNav from './_components/mobile-nav';
 import { navMenuData } from '@/lib/data';
 import { ThemeTogglerButton } from '@/components/theme-toggler';

@@ -13,9 +13,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Check if we're in the browser
-const isBrowser = typeof window !== 'undefined';
-
 // Initialize Firebase only if we have the required config
 let app;
 
