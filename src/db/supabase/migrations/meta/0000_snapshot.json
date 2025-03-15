@@ -1,5 +1,5 @@
 {
-  "id": "5111ee05-bd8e-4fea-a68f-5b11dca27a85",
+  "id": "b5848160-6700-4f87-be67-cf16075ff50d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,9 +10,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "title": {
           "name": "title",
@@ -44,11 +45,23 @@
           "primaryKey": false,
           "notNull": false
         },
-        "video_id": {
-          "name": "video_id",
-          "type": "integer",
+        "video_url": {
+          "name": "video_url",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "video_title": {
+          "name": "video_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "postId": {
+          "name": "postId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -66,12 +79,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "postSections_table_video_id_video_table_id_fk": {
-          "name": "postSections_table_video_id_video_table_id_fk",
+        "postSections_table_postId_posts_table_id_fk": {
+          "name": "postSections_table_postId_posts_table_id_fk",
           "tableFrom": "postSections_table",
-          "tableTo": "video_table",
+          "tableTo": "posts_table",
           "columnsFrom": [
-            "video_id"
+            "postId"
           ],
           "columnsTo": [
             "id"
@@ -92,9 +105,22 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
+        },
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "language": {
           "name": "language",
@@ -169,50 +195,6 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.video_table": {
-      "name": "video_table",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "title": {
-          "name": "title",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "url": {
-          "name": "url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

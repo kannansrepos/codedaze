@@ -12,8 +12,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const body = await req.json();
-  DUMMY_DATA.map((post) => {
-    createNewPost(post);
-  });
+  console.log('received body: ', body);
+  await createNewPost(body);
   return NextResponse.json({ message: 'ok' });
 }

@@ -1,3 +1,4 @@
+import { url } from 'inspector';
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
 import {
@@ -15,6 +16,8 @@ const createNewPost = async (data: BlogPost) => {
     // Create the post and get the ID
     const postId = await createPost(
       {
+        url: data.url,
+        metadata: data.metadata,
         language: data.language,
         shortTitle: data.shortTitle,
         title: data.title,
@@ -24,6 +27,7 @@ const createNewPost = async (data: BlogPost) => {
       },
       tx
     );
+    console.log('postId', postId);
     // Use Promise.all to handle all section creations in parallel
     await Promise.all(
       data.section.map((section) =>
@@ -59,12 +63,64 @@ export async function updatePost(
 export async function deletePost(id: SelectPost['id']) {
   await db.delete(postsTable).where(eq(postsTable.id, id));
 }
-
 export async function getPosts(
   pageSize: number,
   pageToken: string
 ): Promise<{ data: BlogPost[]; nextPageToken: string }> {
+  // First, fetch all posts
   const posts = await db
+    .select({
+      id: postsTable.id,
+      url: postsTable.url,
+      metadata: postsTable.metadata,
+      language: postsTable.language,
+      shortTitle: postsTable.shortTitle,
+      title: postsTable.title,
+      description: postsTable.description,
+      category: postsTable.category,
+      readMin: postsTable.readMin,
+      userId: postsTable.userId,
+      createdAt: postsTable.createdAt,
+      updatedAt: postsTable.updatedAt,
+    })
+    .from(postsTable)
+    .orderBy(postsTable.createdAt)
+    .limit(pageSize);
+
+  // Apply pagination if needed
+  let paginatedPosts = posts;
+  if (pageToken) {
+    const startIndex = pageSize * parseInt(pageToken);
+    paginatedPosts = posts.slice(startIndex, startIndex + pageSize);
+  }
+
+  // For each post, fetch its sections
+  const postsWithSections = await Promise.all(
+    paginatedPosts.map(async (post) => {
+      const sections = await db
+        .select()
+        .from(postSectionsTable)
+        .where(eq(postSectionsTable.postId, post.id));
+
+      return {
+        ...post,
+        id: post.id.toString(),
+        section: sections.map((section) => ({
+          ...section,
+        })),
+      } as BlogPost;
+    })
+  );
+  return {
+    data: postsWithSections,
+    nextPageToken:
+      posts.length > pageSize * (parseInt(pageToken || '0') + 1)
+        ? (parseInt(pageToken || '0') + 1).toString()
+        : '',
+  };
+}
+export async function getPost(id: SelectPost['id']) {
+  const post = await db
     .select({
       id: postsTable.id,
       language: postsTable.language,
@@ -80,39 +136,14 @@ export async function getPosts(
     })
     .from(postsTable)
     .leftJoin(postSectionsTable, eq(postsTable.id, postSectionsTable.postId))
-    .orderBy(postsTable.createdAt)
-    .limit(pageSize);
-  if (pageToken) {
-    const startIndex = pageSize * parseInt(pageToken);
-    posts.slice(startIndex, startIndex + pageSize);
-  }
+    .where(eq(postsTable.id, id))
+    .then((result) => result[0]);
   return {
-    data: posts.map((post) => ({
-      ...post,
-      id: post.id.toString(),
-      section: post.section
-        ? [
-            {
-              id: post.section.id,
-              title: post.section.title,
-              language: post.section.language,
-              shortTitle: post.section.shortTitle,
-              description: post.section.description,
-              category: post.section.category,
-              videoUrl: post.section.videoUrl,
-              videoTitle: post.section.videoTitle,
-              postId: post.section.postId,
-              createdAt: post.section.createdAt,
-              updatedAt: post.section.updatedAt,
-              content: '',
-            },
-          ]
-        : [],
-    })) as BlogPost[],
-    nextPageToken: '',
-  };
+    ...post,
+    id: post.id.toString(),
+    section: post.section ? [{ ...post.section }] : [],
+  } as unknown as BlogPost;
 }
-
 export async function createSection(data: InsertSection, tx?: any) {
   const queryBuilder = tx || db;
   return await queryBuilder

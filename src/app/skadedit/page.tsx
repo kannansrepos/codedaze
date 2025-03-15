@@ -16,14 +16,23 @@ import {
 import { Label } from '../../components/ui/label';
 import { Input } from '../../components/ui/input';
 import { useState } from 'react';
+import { usePost } from '../../context/PostContext';
 
 const AdminPage = () => {
   const [language, setLanguage] = useState('dotnet');
+  const { setLoading } = usePost();
   const CreateAutoPosts = async () => {
-    const res = await fetch(`/api/autopost?lang=${language}`);
-    if (res.ok) {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/autopost?lang=${language}`);
+      if (res.ok) {
+      }
+      return [];
+    } catch {
+      toast.error('Error creating posts');
+    } finally {
+      setLoading(false);
     }
-    return [];
   };
   const CreateSamplePosts = async () => {
     const res = await fetch(`/api/blogpost`, {

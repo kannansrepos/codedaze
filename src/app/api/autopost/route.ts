@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { v4 as uuidv4 } from 'uuid';
-import { setDoc, doc } from 'firebase/firestore';
 import { Prompt } from '@/lib/data';
-import db from '@/lib/firestore-config';
-import { formatDateWithIntl } from '../../../lib/utils';
+import { formatDateWithIntl } from '@/lib/utils';
+import createNewPost from '@/db/service';
 
 const collection_name = 'codedaze_posts';
 
@@ -21,35 +20,25 @@ const GET = async (req: Request) => {
     const result = await model.generateContent(
       Prompt.titlePrompt.replace('{LANGUAGE}', lang!)
     );
+    console.log('Title Requesting');
     const response = result.response;
     const titleText = response.text();
     const title = ParseMardownText(titleText);
     const titleObj = JSON.parse(title);
-    console.log(titleObj.title);
     const blogPrompt = Prompt.prompt.replace('{TITLE}', titleObj.title);
     const blogResult = await model.generateContent(blogPrompt + aditinalPrompt);
     const blogResponse = blogResult.response;
     const blogText = blogResponse.text();
     const blogData = ParseMardownText(blogText);
-    console.log(blogData);
-    const id = uuidv4();
     const blogPost = JSON.parse(blogData);
-
-    // const sanitizedBlogPost = sanitizeFirestoreData(blogData);
-    // console.log(sanitizedBlogPost);
     blogPost.date = formatDateWithIntl(new Date());
-
-    const responseFromFirebase = await setDoc(
-      doc(db!, collection_name, id),
-      blogPost, // Use the sanitized data here
-      {
-        merge: true,
-      }
-    );
+    if (!blogPost.url) {
+      blogPost.url = createUrlSlug(blogPost.title);
+    }
+    const responseData = await createNewPost(blogPost);
     return NextResponse.json({
-      id,
       text: 'Blog Posted',
-      response: responseFromFirebase,
+      response: responseData,
     });
   } catch (e) {
     console.log(e);
@@ -59,6 +48,15 @@ const GET = async (req: Request) => {
     );
   }
 };
+function createUrlSlug(title: string): string {
+  return title
+    .toLowerCase() // Convert to lowercase
+    .trim() // Remove leading/trailing whitespace
+    .replace('.', 'dot')
+    .replace(/[^\w\s-]/g, '') // Remove special characters, keep alphanumeric, spaces, and dashes
+    .replace(/[\s_-]+/g, '-') // Replace spaces, underscores, and multiple dashes with a single dash
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
+}
 const ParseMardownText = (data: string) => {
   // Remove markdown code block indicators (```json and ```)
   const result = data

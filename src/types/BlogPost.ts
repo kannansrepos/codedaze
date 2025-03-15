@@ -1,5 +1,7 @@
 export type BlogPost = {
   id: string;
+  url: string;
+  metadata: string;
   language: string;
   shortTitle: string;
   title: string;

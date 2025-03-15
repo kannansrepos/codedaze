@@ -1,15 +1,10 @@
-import {
-  integer,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  uuid,
-} from 'drizzle-orm/pg-core';
+import { integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { authUsers } from 'drizzle-orm/supabase';
 
 const postsTable = pgTable('posts_table', {
-  id: serial('id').primaryKey(),
+  id: uuid('id').notNull().primaryKey().defaultRandom(),
+  url: text('url').notNull(),
+  metadata: text('metadata'),
   language: text('language').notNull(),
   shortTitle: text('shortTitle').notNull(),
   title: text('title').notNull(),
@@ -24,12 +19,12 @@ const postsTable = pgTable('posts_table', {
 });
 
 const postSectionsTable = pgTable('postSections_table', {
-  id: serial('id').primaryKey(),
+  id: uuid('id').notNull().primaryKey().defaultRandom(),
   title: text('title').notNull(),
-  language: text('content'),
-  shortTitle: text('code'),
-  description: text('image'),
-  category: text('imageAlt'),
+  content: text('content'),
+  code: text('code'),
+  image: text('image'),
+  imageAlt: text('imageAlt'),
   videoUrl: text('video_url'),
   videoTitle: text('video_title'),
   postId: uuid().references(() => postsTable.id, { onDelete: 'cascade' }),
