@@ -1,14 +1,15 @@
 'use client';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 
 import { PostMetadata } from '@/types/PostMetadata';
+
 type PostClientProps = {
   allPosts: PostMetadata[];
 };
 const POSTS_PER_PAGE = 9;
 
-const PostClient = ({ allPosts }: PostClientProps) => {
+const PostClientContent = ({ allPosts }: PostClientProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const page = parseInt(searchParams.get('page') ?? '1');
@@ -16,6 +17,7 @@ const PostClient = ({ allPosts }: PostClientProps) => {
   const headingRef = useRef<HTMLDivElement | null>(null);
 
   const [currentPosts, setCurrentPosts] = useState<PostMetadata[]>([]);
+
   useEffect(() => {
     let posts = [...allPosts];
     if (selectedLanguage) {
@@ -33,6 +35,7 @@ const PostClient = ({ allPosts }: PostClientProps) => {
     setCurrentPosts(posts.slice(startIndex, endIndex));
     console.log(posts);
   }, [allPosts, page, selectedLanguage]);
+
   // Scroll to heading after filter/page change
   useEffect(() => {
     if (headingRef.current) {
@@ -49,11 +52,13 @@ const PostClient = ({ allPosts }: PostClientProps) => {
     : allPosts.length;
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
   const changePage = (newPage: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', newPage.toString());
     router.push(`/posts?${params.toString()}`, { scroll: false });
   };
+
   const changeLanguage = (newLanguage: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (newLanguage) {
@@ -64,6 +69,7 @@ const PostClient = ({ allPosts }: PostClientProps) => {
     params.set('page', '1');
     router.push(`/blog?${params.toString()}`, { scroll: false });
   };
+
   const uniqueLanguages = Array.from(
     new Set(allPosts.map((post) => post.language))
   ).filter(Boolean);
@@ -119,6 +125,14 @@ const PostClient = ({ allPosts }: PostClientProps) => {
         ))}
       </div>
     </>
+  );
+};
+
+const PostClient = ({ allPosts }: PostClientProps) => {
+  return (
+    <Suspense fallback={<div>Loading posts...</div>}>
+      <PostClientContent allPosts={allPosts} />
+    </Suspense>
   );
 };
 
