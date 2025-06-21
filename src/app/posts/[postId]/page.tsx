@@ -47,7 +47,9 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
                   className="w-full h-[300px] object-fill"
                 />
                 <div className="absolute top-0 left-0 w-full h-[300px] text-center flex justify-center items-center text-4xl font-bold text-primary">
-                  {post.shortTitle.toUpperCase()}
+                  <h1 className="bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
+                    {post.shortTitle.toUpperCase()}
+                  </h1>
                 </div>
               </div>
               <div className="flex flex-col gap-3 my-5">

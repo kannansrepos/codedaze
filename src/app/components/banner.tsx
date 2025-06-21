@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { MailIcon } from 'lucide-react';
 const Banner = () => {
   return (
-    <div className="h-80 w-full bg-[url('/bg_search.png')] bg-cover bg-center border-none bg-no-repeat flex items-center justify-center">
+    <div className="h-80 w-full bg-[url('/bg_search.png')] bg-cover bg-center border-none bg-no-repeat flex items-center justify-center ">
       <div className="flex w-full max-w-sm items-center space-x-2">
         <Input
           type="email"

@@ -5,3 +5,8 @@ export enum Language {
   nextjs,
   react,
 }
+
+export enum AIModels {
+  Gemini,
+  DeepSeek,
+}

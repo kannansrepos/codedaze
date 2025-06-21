@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <div className="flex items-center gap-2">
       <Image
-        src={'/m_logo.png'}
+        src={'/m_logo_new.png'}
         alt="logo for codedaze"
         height={40}
         width={40}

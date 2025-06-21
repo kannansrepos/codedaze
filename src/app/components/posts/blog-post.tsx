@@ -88,8 +88,10 @@ const BlogPostComponent = () => {
                       height={1200}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary dark:text-primary-foreground">
-                      {post.shortTitle.toUpperCase()}
+                    <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary dark:text-primary-foreground ">
+                      <h1 className="bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
+                        {post.shortTitle.toUpperCase()}
+                      </h1>
                     </div>
                   </div>
                 </CardTitle>
