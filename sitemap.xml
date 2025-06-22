@@ -19,6 +19,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://codedaze.tech/posts/build-a-model-context-protocol-mcp-server-in-csharp12</loc>
+        <lastmod>2025-06-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://codedaze.tech/posts/dotnet-best-practices-sample1</loc>
         <lastmod>2025-06-22</lastmod>
         <changefreq>monthly</changefreq>
