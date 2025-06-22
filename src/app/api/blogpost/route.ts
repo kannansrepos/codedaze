@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import createNewPost, { getPosts } from '@/db/service';
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const pageSize = Number(searchParams.get('pageSize')) || 10;
   const pageToken = searchParams.get('pageToken') || '';
@@ -9,7 +9,7 @@ export async function GET(req: Request) {
   return NextResponse.json(posts);
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
   console.log('received body: ', body);
   await createNewPost(body);

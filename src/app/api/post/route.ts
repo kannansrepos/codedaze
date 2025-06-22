@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 import { AIPrompts } from '@/lib/Prompts';
@@ -7,7 +7,7 @@ import { GetAIResponse } from '@/lib/DeepSeekAIService';
 import { AIModels } from '@/types/Language';
 import { UploadData } from '@/lib/GithubUtil';
 
-const POST = async (req: Request) => {
+const POST = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
     const action = searchParams.get('action');
@@ -24,7 +24,7 @@ const POST = async (req: Request) => {
     return NextResponse.json({ status: 500, error: e });
   }
 };
-const handleRequest = async (req: Request) => {
+const handleRequest = async (req: NextRequest) => {
   const body = await req.json();
   const { model, topic, language } = body;
   switch (model) {
@@ -73,7 +73,7 @@ const handleDeepSeekAI = async (topic: string, language: string) => {
     data: apiResponse.data,
   });
 };
-const handleGenerateMarkdown = async (req: Request) => {
+const handleGenerateMarkdown = async (req: NextRequest) => {
   try {
     const { markdownContent, fileName, GITHUB_TOKEN } = await req.json();
     const FILE_PATH = `posts/${fileName}.md`;

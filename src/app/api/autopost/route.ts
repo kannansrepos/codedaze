@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Prompt } from '@/lib/data';
 import { formatDateWithIntl } from '@/lib/utils';
 import createNewPost from '@/db/service';
 
-const GET = async (req: Request) => {
+const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
     const lang = searchParams.get('lang');

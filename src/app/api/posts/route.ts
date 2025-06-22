@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import {
   setDoc,
@@ -15,7 +15,7 @@ import {
 import db from '@/lib/firestore-config';
 
 const collection_name = 'codedaze_posts';
-const GET = async (req: Request) => {
+const GET = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
     const pageSize = searchParams.get('pageSize');
@@ -45,7 +45,7 @@ const GET = async (req: Request) => {
     );
   }
 };
-const POST = async (request: Request) => {
+const POST = async (request: NextRequest) => {
   try {
     const data = await request.json();
     const id = uuidv4();
