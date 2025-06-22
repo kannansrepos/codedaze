@@ -6,7 +6,9 @@ const UploadData = async (
   const OWNER = 'kannansrepos';
   const REPO = 'codedaze';
   const BRANCH = 'main';
-  const commitMessage = `Add Blog Post ${FILE_PATH} file via API`; // Step 1: Get the latest commit SHA
+  const commitMessage = `Add Blog Post ${FILE_PATH} file via API`;
+  console.log('Request Received to Upload:', FILE_PATH);
+  // Step 1: Get the latest commit SHA
   const refRes = await fetch(
     `https://api.github.com/repos/${OWNER}/${REPO}/git/ref/heads/${BRANCH}`,
     {

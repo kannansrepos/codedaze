@@ -22,7 +22,6 @@ const createNewPost = async (data: BlogPost) => {
       category: data.category,
       readMin: data.readMin,
     });
-    console.log('postId', postId);
     // Use Promise.all to handle all section creations in parallel
     await Promise.all(
       data.section.map((section) =>

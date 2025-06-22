@@ -47,7 +47,6 @@ const handleGoogleAI = async (topic: string, language: string) => {
   const result = await model.generateContent(prompt);
   const response = result.response;
   const postData = response?.text();
-  console.log('response: ', postData);
   return NextResponse.json({
     status: 200,
     text: 'Blog Posted Created',
@@ -78,7 +77,7 @@ const handleGenerateMarkdown = async (req: NextRequest) => {
     const { markdownContent, fileName, GITHUB_TOKEN } = await req.json();
     const FILE_PATH = `posts/${fileName}.md`;
     const FILE_CONTENT = markdownContent;
-    UploadData(GITHUB_TOKEN, FILE_PATH, FILE_CONTENT);
+    await UploadData(GITHUB_TOKEN, FILE_CONTENT, FILE_PATH);
 
     return NextResponse.json({
       status: 200,

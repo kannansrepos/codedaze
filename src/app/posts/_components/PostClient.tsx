@@ -33,7 +33,6 @@ const PostClientContent = ({ allPosts }: PostClientProps) => {
     const startIndex = (page - 1) * POSTS_PER_PAGE;
     const endIndex = startIndex + POSTS_PER_PAGE;
     setCurrentPosts(posts.slice(startIndex, endIndex));
-    console.log(posts);
   }, [allPosts, page, selectedLanguage]);
 
   // Scroll to heading after filter/page change

@@ -17,7 +17,6 @@ const GET = async (req: NextRequest) => {
     const result = await model.generateContent(
       Prompt.titlePrompt.replace('{LANGUAGE}', lang!)
     );
-    console.log('Title Requesting');
     const response = result.response;
     const titleText = response.text();
     const title = ParseMardownText(titleText);

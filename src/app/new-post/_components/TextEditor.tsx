@@ -104,6 +104,7 @@ const TextEditor = () => {
   };
   const onSubmit = async (values: z.infer<typeof blogEditorFormSchema>) => {
     setIsLoading(true);
+    setMarkdown('');
     await CreatePosts(values.topic, values.language, values.model);
     setIsLoading(false);
   };
@@ -115,8 +116,6 @@ const TextEditor = () => {
     setIsLoading(false);
   };
   function onErrors(errors: unknown) {
-    alert('Button clicked!');
-
     console.log('errors', errors);
   }
 

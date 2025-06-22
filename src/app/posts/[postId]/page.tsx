@@ -10,7 +10,6 @@ import { usePost } from '@/context/PostContext';
 import MetaDataComponent from '../../components/metaData';
 
 const PostDetail = ({ params }: { params: { postId: string } }) => {
-  console.log('Params:', params);
   const { viewPost: post, posts, setViewPost } = usePost();
   if (!post) {
     const postData = posts.find((p) => p.url === params.postId);

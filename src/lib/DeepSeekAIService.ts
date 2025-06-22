@@ -18,12 +18,10 @@ const GetAIResponse = async (prompt: string, metadata?: Metadata) => {
     baseURL: apiUrl,
     headers: apiHeaders,
   });
-  console.log('Api is ready to call with headers: ', apiHeaders);
   const apiResponse = await api.post('/chat/completions', {
     model: apiModel,
     messages: [{ role: 'user', content: prompt }],
   });
-  console.log('Api Response: ', apiResponse.data);
   return apiResponse;
 };
 

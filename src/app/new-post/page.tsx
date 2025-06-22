@@ -33,9 +33,6 @@ const AdminPage = () => {
         }),
       });
       console.log(deepRes);
-      //const res = await fetch(`/api/autopost?lang=${language}`);
-      // if (res.ok) {
-      // }
       return [];
     } catch {
       toast.error('Error creating posts');

@@ -22,7 +22,6 @@ const BlogPostComponent = () => {
   const { setViewPost, posts } = usePost();
   const [filteredData, setFilteredData] = useState(posts);
   const ViewPost = (post: BlogPost) => {
-    console.log('Button Clicked!');
     setViewPost(post);
     router.push(`/posts/${post.url}`);
   };
