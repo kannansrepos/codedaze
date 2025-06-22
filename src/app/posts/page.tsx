@@ -1,13 +1,13 @@
-// ✅ No 'use client' here
-import { GetPostMetadata } from '@/lib/PostUtil';
-import PostClient from './_components/PostClient';
+// import { GetPostMetadata } from '@/lib/PostUtil';
+// import PostClient from './_components/PostClient';
 
 export default function PostsPage() {
-  const posts = GetPostMetadata(); // ✅ Runs only on the server
+  // const posts = GetPostMetadata();
 
   return (
     <div>
-      {posts ? <PostClient allPosts={posts} /> : <p>No post data available</p>}
+      {/* {posts ? <PostClient allPosts={posts} /> : <p>No post data available</p>} */}
+      <p>No post data available</p>
     </div>
   );
 }

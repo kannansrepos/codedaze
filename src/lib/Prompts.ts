@@ -31,7 +31,7 @@ example:"---
 title: "Title of the blog"
 subtitle: "Sub Title Of the Blog"
 readTime: "Read Time Of the Blog"
-date:"currentDate",
+date:"${new Date().toISOString().split('T')[0]}",
 language:"what am passing language"
 meta_description: "Meta Description of the blog"
 full_blog: "Full Blog Content",
