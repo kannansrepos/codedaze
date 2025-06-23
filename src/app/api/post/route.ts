@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { AIPrompts } from '@/lib/Prompts';
 import { GetAIResponse } from '@/lib/DeepSeekAIService';
 import { AIModels } from '@/types/Language';
-import { UploadData } from '@/lib/GithubUtil';
+import { PushToGithub, UploadData } from '@/lib/GithubUtil';
 
 const POST = async (req: NextRequest) => {
   try {
@@ -77,8 +77,11 @@ const handleGenerateMarkdown = async (req: NextRequest) => {
     const { markdownContent, fileName, GITHUB_TOKEN } = await req.json();
     const FILE_PATH = `posts/${fileName}.md`;
     const FILE_CONTENT = markdownContent;
-    await UploadData(GITHUB_TOKEN, FILE_CONTENT, FILE_PATH);
-
+    if (GITHUB_TOKEN == 1) {
+      await PushToGithub(FILE_CONTENT, FILE_PATH);
+    } else {
+      await UploadData(GITHUB_TOKEN, FILE_CONTENT, FILE_PATH);
+    }
     return NextResponse.json({
       status: 200,
       text: 'Blog Posted Created',

@@ -66,7 +66,9 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="/logo.png" />
       </head>
-      <body className={` ${roboto.className} antialiased bg-background`}>
+      <body
+        className={` ${roboto.className} antialiased bg-background w-screen h-screen`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
