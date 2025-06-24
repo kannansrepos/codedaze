@@ -4,6 +4,10 @@ export const navMenuData = [
     href: '/',
   },
   {
+    name: 'Posts',
+    href: '/posts',
+  },
+  {
     name: 'About',
     href: '/about',
   },

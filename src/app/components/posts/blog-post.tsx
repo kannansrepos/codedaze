@@ -4,7 +4,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { BlogPost } from '../../../types/BlogPost';
 import {
   Card,
-  CardContent,
+  // CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -97,9 +97,9 @@ const BlogPostComponent = () => {
                 <CardHeader className="text-lg font-bold text-primary dark:text-primary-foreground">
                   {post.title}
                 </CardHeader>
-                <CardContent className="text-justify">
+                {/* <CardContent className="text-justify">
                   {post.description}
-                </CardContent>
+                </CardContent> */}
                 <CardFooter className="flex items-end justify-end">
                   <Button
                     className="hover:border-primary border-2 hover:text-primary dark:hover:bg-primary-foreground dark:hover:text-primary"

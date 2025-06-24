@@ -67,7 +67,7 @@ export default function RootLayout({
         <link rel="canonical" href="/logo.png" />
       </head>
       <body
-        className={` ${roboto.className} antialiased bg-background w-screen h-screen`}
+        className={` ${roboto.className} antialiased bg-[#F0F0F0] w-screen h-screen`}
       >
         <ThemeProvider
           attribute="class"
