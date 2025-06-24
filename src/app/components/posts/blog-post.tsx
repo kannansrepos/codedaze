@@ -12,10 +12,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link2Icon } from 'lucide-react';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { usePost } from '@/context/PostContext';
 import { useRouter } from 'next/navigation';
+import ImageWithFallback from '@/components/ImageWithFallback';
 
 const BlogPostComponent = () => {
   const router = useRouter();
@@ -74,17 +74,15 @@ const BlogPostComponent = () => {
                 <CardTitle className="p-8">
                   <div
                     className={cn(
-                      // `bg-[url('/banner/${
-                      //   Language[post.language]
-                      //}_short.png')]
-                      `relative`
+                      'relative'
                     )}
                   >
-                    <Image
+                    <ImageWithFallback
                       src={`/banner/${post.language}.png`}
                       alt={post.language}
                       width={1200}
                       height={1200}
+                      fallbackSrc="/banner/codedaze.png"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary dark:text-primary-foreground ">
@@ -112,7 +110,7 @@ const BlogPostComponent = () => {
               </Card>
             </div>
           );
-        })}
+        })}{' '}
       </div>
     </div>
   );

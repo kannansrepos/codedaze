@@ -1,28 +1,24 @@
-import Link from 'next/link';
+import SocialLinks from './posts/SocialLinks';
 
 const Connections = () => {
   return (
-    <div>
-      <h1>🤝 Let’s Connect & Collaborate</h1>
-      <p>
-        Join me across your favorite social channels, where I share expert .NET
-        insights, software engineering deep dives, and real-world coding tips.
-      </p>
-      <div>
-        <Link href="https://twitter.com/jeremy_daly">X</Link>
-        <Link href="https://www.linkedin.com/in/jeremy-daly-657a2512/">
-          LinkedIn
-        </Link>
-        <Link href="https://www.youtube.com/@jeremydaly">YouTube</Link>
-        <Link href="https://www.facebook.com/jeremy.daly.33">Facebook</Link>
-        <Link href="https://www.instagram.com/jeremydaly/">Instagram</Link>
-        <Link href="https://github.com/jeremydaly">GitHub</Link>
-        <Link href="https://www.twitch.tv/jeremydaly">Twitch</Link>
-        <Link href="https://www.tiktok.com/@jeremydaly">TikTok</Link>
-        <Link href="https://www.reddit.com/user/jeremydaly">Reddit</Link>
-        <Link href="https://www.pinterest.com/jeremydaly/">Pinterest</Link>
-        <Link href="https://www.snapchat.com/add/jeremydaly">Snapchat</Link>
-        <Link href="https://www.threads.net/@jeremydaly">Threads</Link>
+    <div className="w-full bg-white rounded-lg shadow-lg p-4">
+      <div className="container mx-auto px-10 flex flex-col gap-4 items-center justify-center">
+        <h1 className="text-4xl bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
+          Let’s Connect & Collaborate
+        </h1>
+        <p className="text-lg">
+          Join me across your favorite social channels, where I share expert{' '}
+          <br />
+          <b>
+            <ul>
+              <li> ✔ .NET insights</li>
+              <li> ✔ software engineering deep dives</li>
+              <li> ✔ real-world coding tips</li>
+            </ul>
+          </b>
+        </p>
+        <SocialLinks />
       </div>
     </div>
   );
