@@ -1,5 +1,4 @@
 'use client';
-import Script from 'next/script';
 import Banner from './components/banner';
 import Connections from './components/Connections';
 import Footer from './components/Footer';
@@ -11,33 +10,6 @@ export default function Home() {
   return (
     <>
       <div>
-        <Script
-          src="https://assets.mailerlite.com/js/universal.js"
-          strategy="afterInteractive"
-        />
-
-        {/* Initialize MailerLite */}
-        <Script id="mailerlite-init" strategy="afterInteractive">
-          {`
-            window.ml = window.ml || function() {
-              (window.ml.q = window.ml.q || []).push(arguments);
-            };
-            ml('account', '1619211');
-          `}
-        </Script>
-
-        {/* <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-2 mb-5">
-          <div
-            className="senja-embed"
-            data-id="d3aebb3a-5fb2-4f6f-9eb7-0ab7dff49f75"
-            data-lazyload="false"
-          ></div>
-          <Script
-            src="https://static.senja.io/dist/platform.js"
-            async
-            type="text/javascript"
-          ></Script>
-        </div> */}
         <div
           className="col-md-8"
           dangerouslySetInnerHTML={{
