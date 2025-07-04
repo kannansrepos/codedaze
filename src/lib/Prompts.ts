@@ -27,18 +27,19 @@ Notes:
 - All code examples must be properly syntax highlighted.
 - Make the post timeless and beginner-accessible while giving enough technical depth for seniors.
 
-example:"---
+example:"
+---
 title: "Title of the blog"
 subtitle: "Sub Title Of the Blog"
 readTime: "Read Time Of the Blog"
 date:"${new Date().toISOString().split('T')[0]}",
 language:"what am passing language"
+my language attribute is: [LANGUAGE_ATTR]
 meta_description: "Meta Description of the blog"
-full_blog: "Full Blog Content",
 "SEO_Keywords_List": "Key Word about the POST",
 "SEO_Meta_Description": "Meta Description of the blog"
----"
-my language attribute is: [LANGUAGE_ATTR]
+---
+full_blog as Markdown content with headings, code blocks, and explanations.",
 Now begin.
 `,
 };

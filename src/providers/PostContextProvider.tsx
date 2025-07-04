@@ -42,7 +42,8 @@ const PostContextProvider = ({ children }: Props) => {
       }
     };
     fetchPosts();
-  }, []);
+  }, [nextPageToken]);
+
   const value = {
     loading,
     posts,

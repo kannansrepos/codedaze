@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import { BlogContextType } from '../types/BlogContextType';
 
-export const BlogContextDefaulrValue: BlogContextType = {
+export const BlogContextDefaultValue: BlogContextType = {
   loading: false,
   posts: [],
   nextPageToken: '',
@@ -10,11 +10,12 @@ export const BlogContextDefaulrValue: BlogContextType = {
   setPosts: () => {},
   setNextPageToken: () => {},
   setLoading: () => {},
+
   setViewPost: () => {},
 };
 
 export const PostContext = createContext<BlogContextType>(
-  BlogContextDefaulrValue
+  BlogContextDefaultValue
 );
 
 export const usePost = () => useContext(PostContext);
