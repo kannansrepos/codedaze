@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 import { db } from '../db';
 import {
   InsertPost,
@@ -6,8 +6,57 @@ import {
   postsTable,
   postSectionsTable,
   InsertSection,
+  postIndexTable,
 } from '../db/schema';
-import { BlogPost } from '../types/BlogPost';
+import { BlogPost, PostIndex } from '../types/BlogPost';
+
+const createPostIndex = async (data: PostIndex) => {
+  const queryBuilder = db;
+  const result = await queryBuilder
+    .insert(postIndexTable)
+    .values(data)
+    .returning({ id: postIndexTable.id });
+  return result[0].id;
+};
+
+const createPostIndexIfNotExists = async (data: PostIndex) => {
+  const queryBuilder = db;
+  const result = await queryBuilder
+    .select()
+    .from(postIndexTable)
+    .where(eq(postIndexTable.postId, data.postId))
+    .then((result) => result[0]);
+  if (!result) {
+    return await createPostIndex(data);
+  }
+  return result.id;
+};
+
+// This function retrieves the top postsindex based on the createdAt timestamp with pagination support.
+export const getPostIndexByPage = async (
+  pageSize: number = 9,
+  pageToken: string = '1'
+) => {
+  const queryBuilder = db;
+  const result = await queryBuilder
+    .select()
+    .from(postIndexTable)
+    .orderBy(desc(postsTable.createdAt))
+    .limit(pageSize)
+    .offset(pageSize * parseInt(pageToken || '0'));
+  return result;
+};
+
+const getTopPostIndexes = async (limit: number = 3) => {
+  const queryBuilder = db;
+  const result = await queryBuilder
+    .select()
+    .from(postIndexTable)
+    .orderBy(desc(postIndexTable.createdAt))
+    .limit(limit);
+  return result;
+};
+
 const createNewPost = async (data: BlogPost) => {
   // Start a transaction
   return await db.transaction(async () => {
@@ -143,3 +192,8 @@ export async function createSection(data: InsertSection, tx?: typeof db) {
     .returning({ id: postSectionsTable.id });
 }
 export default createNewPost;
+export {
+  createPostIndexIfNotExists as CreatePost,
+  getTopPostIndexes as GetTopPostIndexes,
+  getPostIndexByPage as GetPostIndexByPage,
+};

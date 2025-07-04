@@ -22,9 +22,9 @@ const RecentPost = () => {
   return (
     <div className="w-full flex gap-2 flex-col bg-[#F3F4F6]">
       <div className="container m-auto">
-        <h1 className="text-4xl py-5 font-bold text-center justify-center flex gap-2">
+        <h1 className="text-xl md:text-4xl py-5 font-bold text-center justify-center flex gap-2">
           <p className="flex items-center text-center">The Recent</p>
-          <p className="text-5xl bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
+          <p className="text-3xl md:text-5xl bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
             CodeDaze
           </p>
           <p className="flex items-center text-center">Posts</p>

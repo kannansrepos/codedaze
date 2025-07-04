@@ -6,6 +6,7 @@ import { AIPrompts } from '@/lib/Prompts';
 import { GetAIResponse } from '@/lib/DeepSeekAIService';
 import { AIModels } from '@/types/Language';
 import { PushToGithub, UploadData } from '@/lib/GithubUtil';
+import { PushToDatabase } from '../../../lib/DatabaseUtil';
 
 const POST = async (req: NextRequest) => {
   try {
@@ -82,6 +83,8 @@ const handleGenerateMarkdown = async (req: NextRequest) => {
     } else {
       await UploadData(GITHUB_TOKEN, FILE_CONTENT, FILE_PATH);
     }
+    await PushToDatabase(fileName);
+
     return NextResponse.json({
       status: 200,
       text: 'Blog Posted Created',

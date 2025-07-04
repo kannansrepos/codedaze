@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-import { Brain, Loader2Icon, SaveIcon } from 'lucide-react';
+import { Brain, ExternalLink, Loader2Icon, SaveIcon } from 'lucide-react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import {
   Select,
@@ -25,6 +25,7 @@ import {
 import { AIModels, Language } from '@/types/Language';
 import { useState } from 'react';
 import { Input } from '../../../components/ui/input';
+import Link from 'next/link';
 
 const blogEditorFormSchema = z.object({
   model: z.string(),
@@ -86,11 +87,30 @@ const TextEditor = () => {
 
   const publishPost = async (fileName: string, GITHUB_TOKEN: string) => {
     try {
+      if (fileName.trim() === '') {
+        alert('Please provide a valid file name to publish the post.');
+        return;
+      }
+      if (GITHUB_TOKEN.trim() === '') {
+        alert('Please provide a valid GitHub token to publish the post.');
+        return;
+      }
+      if (markdown.trim() === '') {
+        alert('Please generate the markdown content before publishing.');
+        return;
+      }
+      // Ensure the fileName is sanitized and does not contain invalid characters
+      const sanitizedFileName = fileName
+        .replace(/[^a-zA-Z0-9-_]/g, '_')
+        .toLocaleLowerCase()
+        .replace(/_+/g, '_')
+        .replaceAll(' ', '-');
+      console.log('Sanitized File Name:', sanitizedFileName);
       const apiResponse = await fetch(`/api/post?action=generate_markdown`, {
         method: 'POST',
         body: JSON.stringify({
           markdownContent: markdown,
-          fileName,
+          fileName: sanitizedFileName,
           GITHUB_TOKEN,
         }),
       });
@@ -215,6 +235,15 @@ const TextEditor = () => {
               </Button>
             </form>
           </Form>
+          <Link
+            href={`https://github.com/settings/personal-access-tokens/7207250`}
+            target="_blank"
+          >
+            <Button>
+              <ExternalLink />
+              Get GitHub Token
+            </Button>
+          </Link>
         </div>
         {markdown && (
           <div>

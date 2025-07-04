@@ -21,3 +21,7 @@ export type BlogPostSection = {
   videoUrl?: string;
   videoTitle?: string;
 };
+
+export type PostIndex = {
+  postId: string;
+};

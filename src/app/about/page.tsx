@@ -4,6 +4,20 @@ import Footer from '../components/Footer';
 import SocialLinks from '../components/posts/SocialLinks';
 
 const page = () => {
+  const certificate = [
+    {
+      image: '/images/certificates/ai-102.svg',
+      ref: '4b0deceb33e5d78a',
+    },
+    {
+      image: '/images/certificates/az-102.svg',
+      ref: 'd388984d7a2b1cb5',
+    },
+    {
+      image: '/images/certificates/az-900.svg',
+      ref: 'a17246d7f465769d',
+    },
+  ];
   const skills = [
     'C#',
     'ASP.NET Core',
@@ -31,7 +45,26 @@ const page = () => {
             <h2 className="text-2xl font-semibold bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
               Kannan S
             </h2>
-            <p className="text-gray-600">Software Engineer</p>
+            <p className="text-gray-600">Lead Software Engineer</p>
+            <div className="flex justify-center mt-4">
+              {certificate.map((cert, index) => (
+                <a
+                  key={index}
+                  href={`https://learn.microsoft.com/en-us/users/kannan-s-299/credentials/${cert.ref}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mr-2"
+                >
+                  <Image
+                    src={cert.image}
+                    alt="Certificate"
+                    width={100}
+                    height={100}
+                    className="w-10 h-10"
+                  />
+                </a>
+              ))}
+            </div>
             <div className="flex justify-center mt-4">
               <SocialLinks size={32} />
             </div>

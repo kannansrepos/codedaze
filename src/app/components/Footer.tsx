@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="flex items-center justify-between px-4 md:px-6 container mx-auto">
         <div>&copy; {new Date().getFullYear()} CodeDaze.tech</div>
         <div className="flex gap-4">
-          <p>Connect |</p>
+          <p className="hidden lg:inline-block">Connect |</p>
           <Link href="https://www.linkedin.com/in/kanns/">
             <Linkedin />
           </Link>

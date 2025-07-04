@@ -11,6 +11,10 @@ export const navMenuData = [
     name: 'About',
     href: '/about',
   },
+  {
+    name: 'Create Post',
+    href: '/new-post',
+  },
 ];
 
 export const Prompt = {

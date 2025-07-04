@@ -16,7 +16,7 @@ const Languages = () => {
       className="bg-white w-full h-32
   rounded-lg  shadow-lg p-4"
     >
-      <div className="container mx-auto px-10">
+      <div className="container mx-auto md:px-10 py-6 xl:py-2">
         <div className="flex items-center gap-4 justify-between overflow-x-auto ">
           {images.map((image, index) => (
             <Image
@@ -25,6 +25,7 @@ const Languages = () => {
               alt="logo"
               width={90}
               height={90}
+              className="h-10 w-10 md:h-16 md:w-16 xl:h-24 xl:w-24 object-contain"
             />
           ))}
         </div>
