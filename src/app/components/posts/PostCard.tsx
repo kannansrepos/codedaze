@@ -9,16 +9,17 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { BlogPost } from '@/types/BlogPost';
+import { Slag } from '@/types/BlogPost';
 
 type Props = {
-  post: BlogPost;
+  post: Slag;
+  postId: string;
   showDescription?: boolean;
-  ViewPost: (post: BlogPost) => void;
+  ViewPost: (postId: string) => void;
 };
-const PostCard = ({ post, showDescription, ViewPost }: Props) => {
+const PostCard = ({ post, showDescription, ViewPost, postId }: Props) => {
   return (
-    <div key={post.id}>
+    <div key={post.title}>
       <Card className="">
         <CardTitle className="p-8">
           <div className={cn('relative')}>
@@ -32,7 +33,9 @@ const PostCard = ({ post, showDescription, ViewPost }: Props) => {
             />
             <div className="absolute top-0 left-0 w-full h-full text-center flex justify-center items-center text-xl font-bold text-primary dark:text-primary-foreground ">
               <h1 className="bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
-                {post.shortTitle.toUpperCase()}
+                {post.title.length > 15
+                  ? post.title.substring(0, 15).toUpperCase() + '...'
+                  : post.title.toUpperCase()}
               </h1>
             </div>
           </div>
@@ -41,13 +44,13 @@ const PostCard = ({ post, showDescription, ViewPost }: Props) => {
           {post.title}
         </CardHeader>
         {showDescription && (
-          <CardContent className="text-justify">{post.description}</CardContent>
+          <CardContent className="text-justify">{post.subtitle}</CardContent>
         )}
 
         <CardFooter className="flex items-end justify-end">
           <Button
             className="hover:border-primary border-2 hover:text-primary dark:hover:bg-primary-foreground dark:hover:text-primary"
-            onClick={() => ViewPost(post)}
+            onClick={() => ViewPost(postId)}
           >
             <Link2Icon className="mr-2 h-4 w-4" />
             Read More...
