@@ -35,16 +35,26 @@ const createPostIndexIfNotExists = async (data: PostIndex) => {
 // This function retrieves the top postsindex based on the createdAt timestamp with pagination support.
 export const getPostIndexByPage = async (
   pageSize: number = 9,
-  pageToken: string = '1'
+  pageToken: number = 1
 ) => {
   const queryBuilder = db;
   const result = await queryBuilder
     .select()
     .from(postIndexTable)
-    .orderBy(desc(postsTable.createdAt))
+    .orderBy(desc(postIndexTable.createdAt))
     .limit(pageSize)
-    .offset(pageSize * parseInt(pageToken || '0'));
-  return result;
+    .offset(pageSize * (pageToken - 1));
+  // const totalCount = await queryBuilder
+  //   .select({ count: postIndexTable.id.count() })
+  //   .from(postIndexTable)
+  //   .then((res) => res[0].count);
+  return {
+    data: result,
+    nextPageToken:
+      result.length < pageSize * pageToken
+        ? undefined
+        : (pageToken + 1).toString(),
+  };
 };
 
 const getTopPostIndexes = async (limit: number = 3) => {
@@ -133,7 +143,6 @@ export async function getPosts(
     const startIndex = pageSize * parseInt(pageToken);
     paginatedPosts = posts.slice(startIndex, startIndex + pageSize);
   }
-
   // For each post, fetch its sections
   const postsWithSections = await Promise.all(
     paginatedPosts.map(async (post) => {
@@ -159,6 +168,7 @@ export async function getPosts(
         : '',
   };
 }
+
 export async function getPost(id: SelectPost['id']) {
   const post = await db
     .select({

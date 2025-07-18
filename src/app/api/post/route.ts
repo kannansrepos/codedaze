@@ -6,7 +6,11 @@ import { AIPrompts } from '@/lib/Prompts';
 import { GetAIResponse } from '@/lib/DeepSeekAIService';
 import { AIModels } from '@/types/Language';
 import { PushToGithub, UploadData } from '@/lib/GithubUtil';
-import { PushToDatabase } from '../../../lib/DatabaseUtil';
+import {
+  GetAllPostIndex,
+  GetTopThreePostIndexes,
+  PushToDatabase,
+} from '../../../lib/DatabaseUtil';
 
 const POST = async (req: NextRequest) => {
   try {
@@ -17,6 +21,23 @@ const POST = async (req: NextRequest) => {
         return await handleRequest(req);
       case 'generate_markdown':
         return await handleGenerateMarkdown(req);
+      default:
+        return NextResponse.json({ status: 400, error: 'Invalid action' });
+    }
+  } catch (e) {
+    console.log(e);
+    return NextResponse.json({ status: 500, error: e });
+  }
+};
+const GET = async (req: NextRequest) => {
+  try {
+    const { searchParams } = new URL(req.url);
+    const action = searchParams.get('action');
+    switch (action) {
+      case 'get_top_posts':
+        return await handleTopPostRequest(req);
+      case 'get_all_posts':
+        return await handleGetAllPosts(req);
       default:
         return NextResponse.json({ status: 400, error: 'Invalid action' });
     }
@@ -98,4 +119,44 @@ const handleGenerateMarkdown = async (req: NextRequest) => {
     );
   }
 };
-export { POST };
+
+const handleTopPostRequest = async (req: NextRequest) => {
+  try {
+    const { searchParams } = new URL(req.url);
+    const recordCount = Number(searchParams.get('recordCount')) || 3;
+    const posts = await GetTopThreePostIndexes(recordCount);
+    return NextResponse.json({
+      status: 200,
+      text: `Fetched top ${recordCount} posts`,
+      data: posts,
+    });
+  } catch (error) {
+    console.error('Error generating markdown:', error);
+    return NextResponse.json(
+      { error: 'Failed to generate markdown file' },
+      { status: 500 }
+    );
+  }
+};
+const handleGetAllPosts = async (req: NextRequest) => {
+  try {
+    const { searchParams } = new URL(req.url);
+    const pageSize = Number(searchParams.get('pageSize')) || 9;
+    const pageToken = Number(searchParams.get('pageToken')) || 1;
+    const posts = await GetAllPostIndex(pageSize, pageToken);
+    return NextResponse.json({
+      status: 200,
+      text: `Fetched posts for page ${pageToken}`,
+      data: posts.data,
+      nextPageToken: posts.nextPageToken,
+    });
+  } catch (error) {
+    console.error('Error generating markdown:', error);
+    return NextResponse.json(
+      { error: 'Failed to generate markdown file' },
+      { status: 500 }
+    );
+  }
+};
+
+export { POST, GET };

@@ -19,7 +19,8 @@ const PushToDatabase = async (fileName: string) => {
   }
 };
 
-const GetTopThreePostIndexes = () => GetTopPostIndexes();
-const GetAllPostIndex = (pageSize: number = 9, pageToken: string = '1') =>
+const GetTopThreePostIndexes = (recordCount: number) =>
+  GetTopPostIndexes(recordCount);
+const GetAllPostIndex = (pageSize: number = 9, pageToken: number = 1) =>
   GetPostIndexByPage(pageSize, pageToken);
 export { PushToDatabase, GetTopThreePostIndexes, GetAllPostIndex };

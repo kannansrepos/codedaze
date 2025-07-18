@@ -19,13 +19,13 @@ const GET = async (req: NextRequest) => {
     );
     const response = result.response;
     const titleText = response.text();
-    const title = ParseMardownText(titleText);
+    const title = ParseMarkdownText(titleText);
     const titleObj = JSON.parse(title);
     const blogPrompt = Prompt.prompt.replace('{TITLE}', titleObj.title);
     const blogResult = await model.generateContent(blogPrompt + aditinalPrompt);
     const blogResponse = blogResult.response;
     const blogText = blogResponse.text();
-    const blogData = ParseMardownText(blogText);
+    const blogData = ParseMarkdownText(blogText);
     const blogPost = JSON.parse(blogData);
     blogPost.date = formatDateWithIntl(new Date());
     if (!blogPost.url) {
@@ -53,7 +53,7 @@ function createUrlSlug(title: string): string {
     .replace(/[\s_-]+/g, '-') // Replace spaces, underscores, and multiple dashes with a single dash
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
 }
-const ParseMardownText = (data: string) => {
+const ParseMarkdownText = (data: string) => {
   // Remove markdown code block indicators (```json and ```)
   const result = data
     .replace(/^```json\n/, '') // Remove opening ```json tag
