@@ -39,7 +39,8 @@ const RecentPost = () => {
       console.log('Failed to fetch markdown data');
     }
     const data = await response.json();
-    const { markdownDataList } = data.data;
+    console.log('markdownDataList Data Received: ', data);
+    const { markdownDataList } = data.data ?? null;
 
     const formattedData = await Promise.all(
       markdownDataList.map(
@@ -61,7 +62,7 @@ const RecentPost = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const postList = ['kannan_netcore_gmail_com'];
+      const postList = ['best_practices_for_efficient_data_access'];
       await getMarkdownDataList(postList);
     };
     fetchData();
