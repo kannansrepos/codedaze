@@ -2,6 +2,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 
 import { NextRequest, NextResponse } from 'next/server';
+import Logger from '../../../lib/Logger';
 const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const fileName = searchParams.get('fileName') || '';
@@ -48,9 +49,13 @@ const getMarkdownData = (markdownFileName: string) => {
   try {
     const folder = 'posts/';
     const file = `${folder}${markdownFileName}.md`;
+    Logger.info(`Reading markdown file: ${file}`);
     const content = fs.readFileSync(file, 'utf8');
     const { data, content: markdownContent } = matter(content);
     // 'markdownContent' contains the markdown without frontmatter
+    Logger.info(
+      `Markdown file content for ${markdownFileName}: ${markdownContent}`
+    );
     return {
       frontmatter: data,
       content: markdownContent,

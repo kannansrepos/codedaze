@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { markdownToHtml } from '@/lib/MarkdownUtil';
 import { PostIndex } from '@/types/BlogPost';
 import InfiniteScrollPosts from '../InfiniteScrollPosts';
+import Logger from '../../../lib/Logger';
 
 const BlogPostComponent = () => {
   const [postList, setPostList] = useState<any[]>([]);
@@ -37,10 +38,11 @@ const BlogPostComponent = () => {
     if (!response.ok) {
     }
     const data = await response.json();
+    Logger.info('Fetched markdown data:', data);
     const { markdownDataList } = data.data ?? null;
 
     const formattedData = await Promise.all(
-      markdownDataList.map(
+      markdownDataList?.map(
         async (item: {
           frontmatter: unknown;
           content: string;
