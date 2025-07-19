@@ -5,9 +5,9 @@ import { MailIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
-import { Slag } from '../../../types/BlogPost';
+import { Slag } from '@/types/BlogPost';
 import { marked } from 'marked';
-import ImageWithFallback from '../../../components/ImageWithFallback';
+import ImageWithFallback from '@/components/ImageWithFallback';
 
 const PostDetail = ({ params }: { params: { postId: string } }) => {
   const getPostData = async (postId: string) => {

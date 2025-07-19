@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import NewsLetter from '../components/NewsLetter';
-import Footer from '../components/Footer';
-import SocialLinks from '../components/posts/SocialLinks';
+import NewsLetter from '../../components/NewsLetter';
+import Footer from '../../components/Footer';
+import SocialLinks from '../../components/posts/SocialLinks';
 
 const page = () => {
   const certificate = [

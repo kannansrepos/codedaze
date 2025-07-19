@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { AIModels, Language } from '@/types/Language';
 import { useState } from 'react';
-import { Input } from '../../../components/ui/input';
+import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 
 const blogEditorFormSchema = z.object({
@@ -84,7 +84,17 @@ const TextEditor = () => {
     } finally {
     }
   };
-
+  const UploadData = async () => {
+    const apiResponse = await fetch(`/api/post?action=upload_document`, {
+      method: 'POST',
+      body: JSON.stringify({
+        markdownContent: markdown,
+        fileName: 'post.md',
+      }),
+    });
+    const responseData = await apiResponse.json();
+    console.log('Upload Response:', responseData);
+  };
   const publishPost = async (fileName: string, GITHUB_TOKEN: string) => {
     try {
       if (fileName.trim() === '') {
@@ -133,6 +143,11 @@ const TextEditor = () => {
   ) => {
     setIsLoading(true);
     await publishPost(values.fileName, values.token);
+    setIsLoading(false);
+  };
+  const onUploadDocument = async () => {
+    setIsLoading(true);
+    await UploadData();
     setIsLoading(false);
   };
   function onErrors(errors: unknown) {
@@ -244,6 +259,7 @@ const TextEditor = () => {
               Get GitHub Token
             </Button>
           </Link>
+          <Button onClick={onUploadDocument}>Upload</Button>
         </div>
         {markdown && (
           <div>

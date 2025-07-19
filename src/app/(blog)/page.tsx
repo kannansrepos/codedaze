@@ -1,11 +1,11 @@
 'use client';
-import Banner from './components/banner';
-import Connections from './components/Connections';
-import Footer from './components/Footer';
-import Languages from './components/languages';
-import NewsLetter from './components/NewsLetter';
-import RecentPost from './components/RecentPost';
-import RecentVideos from './components/RecentVideos';
+import Banner from '../components/banner';
+import Connections from '../components/Connections';
+import Footer from '../components/Footer';
+import Languages from '../components/languages';
+import NewsLetter from '../components/NewsLetter';
+import RecentPost from '../components/RecentPost';
+import RecentVideos from '../components/RecentVideos';
 export default function Home() {
   return (
     <>

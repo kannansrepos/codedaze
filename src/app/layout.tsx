@@ -2,10 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 
 import './globals.css';
-import Nav from './components/nav/nav';
-import { ThemeProvider } from '@/components/theme-provider';
-import { ToastContainer } from 'react-toastify';
-import PostContextProvider from '../providers/PostContextProvider';
+
 const roboto = Roboto({
   weight: ['400', '900'],
   subsets: ['latin'],
@@ -69,16 +66,7 @@ export default function RootLayout({
       <body
         className={` ${roboto.className} antialiased bg-[#F0F0F0] w-screen h-screen`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Nav />
-          <PostContextProvider>{children}</PostContextProvider>
-          <ToastContainer />
-        </ThemeProvider>
+       {children}
       </body>
     </html>
   );

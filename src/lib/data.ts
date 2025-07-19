@@ -13,7 +13,7 @@ export const navMenuData = [
   },
   {
     name: 'Create Post',
-    href: '/new-post',
+    href: '/new',
   },
 ];
 

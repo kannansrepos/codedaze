@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { markdownToHtml } from '@/lib/MarkdownUtil';
 import { PostIndex } from '@/types/BlogPost';
 import PostView from './PostView';
-import { Button } from '../../components/ui/button';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 const RecentPost = () => {
   const [markdownData, setMarkdownData] = useState<any[]>([]);
@@ -18,7 +18,7 @@ const RecentPost = () => {
       console.log('Failed to fetch markdown data');
     }
     const data = await response.json();
-    const { markdownDataList } = data.data ?? null;
+    const { markdownDataList } = data.data ?? { markdownDataList: [] };
 
     const formattedData = await Promise.all(
       markdownDataList.map(
@@ -50,7 +50,7 @@ const RecentPost = () => {
   }, []);
   return (
     <>
-      {markdownData && markdownData.length > 0 ? (
+      {markdownData && markdownData.length > 0 && (
         <>
           <div className="w-full flex gap-2 flex-col bg-[#F3F4F6]">
             <div className="container m-auto">
@@ -63,8 +63,6 @@ const RecentPost = () => {
             </Button>
           </div>
         </>
-      ) : (
-        <div>No Data Found</div>
       )}
     </>
   );

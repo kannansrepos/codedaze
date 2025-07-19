@@ -10,7 +10,8 @@ import {
   GetAllPostIndex,
   GetTopThreePostIndexes,
   PushToDatabase,
-} from '../../../lib/DatabaseUtil';
+} from '@/lib/DatabaseUtil';
+import { createServer } from '../../../utils/supabase/server';
 
 const POST = async (req: NextRequest) => {
   try {
@@ -21,6 +22,8 @@ const POST = async (req: NextRequest) => {
         return await handleRequest(req);
       case 'generate_markdown':
         return await handleGenerateMarkdown(req);
+      case 'upload_document':
+        return await handleUploadDocument(req);
       default:
         return NextResponse.json({ status: 400, error: 'Invalid action' });
     }
@@ -94,6 +97,7 @@ const handleDeepSeekAI = async (topic: string, language: string) => {
     data: apiResponse.data,
   });
 };
+
 const handleGenerateMarkdown = async (req: NextRequest) => {
   try {
     const { markdownContent, fileName, GITHUB_TOKEN } = await req.json();
@@ -104,6 +108,9 @@ const handleGenerateMarkdown = async (req: NextRequest) => {
     } else {
       await UploadData(GITHUB_TOKEN, FILE_CONTENT, FILE_PATH);
     }
+
+    await PushToBlobStorage(`${fileName}.md`, FILE_CONTENT);
+
     await PushToDatabase(fileName);
 
     return NextResponse.json({
@@ -158,5 +165,34 @@ const handleGetAllPosts = async (req: NextRequest) => {
     );
   }
 };
+const handleUploadDocument = async (req: NextRequest) => {
+  const { markdownContent, fileName } = await req.json();
+  await PushToBlobStorage(fileName, markdownContent);
+  return NextResponse.json(
+    { error: 'Failed to generate markdown file' },
+    { status: 500 }
+  );
+};
+const PushToBlobStorage = async (fileName: string, markdownContent: any) => {
+  try {
+    const supabase = createServer();
+    const { data, error } = await supabase.storage
+      .from('codedaze')
+      .upload(fileName, markdownContent, {
+        contentType: 'text/markdown',
+      });
+    if (error) {
+      console.error('Error uploading file:', error);
+    } else {
+      console.log('File uploaded successfully:', data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  const supabase = createServer();
 
+  await supabase.storage.from('posts').upload(fileName, markdownContent, {
+    contentType: 'text/markdown',
+  });
+};
 export { POST, GET };
