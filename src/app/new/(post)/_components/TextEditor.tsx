@@ -26,6 +26,12 @@ import { AIModels, Language } from '@/types/Language';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import {
+  CreatePostIndex,
+  UploadFileStore,
+  UploadFileToGithub,
+} from './actions';
 
 const blogEditorFormSchema = z.object({
   model: z.string(),
@@ -62,13 +68,13 @@ const TextEditor = () => {
       .replace(/```$/, '') // Remove ending ```
       .trim(); // Trim whitespace
   };
-  const CreatePosts = async (
+  const GeneratePost = async (
     topic: string,
     language: string,
     model: string
   ) => {
     try {
-      const apiResponse = await fetch(`/api/post?action=create`, {
+      const apiResponse = await fetch(`/api/post/generate`, {
         method: 'POST',
         body: JSON.stringify({
           model,
@@ -79,34 +85,27 @@ const TextEditor = () => {
       const responseData = await apiResponse.json();
       if (responseData.status == 200) {
         setMarkdown(cleanYamlBlock(responseData.data));
+        toast.success('Post generated successfully');
+      } else {
+        toast.error(responseData.message);
       }
     } catch {
-    } finally {
+      toast.error('Error generating post');
     }
   };
-  const UploadData = async () => {
-    const apiResponse = await fetch(`/api/post?action=upload_document`, {
-      method: 'POST',
-      body: JSON.stringify({
-        markdownContent: markdown,
-        fileName: 'post.md',
-      }),
-    });
-    const responseData = await apiResponse.json();
-    console.log('Upload Response:', responseData);
-  };
+
   const publishPost = async (fileName: string, GITHUB_TOKEN: string) => {
     try {
       if (fileName.trim() === '') {
-        alert('Please provide a valid file name to publish the post.');
+        toast.error('Please provide a valid file name to publish the post.');
         return;
       }
       if (GITHUB_TOKEN.trim() === '') {
-        alert('Please provide a valid GitHub token to publish the post.');
+        toast.error('Please provide a valid GitHub token to publish the post.');
         return;
       }
       if (markdown.trim() === '') {
-        alert('Please generate the markdown content before publishing.');
+        toast.error('Please generate the markdown content before publishing.');
         return;
       }
       // Ensure the fileName is sanitized and does not contain invalid characters
@@ -115,27 +114,23 @@ const TextEditor = () => {
         .toLocaleLowerCase()
         .replace(/_+/g, '_')
         .replaceAll(' ', '-');
-      console.log('Sanitized File Name:', sanitizedFileName);
-      const apiResponse = await fetch(`/api/post?action=generate_markdown`, {
-        method: 'POST',
-        body: JSON.stringify({
-          markdownContent: markdown,
-          fileName: sanitizedFileName,
-          GITHUB_TOKEN,
-        }),
-      });
-      const responseData = await apiResponse.json();
-      if (responseData.status == 200) {
-        setMarkdown(cleanYamlBlock(responseData.data));
-      }
+      setIsLoading(true);
+      await Promise.all([
+        UploadFileToGithub(markdown, sanitizedFileName, GITHUB_TOKEN),
+        UploadFileStore(markdown, sanitizedFileName),
+        CreatePostIndex(sanitizedFileName),
+      ]);
+      setIsLoading(false);
+      setMarkdown('');
+      toast.success('Post published successfully');
     } catch {
-    } finally {
+      toast.error('Error generating post');
     }
   };
   const onSubmit = async (values: z.infer<typeof blogEditorFormSchema>) => {
     setIsLoading(true);
     setMarkdown('');
-    await CreatePosts(values.topic, values.language, values.model);
+    await GeneratePost(values.topic, values.language, values.model);
     setIsLoading(false);
   };
   const onPublishFormSubmit = async (
@@ -145,15 +140,9 @@ const TextEditor = () => {
     await publishPost(values.fileName, values.token);
     setIsLoading(false);
   };
-  const onUploadDocument = async () => {
-    setIsLoading(true);
-    await UploadData();
-    setIsLoading(false);
-  };
   function onErrors(errors: unknown) {
     console.log('errors', errors);
   }
-
   return (
     <div className="flex flex-col gap-3">
       <div>
@@ -259,7 +248,6 @@ const TextEditor = () => {
               Get GitHub Token
             </Button>
           </Link>
-          <Button onClick={onUploadDocument}>Upload</Button>
         </div>
         {markdown && (
           <div>

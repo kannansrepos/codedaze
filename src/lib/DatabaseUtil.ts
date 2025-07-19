@@ -4,12 +4,11 @@ import {
   GetTopPostIndexes,
 } from '../db/service';
 
-const PushToDatabase = async (fileName: string) => {
+const CreatePostIndex = async (postId: string) => {
   try {
     const response = await CreatePost({
-      postId: fileName,
+      postId,
     });
-    console.log('Post index created:', response);
     if (!response) {
       throw new Error('Failed to create post index');
     }
@@ -23,4 +22,4 @@ const GetTopThreePostIndexes = (recordCount: number) =>
   GetTopPostIndexes(recordCount);
 const GetAllPostIndex = (pageSize: number = 9, pageToken: number = 1) =>
   GetPostIndexByPage(pageSize, pageToken);
-export { PushToDatabase, GetTopThreePostIndexes, GetAllPostIndex };
+export { CreatePostIndex as PushToDatabase, GetTopThreePostIndexes, GetAllPostIndex };

@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  console.log('User in middleware:', user?.user_metadata);
   if (request.nextUrl.pathname.startsWith('/new') && !user) {
     const loginUrl = new URL('/login', request.url);
     return NextResponse.redirect(loginUrl);

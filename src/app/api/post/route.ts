@@ -12,6 +12,7 @@ import {
   PushToDatabase,
 } from '@/lib/DatabaseUtil';
 import { createServer } from '../../../utils/supabase/server';
+import matter from 'gray-matter';
 
 const POST = async (req: NextRequest) => {
   try {
@@ -24,6 +25,8 @@ const POST = async (req: NextRequest) => {
         return await handleGenerateMarkdown(req);
       case 'upload_document':
         return await handleUploadDocument(req);
+      case 'download_document':
+        return await handleDownloadDocument(req);
       default:
         return NextResponse.json({ status: 400, error: 'Invalid action' });
     }
@@ -173,12 +176,26 @@ const handleUploadDocument = async (req: NextRequest) => {
     { status: 500 }
   );
 };
+const handleDownloadDocument = async (req: NextRequest) => {
+  const { fileName } = await req.json();
+  const markdownContent = await GetPostData(fileName);
+  if (!markdownContent) {
+    return NextResponse.json(
+      { error: 'Failed to download markdown file' },
+      { status: 500 }
+    );
+  }
+  return NextResponse.json({
+    status: 200,
+    data: { markdownContent },
+  });
+};
 const PushToBlobStorage = async (fileName: string, markdownContent: any) => {
   try {
     const supabase = createServer();
     const { data, error } = await supabase.storage
       .from('codedaze')
-      .upload(fileName, markdownContent, {
+      .upload(`posts/${fileName}`, markdownContent, {
         contentType: 'text/markdown',
       });
     if (error) {
@@ -188,11 +205,31 @@ const PushToBlobStorage = async (fileName: string, markdownContent: any) => {
     }
   } catch (e) {
     console.log(e);
+    throw e;
   }
-  const supabase = createServer();
+  // const supabase = createServer();
 
-  await supabase.storage.from('posts').upload(fileName, markdownContent, {
-    contentType: 'text/markdown',
-  });
+  // await supabase.storage.from('posts').upload(fileName, markdownContent, {
+  //   contentType: 'text/markdown',
+  // });
+};
+
+const GetPostData = async (fileName: string) => {
+  const supabase = createServer();
+  const { data, error } = await supabase.storage
+    .from('codedaze')
+    .download(`posts/${fileName}`);
+  if (error) {
+    console.error('Error downloading file:', error);
+    return null;
+  } else {
+    const fileContent = await data.text();
+    const { data: fileInfo, content: markdownContent } = matter(fileContent);
+    return {
+      frontmatter: fileInfo,
+      content: markdownContent,
+      postId: fileName.replace('.md', ''),
+    };
+  }
 };
 export { POST, GET };
