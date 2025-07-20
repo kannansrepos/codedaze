@@ -112,16 +112,6 @@ export const PushToGithub = async (FILE_CONTENT: string, FILE_PATH: string) => {
   const commitMessage = `Add Blog Post ${FILE_PATH} file via API`;
   console.log('Request Received to Upload:', FILE_PATH);
   try {
-    // Initialize GitHub App
-    // const app = new App({
-    //   appId: parseInt(process.env.GITHUB_APP_ID!),
-    //   privateKey: process.env.GITHUB_APP_PRIVATE_KEY!,
-    // });
-
-    // Get installation access token
-    // const octokit = await app.getInstallationOctokit(
-    //   parseInt(process.env.GITHUB_CLIENT_ID!)
-    // );
     const octokit = new Octokit({
       auth: {
         clientType: 'oauth-app',
@@ -143,7 +133,5 @@ export const PushToGithub = async (FILE_CONTENT: string, FILE_PATH: string) => {
     console.error('Error creating/updating file:', error);
   }
 };
-
-
 
 export { UploadData };
