@@ -6,23 +6,23 @@ import { PostIndex } from '@/types/BlogPost';
 import PostView from '../PostView';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 const RecentPost = () => {
   const [markdownData, setMarkdownData] = useState<any[]>([]);
-  const getMarkdownDataList = async (markdownFileNames: string[]) => {
-    const response = await fetch('/api/markdown', {
+  const getMarkdownDataList = async (postIds: string[]) => {
+    const response = await fetch('/api/post/file?action=get_posts_content', {
       method: 'POST',
       body: JSON.stringify({
-        markdownFileNames,
+        postIds: postIds,
       }),
     });
     if (!response.ok) {
-      console.log('Failed to fetch markdown data');
+      toast.error('Failed to fetch recent posts');
     }
     const data = await response.json();
-    const { markdownDataList } = data.data ?? { markdownDataList: [] };
-
+    const { downloadResults } = data.data ?? { downloadResults: [] };
     const formattedData = await Promise.all(
-      markdownDataList.map(
+      downloadResults.map(
         async (item: {
           frontmatter: unknown;
           content: string;

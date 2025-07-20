@@ -29,19 +29,18 @@ export const handleUploadDocument = async (req: NextRequest) => {
 export const handleDownloadDocument = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
-    const fileName = searchParams.get('filename');
-    if (!fileName) {
+    const postId = searchParams.get('postId');
+    if (!postId) {
       return NextResponse.json(
-        { error: 'File name is required' },
+        { error: 'Post Id is required' },
         { status: 400 }
       );
     }
-    const downloadResult = await GetFileContent(fileName);
-
+    const downloadResult = await DownloadFile(postId);
     if (downloadResult) {
       return NextResponse.json({
         status: 200,
-        data: { message: 'File uploaded successfully' },
+        data: { downloadResult },
       });
     }
 
@@ -55,6 +54,38 @@ export const handleDownloadDocument = async (req: NextRequest) => {
   }
 };
 
+export const handleDownloadDocuments = async (req: NextRequest) => {
+  try {
+    const body = await req.json();
+    const { postIds } = body;
+    if (!postIds || postIds.length === 0) {
+      return NextResponse.json({
+        status: 400,
+        error: 'No postIds provided',
+      });
+    }
+    const downloadResults = await Promise.all(
+      postIds.map(async (postId: string) => {
+        const downloadResult = await DownloadFile(postId);
+        return downloadResult;
+      })
+    );
+    if (downloadResults) {
+      return NextResponse.json({
+        status: 200,
+        data: { downloadResults },
+      });
+    }
+
+    return NextResponse.json(
+      { error: 'Failed to upload post file' },
+      { status: 500 }
+    );
+  } catch (error) {
+    console.error('Error uploading document:', error);
+    return NextResponse.json({ status: 500, error: 'Internal Server Error' });
+  }
+};
 const UploadFileToSupabase = async (fileName: string, markdownContent: any) => {
   try {
     const supabase = createServer();
@@ -74,7 +105,7 @@ const UploadFileToSupabase = async (fileName: string, markdownContent: any) => {
   }
 };
 
-const GetFileContent = async (fileName: string) => {
+const DownloadFile = async (fileName: string) => {
   const supabase = createServer();
   const { data, error } = await supabase.storage
     .from('codedaze')

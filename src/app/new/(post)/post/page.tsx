@@ -32,7 +32,6 @@ const AdminPage = () => {
           topic: '.NET Entity Framework Best Practices',
         }),
       });
-      console.log(deepRes);
       return [];
     } catch {
       toast.error('Error creating posts');

@@ -4,8 +4,6 @@ import { createServerClient } from '@supabase/ssr';
 
 export async function middleware(request: NextRequest) {
   // Debug: log all cookies
-  console.log('Cookies in middleware:', request.cookies.getAll());
-
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -19,7 +17,6 @@ export async function middleware(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log('User in middleware:', user?.user_metadata);
   if (request.nextUrl.pathname.startsWith('/new') && !user) {
     const loginUrl = new URL('/login', request.url);
     return NextResponse.redirect(loginUrl);

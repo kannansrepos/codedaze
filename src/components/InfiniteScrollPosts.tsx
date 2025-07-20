@@ -8,7 +8,7 @@ interface InfiniteScrollPostsProps {
 }
 
 const InfiniteScrollPosts: React.FC<InfiniteScrollPostsProps> = ({
-  pageSize = 9,
+  pageSize = 3,
 }) => {
   const { posts, loading, hasMore, fetchMore, error } = usePosts(pageSize);
   const sentinelRef = useInfiniteScrollObserver({

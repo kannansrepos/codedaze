@@ -20,26 +20,26 @@ interface UsePostsReturn {
   error: string | null;
 }
 
-export const usePosts = (pageSize: number = 9): UsePostsReturn => {
+export const usePosts = (pageSize: number = 3): UsePostsReturn => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [nextPageToken, setNextPageToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const getMarkdownDataList = async (markdownFileNames: string[]) => {
-    const response = await fetch('/api/markdown', {
+  const getMarkdownDataList = async (postIds: string[]) => {
+    const response = await fetch('/api/post/file?action=get_posts_content', {
       method: 'POST',
       body: JSON.stringify({
-        markdownFileNames,
+        postIds: postIds,
       }),
     });
     if (!response.ok) {
     }
     const data = await response.json();
-    const { markdownDataList } = data.data ?? null;
+    const { downloadResults } = data.data ?? { downloadResults: [] };
 
     const formattedData = await Promise.all(
-      markdownDataList.map(
+      downloadResults.map(
         async (item: {
           frontmatter: unknown;
           content: string;
@@ -67,7 +67,7 @@ export const usePosts = (pageSize: number = 9): UsePostsReturn => {
         });
 
         const response = await fetch(
-          `/api/post?action=get_all_posts&${params}`
+          `/api/post/data?action=get_all_posts&${params}`
         );
 
         if (!response.ok) {

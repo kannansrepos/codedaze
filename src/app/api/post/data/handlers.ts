@@ -26,7 +26,7 @@ const handleGetTopPostRequest = async (req: NextRequest) => {
 const handleAllTopPostRequest = async (req: NextRequest) => {
   try {
     const { searchParams } = new URL(req.url);
-    const pageSize = Number(searchParams.get('pageSize')) || 9;
+    const pageSize = Number(searchParams.get('pageSize')) || 3;
     const pageToken = Number(searchParams.get('pageToken')) || 1;
     const posts = await GetAllPostIndex(pageSize, pageToken);
     return NextResponse.json({

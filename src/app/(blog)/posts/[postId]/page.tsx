@@ -9,17 +9,21 @@ import { Button } from '@/components/ui/button';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 import { Slag } from '@/types/BlogPost';
+import { toast } from 'react-toastify';
 
 const PostDetail = ({ params }: { params: { postId: string } }) => {
   const getPostData = async (postId: string) => {
-    const response = await fetch(`/api/markdown?fileName=${postId}`);
+    const response = await fetch(`/api/post/file?postId=${postId}`);
     if (!response.ok) {
       throw new Error('Failed to fetch post data');
     }
     const responseData = await response.json();
-    console.log('Post Data Received: ', responseData.data);
-    setMarkdownData(marked(responseData?.data?.markdownData?.content));
-    setSlagData(responseData?.data?.markdownData?.frontmatter as Slag);
+    const { downloadResult } = responseData.data;
+    if (!downloadResult) {
+      toast.error('Failed to fetch post data');
+    }
+    setMarkdownData(marked(downloadResult?.content));
+    setSlagData(downloadResult?.frontmatter as Slag);
   };
 
   const [markdownData, setMarkdownData] = useState<any>(null);

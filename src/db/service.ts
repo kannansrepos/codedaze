@@ -16,7 +16,7 @@ const CreatePostIndex = async (data: PostIndex) => {
   return result.id;
 };
 
-const GetAllPostIndex = async (pageSize: number = 9, pageToken: number = 1) => {
+const GetAllPostIndex = async (pageSize: number = 3, pageToken: number = 1) => {
   const queryBuilder = db;
   const result = await queryBuilder
     .select()
