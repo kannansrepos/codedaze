@@ -10,11 +10,15 @@ import Image from 'next/image';
 
 const Nav = () => {
   const [user, setUser] = useState<User | null>(null);
-
+  const [IsAdminUser, setIsAdminUser] = useState(false);
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
+      console.log(data.user);
+      if (['kannan.netcore@outlook.com'].includes(data.user?.email || '')) {
+        setIsAdminUser(true);
+      }
     });
   }, []);
   const handleLogout = async () => {
@@ -29,16 +33,22 @@ const Nav = () => {
           <Logo />
         </Link>
         <nav className="hidden items-center gap-6  font-medium md:flex">
-          {navMenuData.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              prefetch={false}
-              className="hover:font-bold hover:tracking-wider hover:border-b-2"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navMenuData.map((item) => {
+            if (item.name === 'Create Post' && !IsAdminUser) {
+              return null;
+            } else {
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  prefetch={false}
+                  className="hover:font-bold hover:tracking-wider hover:border-b-2"
+                >
+                  {item.name}
+                </Link>
+              );
+            }
+          })}
           {user ? (
             <div className="flex items-center gap-2">
               {user.user_metadata?.avatar_url && (
