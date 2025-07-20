@@ -23,9 +23,9 @@ sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
 
 # Add each file in the directory to the sitemap
 for filename in os.listdir(directory):
-    if filename.endswith(".md"):
+    if filename.endswith(".txt"):
         file_path = os.path.join(directory, filename)
-        file_url = f"{base_url}/{directory}/{filename.replace('.md', '')}"
+        file_url = f"{base_url}/{directory}/{filename.replace('.txt', '')}"
         sitemap += f"""    <url>
         <loc>{file_url}</loc>
         <lastmod>{current_date}</lastmod>

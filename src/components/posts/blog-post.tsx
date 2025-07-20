@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { Input } from '@/components/ui/input';
-import InfiniteScrollPosts from '../InfiniteScrollPosts';
+import InfiniteScrollPosts from '@/components/InfiniteScrollPosts';
 import Logger from '@/lib/Logger';
 
 const BlogPostComponent = () => {

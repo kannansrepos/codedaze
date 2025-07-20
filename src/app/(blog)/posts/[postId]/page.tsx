@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
+import { useEffect, useState } from 'react';
 import { MailIcon } from 'lucide-react';
+import { marked } from 'marked';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
-import { Slag } from '@/types/BlogPost';
-import { marked } from 'marked';
 import ImageWithFallback from '@/components/ImageWithFallback';
+
+import { Slag } from '@/types/BlogPost';
 
 const PostDetail = ({ params }: { params: { postId: string } }) => {
   const getPostData = async (postId: string) => {

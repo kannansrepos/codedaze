@@ -1,7 +1,7 @@
 import React from 'react';
-import { usePosts } from '../hooks/UsePosts';
-import { useInfiniteScrollObserver } from '../hooks/useInfiniteScrollObserver';
-import PostView from '../app/components/PostView';
+import { usePosts } from '@/hooks/UsePosts';
+import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
+import PostView from './PostView';
 
 interface InfiniteScrollPostsProps {
   pageSize?: number;

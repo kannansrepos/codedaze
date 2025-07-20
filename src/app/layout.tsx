@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 
 import './globals.css';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 const roboto = Roboto({
   weight: ['400', '900'],
@@ -66,7 +67,20 @@ export default function RootLayout({
       <body
         className={` ${roboto.className} antialiased bg-[#F0F0F0] w-screen h-screen`}
       >
-       {children}
+        {children}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          transition={Bounce}
+        />
       </body>
     </html>
   );

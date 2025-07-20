@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
 import { useEffect, useState } from 'react';
 import { markdownToHtml } from '@/lib/MarkdownUtil';
 import { PostIndex } from '@/types/BlogPost';
-import PostView from './PostView';
+import PostView from '../PostView';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 const RecentPost = () => {
@@ -38,7 +39,7 @@ const RecentPost = () => {
 
   useEffect(() => {
     const GetTopPosts = async () => {
-      const topPostUrl = '/api/post?action=get_top_posts&recordCount=3';
+      const topPostUrl = '/api/post/data?action=get_top_posts&recordCount=3';
       const res = await fetch(topPostUrl);
       const response = await res.json();
       if (res.ok) {

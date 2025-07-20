@@ -3,7 +3,7 @@ import {
   GetTopPostIndex,
   GetAllPostIndex,
   CreatePostIndex,
-} from '@/db/db_service';
+} from '@/db/service';
 
 const handleGetTopPostRequest = async (req: NextRequest) => {
   try {

@@ -1,4 +1,4 @@
-import SocialLinks from './posts/SocialLinks';
+import SocialLinks from '../posts/SocialLinks';
 
 const Connections = () => {
   return (
@@ -8,16 +8,13 @@ const Connections = () => {
           Let’s Connect & Collaborate
         </h1>
         <p className="text-sm md:text-lg">
-          Join me across your favorite social channels, where I share expert{' '}
-          <br />
-          <b>
-            <ul>
-              <li> ✔ .NET insights</li>
-              <li> ✔ software engineering deep dives</li>
-              <li> ✔ real-world coding tips</li>
-            </ul>
-          </b>
+          Join me across your favorite social channels, where I share expert
         </p>
+        <ul className="text-sm md:text-lg font-bold">
+          <li>✔ .NET insights</li>
+          <li>✔ software engineering deep dives</li>
+          <li>✔ real-world coding tips</li>
+        </ul>
         <SocialLinks />
       </div>
     </div>

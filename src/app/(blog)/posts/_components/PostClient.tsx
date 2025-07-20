@@ -1,6 +1,6 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import { PostMetadata } from '@/types/PostMetadata';
 

@@ -1,7 +1,5 @@
 import Image from 'next/image';
-import NewsLetter from '../../components/NewsLetter';
-import Footer from '../../components/Footer';
-import SocialLinks from '../../components/posts/SocialLinks';
+import { NewsLetter, Footer, SocialLinks } from '@/components';
 
 const page = () => {
   const certificate = [
@@ -32,15 +30,15 @@ const page = () => {
   ];
   return (
     <div>
-      <div className="bg-white rounded-xl shadow-lg w-full p-8">
+      <div className="bg-[#FEFEFE] rounded-xl shadow-lg w-full p-8">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3 text-center mb-6 md:mb-0">
             <Image
-              src="/images/profile.jpg"
+              src="/images/profile_n.jpg"
               height={300}
               width={300}
               alt="Profile Picture"
-              className="rounded-full w-32 h-32 mx-auto mb-4 border-4 border-[#2A42BA] shadow-lg"
+              className="rounded-full w-32 h-32 mx-auto mb-1"
             />
             <h2 className="text-2xl font-semibold bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
               Kannan S

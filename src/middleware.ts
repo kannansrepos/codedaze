@@ -7,8 +7,8 @@ export async function middleware(request: NextRequest) {
   console.log('Cookies in middleware:', request.cookies.getAll());
 
   const supabase = createServerClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll: request.cookies.getAll.bind(request.cookies),

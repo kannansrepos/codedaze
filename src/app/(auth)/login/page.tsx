@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import React from 'react';
-import { Input } from '@/components/ui/input';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { SupabaseAuthenticationAsync } from '@/utils/supabaseActions';
-import { redirect, useRouter } from 'next/navigation';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -16,15 +17,13 @@ const LoginPage = () => {
     bg: '/s.svg',
   };
   const signIn = async (authProvider: 'google' | 'github' | 'email') => {
-    console.log('authProvider', authProvider);
     const { error, data } = await SupabaseAuthenticationAsync(authProvider);
     if (error) {
-      console.error('Error during sign-in:', error);
+      console.error('Error during sign-in', error);
+      toast.error('Error during sign-in');
       return;
     }
-    console.log('Sign-in successful:', data);
     if ('url' in data && typeof data.url === 'string') {
-      console.log('Redirecting to:', data.url);
       router.push(data.url);
     } else {
       router.push('/');
@@ -34,16 +33,6 @@ const LoginPage = () => {
     <>
       <div className="bg-[#2A42BA] absolute top-0 left-0 bg-gradient-to-b from-[#8142EF] via-[#2A42BA] to-[#C521EF] bottom-0 leading-5 h-full w-full overflow-hidden "></div>
       <div className="relative   min-h-screen  sm:flex sm:flex-row  justify-center bg-transparent rounded-3xl shadow-xl">
-        <div className="flex-col flex  self-center lg:px-14 sm:max-w-4xl xl:max-w-md  z-10">
-          <div className="self-start hidden lg:flex flex-col  text-gray-300">
-            <h1 className="my-3 font-semibold text-4xl">Welcome back</h1>
-            <p className="pr-3 text-sm opacity-75">
-              Lorem ipsum is placeholder text commonly used in the graphic,
-              print, and publishing industries for previewing layouts and visual
-              mockups
-            </p>
-          </div>
-        </div>
         <div className="flex justify-center self-center  z-10">
           <div className="p-12 bg-white mx-auto rounded-3xl w-96 ">
             <div className="mb-7">
@@ -117,30 +106,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <footer>
-        <div className="container p-5 mx-auto  flex items-center justify-between ">
-          <div className="flex mr-auto">
-            <Link
-              href="https://www.codedaze.tech"
-              target="_blank"
-              title="codepen aji"
-              className="text-center text-gray-700 focus:outline-none"
-            >
-              <Image
-                src="/logo_round_won.png"
-                alt="CodeDaze"
-                height={100}
-                width={100}
-                className="object-cover mx-autorounded-full w-10 h-10"
-              />
-              <p className="text-xl">
-                Code<strong>Daze</strong>
-              </p>
-            </Link>
-          </div>
-        </div>
-      </footer>
-
       <Image
         src={logos.bg}
         alt="Bg Image"
