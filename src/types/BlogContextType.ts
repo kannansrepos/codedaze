@@ -1,13 +1,13 @@
-import { BlogPost } from './BlogPost';
+import { PostIndex } from './BlogPost';
 
 export type BlogContextType = {
-  setPosts: (posts: BlogPost[]) => void;
+  setPosts: (posts: PostIndex[]) => void;
   setNextPageToken: (nextPageToken: string) => void;
   setLoading: (loading: boolean) => void;
-  setViewPost: (post: BlogPost) => void;
+  setViewPost: (post: PostIndex) => void;
 
-  posts: BlogPost[];
+  posts: PostIndex[];
   nextPageToken: string;
   loading: boolean;
-  viewPost: BlogPost | undefined;
+  viewPost: PostIndex | undefined;
 };
