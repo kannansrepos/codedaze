@@ -15,8 +15,11 @@ const Nav = () => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
-      console.log(data.user);
-      if (['kannan.netcore@outlook.com'].includes(data.user?.email || '')) {
+      if (
+        process.env.NEXT_PUBLIC_ADMIN_USERS?.split(',').includes(
+          data.user?.email || ''
+        )
+      ) {
         setIsAdminUser(true);
       }
     });

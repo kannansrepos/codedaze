@@ -21,9 +21,10 @@ export async function middleware(request: NextRequest) {
     const loginUrl = new URL('/login', request.url);
     return NextResponse.redirect(loginUrl);
   }
+  console.log('User:', user?.email);
   if (
     request.nextUrl.pathname.startsWith('/new') &&
-    ![process.env.ADMIN_USERS].includes(user?.email || '')
+    !process.env.NEXT_PUBLIC_ADMIN_USERS?.split(',').includes(user?.email || '')
   ) {
     const loginUrl = new URL('/login', request.url);
     return NextResponse.redirect(loginUrl);
