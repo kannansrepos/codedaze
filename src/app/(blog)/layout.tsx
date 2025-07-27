@@ -1,4 +1,5 @@
 import { Nav } from '@/components';
+import SubscribeNewsletter from '@/components/pages/SubscribeNewsletter';
 const BlogLayout = async ({
   children,
 }: Readonly<{
@@ -8,6 +9,7 @@ const BlogLayout = async ({
     <>
       <Nav />
       {children}
+      <SubscribeNewsletter />
     </>
   );
 };
