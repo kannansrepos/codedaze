@@ -1,6 +1,6 @@
 const RecentVideos = () => {
   const video = {
-    src: 'https://www.youtube.com/embed/xPYDBzfBl1A',
+    src: 'https://www.youtube.com/embed?listType=playlist&list=PLwTd4JLpJnndr-9xR8JgEnKdkesXZAly7',
     title:
       'Building an E-Commerce Catalog Service with Clean Architecture in C# | Microservices Tutorial',
   };
