@@ -10,7 +10,7 @@ import ImageWithFallback from '@/components/ImageWithFallback';
 
 import { Slag } from '@/types/BlogPost';
 import { toast } from 'react-toastify';
-import generate_Metadata from '@/lib/generateMetadata';
+import PostMeta from '../_components/PostMeta';
 
 const getPostData = async (postId: string) => {
   const response = await fetch(`/api/post/file?postId=${postId}`);
@@ -24,36 +24,6 @@ const getPostData = async (postId: string) => {
   }
   return downloadResult;
 };
-
-const img = [
-  'ai',
-  'angular',
-  'azure',
-  'docker',
-  'dotnet',
-  'nextjs',
-  'postgresql',
-  'python',
-  'react',
-];
-const getImage = (language: string) => {
-  if (img.includes(language)) return language;
-  return 'default';
-};
-export async function generateMetadata({
-  params,
-}: {
-  params: { postId: string };
-}) {
-  const { downloadResult } = await getPostData(params.postId);
-  const slagData = downloadResult?.frontmatter as Slag;
-
-  return generate_Metadata({
-    title: slagData.title,
-    description: slagData.subtitle,
-    url: `https://codedaze.tech/img/${getImage(slagData?.language)}.png`,
-  });
-}
 
 const PostDetail = ({ params }: { params: { postId: string } }) => {
   const [markdownData, setMarkdownData] = useState<any>(null);
@@ -70,6 +40,7 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
 
   return (
     <div className="min-h-screen container m-auto flex flex-col md:flex-row gap-4">
+      <PostMeta />
       <div className="flex flex-col gap-2 w-full md:w-3/4 p-4">
         <div className="flex gap-2 flex-col">
           <div className="flex flex-col h-[400px] gap-2 w-full my-3">

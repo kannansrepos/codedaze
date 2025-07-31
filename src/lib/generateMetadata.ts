@@ -8,6 +8,7 @@ type GenerateMetadataProps = {
   type?: 'website' | 'article' | 'profile';
   locale?: string;
   siteName?: string;
+  keywords?: string;
 };
 
 const generate_Metadata = ({
@@ -18,6 +19,7 @@ const generate_Metadata = ({
   type = 'website',
   locale = 'en_US',
   siteName = 'Code Daze',
+  keywords,
 }: GenerateMetadataProps): Metadata => {
   return {
     title,
@@ -46,6 +48,7 @@ const generate_Metadata = ({
       site: siteName,
       creator: 'https://x.com/KannansMca',
     },
+    keywords,
     icons: {
       icon: '/favicon.ico',
     },
