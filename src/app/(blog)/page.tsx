@@ -1,4 +1,3 @@
-'use client';
 import Banner from '@/components/pages/Banner';
 import Footer from '@/components/pages/Footer';
 import Languages from '@/components/pages/Languages';
