@@ -1,11 +1,22 @@
 'use client';
-import Banner from '../../components/pages/Banner';
-import Connections from '../../components/pages/Connections';
-import Footer from '../../components/pages/Footer';
-import Languages from '../../components/pages/Languages';
-import NewsLetter from '../../components/pages/NewsLetter';
-import RecentPost from '../../components/pages/RecentPost';
-import RecentVideos from '../../components/pages/RecentVideos';
+import Banner from '@/components/pages/Banner';
+import Footer from '@/components/pages/Footer';
+import Languages from '@/components/pages/Languages';
+import NewsLetter from '@/components/pages/NewsLetter';
+import RecentPost from '@/components/pages/RecentPost';
+import Connections from '@/components/pages/Connections';
+import RecentVideos from '@/components/pages/RecentVideos';
+import generate_Metadata from '@/lib/generateMetadata';
+
+export async function generateMetadata() {
+  return generate_Metadata({
+    title:
+      'Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud',
+    description:
+      'Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices.',
+    url: 'https://codedaze.tech',
+  });
+}
 export default function Home() {
   return (
     <>

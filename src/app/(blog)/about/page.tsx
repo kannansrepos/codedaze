@@ -1,5 +1,16 @@
 import Image from 'next/image';
 import { NewsLetter, Footer, SocialLinks } from '@/components';
+import generate_Metadata from '@/lib/generateMetadata';
+
+export async function generateMetadata() {
+  return generate_Metadata({
+    title:
+      'Code Daze - Kannan S | Empowering Digital Solutions with .NET Full-Stack Expertise',
+    description:
+      '14+ years of hands-on experience in .NET development, specializing in system architecture, performance optimization, and clean code principles.',
+    url: 'https://codedaze.tech',
+  });
+}
 
 const page = () => {
   const certificate = [
