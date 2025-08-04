@@ -1,18 +1,17 @@
 const RecentVideos = () => {
   const video = {
-    src: 'https://www.youtube.com/embed?listType=playlist&list=PLwTd4JLpJnndr-9xR8JgEnKdkesXZAly7',
-    title:
-      'Building an E-Commerce Catalog Service with Clean Architecture in C# | Microservices Tutorial',
+    src: 'https://www.youtube.com/embed/mM5icOG7sxI',
+    title: 'Build an AI App with Semantic Kernel in C# | Step-by-Step Tutorial',
   };
   return (
-    <div className="flex flex-col gap-2 w-full bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] max-h-[700px] py-10 my-5 items-center justify-center">
+    <div className="flex flex-col gap-2 w-full bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] max-h-[750px] py-10 my-5 items-center justify-center">
       <div className="flex flex-col gap-6 items-center justify-center">
         <div className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white">
           🎥 Recent on Youtube
         </div>
         <iframe
           width="850"
-          height="450"
+          height="550"
           src={video.src}
           title={video.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
