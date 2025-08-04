@@ -18,9 +18,7 @@ const getPostData = async (postId: string) => {
     throw new Error('Failed to fetch post data');
   }
   const responseData = await response.json();
-  console.log('INFO: Response ', responseData);
   const { downloadResult } = responseData.data;
-  console.log('INFO: Data ', downloadResult);
 
   if (!downloadResult) {
     toast.error('Failed to fetch post data');
@@ -35,8 +33,6 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
   useEffect(() => {
     const getPost = async () => {
       const downloadResult = await getPostData(params.postId);
-      console.log('INFO: ', downloadResult);
-
       setMarkdownData(marked(downloadResult?.content));
       setSlagData(downloadResult?.frontmatter as Slag);
     };
@@ -51,15 +47,15 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
           <div className="flex flex-col h-[400px] gap-2 w-full my-3">
             <div className="relative text-center">
               <ImageWithFallback
-                src={`/banner/${slagData?.language}.png`}
+                src={`/img/${slagData?.language}.png`}
                 alt={slagData?.language ?? 'banner'}
                 width={1200}
                 height={600}
-                fallbackSrc="/banner/codedaze.png"
+                fallbackSrc="/img/default.png"
                 className="w-full h-[400px] object-cover"
               />
-              <div className="absolute top-0 left-0 w-full h-[300px] text-center flex justify-center items-center text-4xl font-bold text-primary">
-                <h1 className="bg-gradient-to-r from-[#2A42BA] via-[#8142EF] to-[#C521EF] inline-block text-transparent bg-clip-text">
+              <div className="absolute bottom-0 left-0 w-full h-[200px] text-center flex justify-center items-center text-3xl font-bold text-primary">
+                <h1 className="bg-gradient-to-r from-[#f8f8f9] via-[#8142EF] to-[#f9f6fa] inline-block text-transparent bg-clip-text">
                   {slagData?.title.toUpperCase()}
                 </h1>
               </div>
