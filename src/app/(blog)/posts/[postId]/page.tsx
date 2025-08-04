@@ -18,7 +18,10 @@ const getPostData = async (postId: string) => {
     throw new Error('Failed to fetch post data');
   }
   const responseData = await response.json();
+  console.log('INFO: Response ', responseData);
   const { downloadResult } = responseData.data;
+  console.log('INFO: Data ', downloadResult);
+
   if (!downloadResult) {
     toast.error('Failed to fetch post data');
   }
@@ -31,7 +34,9 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
 
   useEffect(() => {
     const getPost = async () => {
-      const { downloadResult } = await getPostData(params.postId);
+      const downloadResult = await getPostData(params.postId);
+      console.log('INFO: ', downloadResult);
+
       setMarkdownData(marked(downloadResult?.content));
       setSlagData(downloadResult?.frontmatter as Slag);
     };
