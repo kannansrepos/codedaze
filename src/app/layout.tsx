@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
-
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { Bounce, ToastContainer } from 'react-toastify';
 
@@ -81,6 +81,7 @@ export default function RootLayout({
           theme="colored"
           transition={Bounce}
         />
+        <SpeedInsights />
       </body>
     </html>
   );

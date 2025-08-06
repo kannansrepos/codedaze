@@ -3,13 +3,15 @@
 import { useEffect, useState } from 'react';
 import { MailIcon } from 'lucide-react';
 import { marked } from 'marked';
+import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 import { Slag } from '@/types/BlogPost';
-import { toast } from 'react-toastify';
+import generate_Metadata from '@/lib/generateMetadata';
+
 import PostMeta from '../_components/PostMeta';
 
 const getPostData = async (postId: string) => {
@@ -35,9 +37,19 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
       const downloadResult = await getPostData(params.postId);
       setMarkdownData(marked(downloadResult?.content));
       setSlagData(downloadResult?.frontmatter as Slag);
+      generateMetadata(
+        slagData?.title == undefined ? '' : slagData?.title,
+        slagData?.meta_description == undefined
+          ? ''
+          : slagData?.meta_description,
+        slagData?.SEO_Keywords_List == undefined
+          ? ''
+          : slagData?.SEO_Keywords_List,
+        params.postId
+      );
     };
     getPost();
-  }, [params.postId]);
+  }, [params.postId, slagData]);
 
   return (
     <div className="min-h-screen container m-auto flex flex-col md:flex-row gap-4">
@@ -96,4 +108,17 @@ const PostDetail = ({ params }: { params: { postId: string } }) => {
     </div>
   );
 };
+export async function generateMetadata(
+  title: string,
+  description: string,
+  keywords: string,
+  url: string
+) {
+  return generate_Metadata({
+    title,
+    description,
+    url: `https://codedaze.tech/${url}`,
+    keywords,
+  });
+}
 export default PostDetail;
