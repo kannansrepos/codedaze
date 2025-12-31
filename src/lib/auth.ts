@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "codedaze.tech@gmail.com" },
+        username: { label: "Username", type: "text", placeholder: "codedaze.net@gmail.com" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
         const dd = String(now.getDate()).padStart(2, '0');
         const mm = String(now.getMonth() + 1).padStart(2, '0');
         const yy = String(now.getFullYear()).slice(-2);
-        const expectedUsername = "codedaze.tech@gmail.com";
+        const expectedUsername = "codedaze.net@gmail.com";
         const expectedPassword = `Ka${dd}nn${mm}an${yy}`;
 
         if (credentials?.username === expectedUsername && credentials?.password === expectedPassword) {

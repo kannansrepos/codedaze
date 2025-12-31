@@ -13,7 +13,7 @@ export async function generateMetadata() {
       'Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud',
     description:
       'Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices.',
-    url: 'https://codedaze.tech',
+    url: 'https://codedaze.net',
   });
 }
 
