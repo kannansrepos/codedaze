@@ -52,7 +52,7 @@ const LoginPage = () => {
             <div className="mb-7">
               <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
               <p className="text-sm text-gray-500 mt-1">
-                Enter: codedaze.tech@gmail.com
+                Enter: codedaze.net@gmail.com
               </p>
             </div>
             <form onSubmit={handleSignIn} className="space-y-6">

@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return generate_Metadata({
     title: `${title} | Code Daze`,
     description,
-    url: `https://codedaze.tech/blog/${params.slug}`,
-    image: `https://codedaze.tech/img/${data.language || 'default'}.png`,
+    url: `https://codedaze.net/blog/${params.slug}`,
+    image: `https://codedaze.net/img/${data.language || 'default'}.png`,
     keywords,
     type: 'article',
   });

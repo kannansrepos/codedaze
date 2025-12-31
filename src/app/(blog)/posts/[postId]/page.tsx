@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return generate_Metadata({
     title: post.frontmatter.title,
     description: post.frontmatter.subtitle || post.frontmatter.meta_description || '',
-    url: `https://codedaze.tech/blog/${params.postId}`,
-    image: `https://codedaze.tech/img/${post.frontmatter.language || 'default'}.png`,
+    url: `https://codedaze.net/blog/${params.postId}`,
+    image: `https://codedaze.net/img/${post.frontmatter.language || 'default'}.png`,
     keywords: (post.frontmatter.SEO_Keywords_List || post.frontmatter.keywords) as string | undefined,
     type: 'article',
   });

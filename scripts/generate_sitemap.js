@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const baseUrl = 'https://codedaze.tech';
+const baseUrl = 'https://codedaze.net';
 const directory = 'posts';
 const changefreq = 'monthly';
 const priority = '0.8';
