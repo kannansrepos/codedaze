@@ -1,4 +1,4 @@
-import { Youtube, PlayCircle, ExternalLink } from 'lucide-react';
+import { Youtube, ExternalLink } from 'lucide-react';
 
 const RecentVideos = () => {
   const video = {

@@ -1,0 +1,30 @@
+
+> codedaze@0.1.0 build D:\workspace\sk\NextJs\blog\codedaze
+> node scripts/generate_sitemap.js && next build
+
+Ô£à Sitemap generated successfully at public/sitemap.xml
+  Ôû▓ Next.js 14.2.18
+  - Environments: .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Linting and checking validity of types ...
+
+./src/hooks/UsePosts.ts
+106:6  Warning: React Hook useEffect has a missing dependency: 'fetchPosts'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+Failed to compile.
+
+./src/app/(blog)/posts/[postId]/page.tsx:25:5
+Type error: Type '{} | undefined' is not assignable to type 'string | undefined'.
+  Type '{}' is not assignable to type 'string'.
+
+  23 |     url: `https://codedaze.tech/blog/${params.postId}`,
+  24 |     image: `https://codedaze.tech/img/${post.frontmatter.language || 'default'}.png`,
+> 25 |     keywords: post.frontmatter.SEO_Keywords_List || post.frontmatter.keywords,
+     |     ^
+  26 |     type: 'article',
+  27 |   });
+  28 | }
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

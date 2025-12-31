@@ -1,0 +1,32 @@
+
+> codedaze@0.1.0 build D:\workspace\sk\NextJs\blog\codedaze
+> node scripts/generate_sitemap.js && next build
+
+Ô£à Sitemap generated successfully at public/sitemap.xml
+  Ôû▓ Next.js 14.2.18
+  - Environments: .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./src/components/pages/Nav/nav.tsx
+10:10  Error: 'motion' is defined but never used.  @typescript-eslint/no-unused-vars
+10:18  Error: 'AnimatePresence' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/components/pages/RecentVideos.tsx
+1:19  Error: 'PlayCircle' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./src/hooks/UsePosts.ts
+106:6  Warning: React Hook useEffect has a missing dependency: 'fetchPosts'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/lib/OpenRouterService.ts
+32:19  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/lib/posts.ts
+18:20  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

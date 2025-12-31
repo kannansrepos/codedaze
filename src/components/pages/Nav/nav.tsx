@@ -7,7 +7,7 @@ import Link from 'next/link';
 import MobileNav from './_components/mobile-nav';
 import { navMenuData } from '@/lib/data';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+
 
 const Nav = () => {
   const { data: session } = useSession();

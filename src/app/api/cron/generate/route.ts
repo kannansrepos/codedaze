@@ -11,7 +11,7 @@ export const maxDuration = 60;
 export async function GET() {
   const historyPath = path.join(process.cwd(), 'data', 'cron-history.json');
   const startTime = new Date().toISOString();
-  let logData = {
+  const logData = {
     timestamp: startTime,
     tech: '',
     topics: [] as string[],
@@ -133,7 +133,9 @@ export async function GET() {
     try {
       const existingHistory = await fs.readFile(historyPath, 'utf-8');
       history = JSON.parse(existingHistory);
-    } catch (e) {}
+    } catch {
+      // Return empty array if file doesn't exist
+    }
 
     history.unshift(logData);
     await fs.writeFile(historyPath, JSON.stringify(history.slice(0, 50), null, 2));
@@ -153,7 +155,9 @@ export async function GET() {
     try {
       const existingHistory = await fs.readFile(historyPath, 'utf-8');
       history = JSON.parse(existingHistory);
-    } catch (e) {}
+    } catch {
+      // Use empty array
+    }
     history.unshift(logData);
     await fs.writeFile(historyPath, JSON.stringify(history.slice(0, 50), null, 2));
 

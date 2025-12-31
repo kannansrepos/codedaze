@@ -29,11 +29,12 @@ const GetOpenRouterResponse = async (prompt: string, model: string) => {
     }
 
     return { status: apiResponse.status, data: apiResponse.data };
-  } catch (error: any) {
-    console.error('OpenRouter Error:', error.response?.data || error.message);
+  } catch (error: unknown) {
+    const err = error as { response?: { status?: number; data?: { error?: { message?: string } } }; message?: string };
+    console.error('OpenRouter Error:', err.response?.data || err.message);
     return {
-      status: error.response?.status || 500,
-      message: error.response?.data?.error?.message || error.message
+      status: err.response?.status || 500,
+      message: err.response?.data?.error?.message || err.message
     };
   }
 };

@@ -1,0 +1,26 @@
+
+> codedaze@0.1.0 build D:\workspace\sk\NextJs\blog\codedaze
+> node scripts/generate_sitemap.js && next build
+
+Ô£à Sitemap generated successfully at public/sitemap.xml
+  Ôû▓ Next.js 14.2.18
+  - Environments: .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+.next/types/app/api/auth/[...nextauth]/route.ts:8:13
+Type error: Type 'OmitWithTag<typeof import("D:/workspace/sk/NextJs/blog/codedaze/src/app/api/auth/[...nextauth]/route"), "config" | "generateStaticParams" | "revalidate" | "dynamic" | "dynamicParams" | ... 10 more ... | "PATCH", "">' does not satisfy the constraint '{ [x: string]: never; }'.
+  Property 'authOptions' is incompatible with index signature.
+    Type 'AuthOptions' is not assignable to type 'never'.
+
+   6 |
+   7 | // Check that the entry is a valid entry
+>  8 | checkFields<Diff<{
+     |             ^
+   9 |   GET?: Function
+  10 |   HEAD?: Function
+  11 |   OPTIONS?: Function
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

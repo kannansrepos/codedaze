@@ -1,0 +1,28 @@
+
+> codedaze@0.1.0 build D:\workspace\sk\NextJs\blog\codedaze
+> node scripts/generate_sitemap.js && next build
+
+Ô£à Sitemap generated successfully at public/sitemap.xml
+  Ôû▓ Next.js 14.2.18
+  - Environments: .env
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Linting and checking validity of types ...
+
+./src/hooks/UsePosts.ts
+106:6  Warning: React Hook useEffect has a missing dependency: 'fetchPosts'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+Failed to compile.
+
+./src/db/index.ts:2:25
+Type error: Cannot find module 'drizzle-orm/postgres-js' or its corresponding type declarations.
+
+  1 | import { config } from 'dotenv';
+> 2 | import { drizzle } from 'drizzle-orm/postgres-js';
+    |                         ^
+  3 | import postgres from 'postgres';
+  4 |
+  5 | config({ path: '.env' }); // or .env.local
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

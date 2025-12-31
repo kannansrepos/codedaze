@@ -48,11 +48,12 @@ export const PostToLinkedIn = async (content: string, blogUrl: string) => {
     );
 
     return { success: true, data: response.data };
-  } catch (error: any) {
-    console.error('[LinkedInService] Error:', error.response?.data || error.message);
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: { message?: string } }; message?: string };
+    console.error('[LinkedInService] Error:', err.response?.data || err.message);
     return {
       success: false,
-      error: error.response?.data?.message || error.message
+      error: err.response?.data?.message || err.message || 'Unknown error'
     };
   }
 };

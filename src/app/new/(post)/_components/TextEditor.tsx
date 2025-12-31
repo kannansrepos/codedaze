@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-import { Brain, ExternalLink, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock } from 'lucide-react';
+import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock } from 'lucide-react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import {
   Select,
@@ -24,7 +24,7 @@ import {
 import { AIModels, Language } from '@/types/Language';
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
-import Link from 'next/link';
+
 import { toast } from 'react-toastify';
 import {
   UploadFileStore,

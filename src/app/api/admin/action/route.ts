@@ -6,7 +6,14 @@ import { PostToLinkedIn } from '@/lib/LinkedInService';
 import { AIPrompts } from '@/lib/Prompts';
 import { GetOpenRouterResponse } from '@/lib/OpenRouterService';
 
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+
 export async function GET(req: Request) {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     try {
         const { searchParams } = new URL(req.url);
         const filename = searchParams.get('filename');
@@ -31,6 +38,10 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     try {
         const body = await req.json();
         const { filename, action } = body;
@@ -45,13 +56,13 @@ export async function POST(req: Request) {
         // Check if source exists
         try {
             await fs.access(source);
-        } catch (e) {
+        } catch {
             return NextResponse.json({ error: `Source file not found: ${filename}` }, { status: 404 });
         }
 
         if (action === 'approve') {
             // Read content
-            let content = await fs.readFile(source, 'utf-8');
+            const content = await fs.readFile(source, 'utf-8');
 
             // Clean content: Remove markdown wrappers if any
             let cleanedContent = content.trim();

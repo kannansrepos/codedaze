@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,11 +17,11 @@ export async function GET() {
     try {
       const data = await fs.readFile(historyPath, 'utf-8');
       history = JSON.parse(data);
-    } catch (e) {
+    } catch {
       // Return empty array if file doesn't exist
     }
     return NextResponse.json(history);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch history' }, { status: 500 });
   }
 }

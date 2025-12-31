@@ -1,6 +1,6 @@
 import SocialLinks from '../posts/SocialLinks';
-import { CheckCircle2, Share2, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { CheckCircle2, Users } from 'lucide-react';
+
 
 const Connections = () => {
   const benefits = [

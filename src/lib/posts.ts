@@ -15,7 +15,7 @@ export type PostData = {
     language?: string;
     meta_description?: string;
     keywords?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 };
 
