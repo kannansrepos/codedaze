@@ -2,25 +2,21 @@
 import React, { useEffect, useState } from 'react';
 import { MenuIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { navMenuData } from '@/lib/data';
-import { createClient } from '@/utils/supabase/client';
-const MobileNav = () => {
-  const [IsAdminUser, setIsAdminUser] = useState(false);
+
+const MobileNav = ({ scrolled }: { scrolled?: boolean }) => {
+  const { data: session } = useSession();
+  const [isAdminUser, setIsAdminUser] = useState(false);
+
   useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      if (
-        process.env.NEXT_PUBLIC_ADMIN_USERS?.split(',').includes(
-          data.user?.email || ''
-        )
-      ) {
-        setIsAdminUser(true);
-      }
-    });
-  }, []);
+    // If user is logged in, they are admin (since only admins can authenticate)
+    setIsAdminUser(!!session?.user?.email);
+  }, [session]);
+
   return (
     <>
       <Sheet>
@@ -28,7 +24,9 @@ const MobileNav = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="rounded-full md:hidden"
+            className={`rounded-full md:hidden transition-colors duration-300 ${
+              scrolled ? 'text-gray-900 dark:text-white' : 'text-white'
+            }`}
           >
             <MenuIcon className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
@@ -37,7 +35,7 @@ const MobileNav = () => {
         <SheetContent side="right" className="md:hidden">
           <div className="grid gap-4 p-4">
             {navMenuData.map((item) => {
-              if (item.name === 'Create Post' && !IsAdminUser) {
+              if (item.requireAdmin && !isAdminUser) {
                 return null;
               } else {
                 return (

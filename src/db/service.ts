@@ -1,7 +1,7 @@
 import { eq, desc } from 'drizzle-orm';
 import { db } from '@/db';
 import { PostIndex } from '@/types/BlogPost';
-import { postIndexTable } from './schema';
+import { postIndexTable, autoPostsTable, InsertAutoPost } from './schema';
 
 const CreatePostIndex = async (data: PostIndex) => {
   const queryBuilder = db;
@@ -52,4 +52,31 @@ const _createPostIndex = async (data: PostIndex) => {
   return result[0].id;
 };
 
-export { CreatePostIndex, GetAllPostIndex, GetTopPostIndex };
+// Auto Post Services
+const CreateAutoPost = async (data: InsertAutoPost) => {
+  return await db.insert(autoPostsTable).values(data).returning();
+};
+
+const GetPendingAutoPosts = async () => {
+  return await db
+    .select()
+    .from(autoPostsTable)
+    .where(eq(autoPostsTable.status, 'PENDING'))
+    .orderBy(desc(autoPostsTable.createdAt));
+};
+
+const UpdateAutoPostStatus = async (id: string, status: string) => {
+  return await db
+    .update(autoPostsTable)
+    .set({ status })
+    .where(eq(autoPostsTable.id, id));
+};
+
+export {
+  CreatePostIndex,
+  GetAllPostIndex,
+  GetTopPostIndex,
+  CreateAutoPost,
+  GetPendingAutoPosts,
+  UpdateAutoPostStatus,
+};

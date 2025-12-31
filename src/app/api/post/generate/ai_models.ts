@@ -1,34 +1,47 @@
 import { NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-
 import { AIPrompts } from '@/lib/Prompts';
 import { GetAIResponse } from '@/lib/DeepSeekAIService';
+import { GetOpenRouterResponse } from '@/lib/OpenRouterService';
 
 const GeneratePostByGeminiAI = async (topic: string, language: string) => {
   try {
-    const getAI = new GoogleGenerativeAI(process.env.API_KEY!);
-    const model = getAI.getGenerativeModel({
-      model: process.env.GEMINI_AI_MODEL || 'gemini-1.5-flash',
-    });
+    const modelName = process.env.GEMINI_AI_MODEL || 'google/gemini-2.0-flash-exp:free';
     const prompt = AIPrompts.prompt
       .replace('[CUSTOM_PROMPT]', topic!)
       .replace('[LANGUAGE_ATTR]', language!);
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const postData = response?.text();
+
+    const apiResponse = await GetOpenRouterResponse(prompt, modelName);
+
+    if (apiResponse.status !== 200) {
+      return NextResponse.json({
+        status: apiResponse.status,
+        message: apiResponse.message || 'Failed to generate post from OpenRouter API',
+      });
+    }
+
+    const content = apiResponse.data?.choices?.[0]?.message?.content;
+
+    if (!content) {
+      return NextResponse.json({
+        status: 500,
+        error: 'No content received from OpenRouter API',
+      });
+    }
+
     return NextResponse.json({
       status: 200,
-      text: 'Blog Posted Created',
-      data: postData,
+      text: 'Blog Post Created',
+      data: content,
     });
   } catch (error) {
-    console.error('Error generating post:', error);
+    console.error('Error generating post with OpenRouter/Gemini:', error);
     return NextResponse.json({
       status: 500,
-      error: 'Internal Server Error',
+      error: error instanceof Error ? error.message : 'Internal Server Error',
     });
   }
 };
+
 const GeneratePostByDeepSeekAI = async (topic: string, language: string) => {
   try {
     const apiResponse = await GetAIResponse(
@@ -36,23 +49,39 @@ const GeneratePostByDeepSeekAI = async (topic: string, language: string) => {
         .replace('[CUSTOM_PROMPT]', topic!)
         .replace('[LANGUAGE_ATTR]', language!)
     );
+
+    console.log('DeepSeek API Response:', JSON.stringify(apiResponse.data, null, 2));
+
     if (apiResponse.status !== 200) {
       return NextResponse.json({
         status: apiResponse.status,
-        error: apiResponse.data,
+        message: 'Failed to generate post from DeepSeek API',
       });
     }
+
+    // Extract content from DeepSeek response structure
+    const content = apiResponse.data?.choices?.[0]?.message?.content;
+
+    if (!content) {
+      console.error('No content in DeepSeek response:', apiResponse.data);
+      return NextResponse.json({
+        status: 500,
+        message: 'No content received from DeepSeek API',
+      });
+    }
+
     return NextResponse.json({
-      status: apiResponse.status,
-      text: 'Blog Posted Created',
-      data: apiResponse.data,
+      status: 200,
+      text: 'Blog Post Created',
+      data: content,
     });
   } catch (error) {
-    console.error('Error generating post:', error);
+    console.error('Error generating post with DeepSeek:', error);
     return NextResponse.json({
       status: 500,
-      error: 'Internal Server Error',
+      message: error instanceof Error ? error.message : 'Internal Server Error',
     });
   }
 };
+
 export { GeneratePostByGeminiAI, GeneratePostByDeepSeekAI };

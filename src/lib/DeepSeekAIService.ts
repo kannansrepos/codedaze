@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 import { GetPageTitle } from './utils';
 
 const GetAIResponse = async (prompt: string, metadata?: Metadata) => {
-  const apiKey = process.env.DEEP_SEEK_API_KEY;
-  const apiUrl = process.env.DEEP_SEEK_API_URL;
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  const apiUrl = process.env.OPENROUTER_API_URL;
   const apiModel =
     process.env.DEEP_SEEK_API_MODEL || 'deepseek/deepseek-r1-0528:free';
 

@@ -3,9 +3,9 @@ import { UploadData } from '@/lib/GithubUtil';
 
 export const handleUploadFileToGithub = async (req: NextRequest) => {
   try {
-    const { fileName, GITHUB_TOKEN } = await req.json();
-    const FILE_PATH = `posts/${fileName}.txt`;
-    await UploadData(GITHUB_TOKEN, fileName, FILE_PATH);
+    const { fileName, GITHUB_TOKEN, markdownContent } = await req.json();
+    const FILE_PATH = `posts/${fileName}.md`;
+    await UploadData(GITHUB_TOKEN, markdownContent, FILE_PATH);
     return NextResponse.json({
       status: 200,
       text: 'File uploaded successfully',

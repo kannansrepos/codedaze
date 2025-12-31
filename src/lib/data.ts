@@ -2,18 +2,32 @@ export const navMenuData = [
   {
     name: 'Home',
     href: '/',
+    requireAdmin: false,
   },
   {
     name: 'Posts',
     href: '/posts',
+    requireAdmin: false,
   },
   {
     name: 'About',
     href: '/about',
+    requireAdmin: false,
   },
   {
     name: 'Create Post',
     href: '/new',
+    requireAdmin: true,
+  },
+  {
+    name: 'Review Drafts',
+    href: '/admin/review',
+    requireAdmin: true,
+  },
+  {
+    name: 'Activity',
+    href: '/admin/activity',
+    requireAdmin: true,
   },
 ];
 

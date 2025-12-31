@@ -26,10 +26,10 @@ const files = fs.readdirSync(postsPath);
 
 files.forEach((filename) =>
 {
-  if (filename.endsWith('.txt'))
+  if (filename.endsWith('.md'))
   {
-    const slug = filename.replace('.txt', '');
-    const fileUrl = `${baseUrl}/${directory}/${slug}`;
+    const slug = filename.replace('.md', '');
+    const fileUrl = `${baseUrl}/blog/${slug}`;
     sitemap += `    <url>
         <loc>${fileUrl}</loc>
         <lastmod>${currentDate}</lastmod>

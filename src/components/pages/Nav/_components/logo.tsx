@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const Logo = () => {
+const Logo = ({ scrolled }: { scrolled?: boolean }) => {
   return (
     <div className="flex items-center gap-2">
       <Image
@@ -9,7 +9,9 @@ const Logo = () => {
         height={32}
         width={32}
       />
-      <p className="font-bold text-lg text-primary-foreground tracking-wider hidden md:flex">
+      <p className={`font-bold text-lg tracking-wider hidden md:flex transition-colors duration-300 ${
+        scrolled ? 'text-gray-900 dark:text-white' : 'text-white'
+      }`}>
         Code Daze
       </p>
     </div>

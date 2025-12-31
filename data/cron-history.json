@@ -1,0 +1,101 @@
+[
+  {
+    "timestamp": "2025-12-31T12:34:30.706Z",
+    "tech": "mongodb",
+    "topics": [
+      "MongoDB Atlas Vector Search: Building AI-Powered Search Experiences in 2024"
+    ],
+    "files": [
+      "2025-12-31-level-up-your-search-building-ai-powered-experiences-with-mongodb-atlas-vector-search-in-2024.md"
+    ],
+    "status": "success",
+    "error": null
+  },
+  {
+    "timestamp": "2025-12-31T12:19:30.668Z",
+    "tech": "kubernetes",
+    "topics": [
+      "Kubernetes Operators: Building Intelligently Automated Applications Beyond Deployments"
+    ],
+    "files": [
+      "2025-12-31-kubernetes-operators-level-up-your-automation-from-deployments-to-intelligent-applications.md"
+    ],
+    "status": "success",
+    "error": null
+  },
+  {
+    "timestamp": "2025-12-31T12:04:30.961Z",
+    "tech": "nextjs",
+    "topics": [],
+    "files": [],
+    "status": "failed",
+    "error": "Rate limit hit (429) on OpenRouter. Please increase your cron interval to more than 5 minutes."
+  },
+  {
+    "timestamp": "2025-12-31T11:49:32.589Z",
+    "tech": "aws",
+    "topics": [
+      "AWS Lambda Powertools for Python: Mastering Observability & Resilience in Serverless Functions"
+    ],
+    "files": [
+      "2025-12-31-aws-lambda-powertools-for-python-building-serverless-champions-with-observability-resilience.md"
+    ],
+    "status": "success",
+    "error": null
+  },
+  {
+    "timestamp": "2025-12-31T11:40:38.197Z",
+    "tech": "typescript",
+    "topics": [
+      "TypeScript Beyond the Basics: Mastering Advanced Type Inference and Utility Types"
+    ],
+    "files": [],
+    "status": "failed",
+    "error": "Rate limit hit during generation. Partial execution logged."
+  },
+  {
+    "timestamp": "2025-12-31T11:34:35.652Z",
+    "tech": "react",
+    "topics": [
+      "React Server Components (RSCs): The Ultimate Guide for Data Fetching & SEO",
+      "Beyond useState: Mastering React's Context API for Complex State Management"
+    ],
+    "files": [
+      "2025-12-31-react-server-components-rscs-the-definitive-guide-to-data-fetching-seo-power.md"
+    ],
+    "status": "partial",
+    "error": "Rate limit hit during generation. Partial execution logged."
+  },
+  {
+    "timestamp": "2025-12-31T11:34:09.241Z",
+    "tech": "angular",
+    "topics": [],
+    "files": [],
+    "status": "failed",
+    "error": "Rate limit hit (429) on OpenRouter. Please increase your cron interval to more than 5 minutes."
+  },
+  {
+    "timestamp": "2025-12-31T11:32:30.584Z",
+    "tech": "kubernetes",
+    "topics": [],
+    "files": [],
+    "status": "failed",
+    "error": "Rate limit hit (429) on OpenRouter. Please increase your cron interval to more than 5 minutes."
+  },
+  {
+    "timestamp": "2025-12-31T11:31:00.978Z",
+    "tech": "react",
+    "topics": [],
+    "files": [],
+    "status": "failed",
+    "error": "Rate limit hit (429) on OpenRouter. Please increase your cron interval to more than 5 minutes."
+  },
+  {
+    "timestamp": "2025-12-31T11:18:11.715Z",
+    "tech": "AWS",
+    "topics": [],
+    "files": [],
+    "status": "failed",
+    "error": "Rate limit hit (429) on OpenRouter. Please increase your cron interval to more than 5 minutes."
+  }
+]

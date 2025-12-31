@@ -1,34 +1,48 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { signIn } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { SupabaseAuthenticationAsync } from '@/utils/supabaseActions';
 
 const LoginPage = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const logos = {
     google: '/images/logos/google.svg',
     github: '/images/logos/github.svg',
     bg: '/s.svg',
   };
-  const signIn = async (authProvider: 'google' | 'github' | 'email') => {
-    const { error, data } = await SupabaseAuthenticationAsync(authProvider);
-    if (error) {
-      console.error('Error during sign-in', error);
-      toast.error('Error during sign-in');
-      return;
-    }
-    if ('url' in data && typeof data.url === 'string') {
-      router.push(data.url);
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const result = await signIn('credentials', {
+      username: email,
+      password: password,
+      redirect: false,
+    });
+
+    setLoading(false);
+
+    if (result?.error) {
+      toast.error('Invalid credentials or error during sign-in');
+      console.error('Login error:', result.error);
     } else {
+      toast.success('Signed in successfully!');
       router.push('/');
+      router.refresh();
     }
   };
+
   return (
     <>
       <div className="bg-[#2A42BA] absolute top-0 left-0 bg-gradient-to-b from-[#8142EF] via-[#2A42BA] to-[#C521EF] bottom-0 leading-5 h-full w-full overflow-hidden "></div>
@@ -37,21 +51,30 @@ const LoginPage = () => {
           <div className="p-12 bg-white mx-auto rounded-3xl w-96 ">
             <div className="mb-7">
               <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Enter: codedaze.tech@gmail.com
+              </p>
             </div>
-            <div className="space-y-6">
+            <form onSubmit={handleSignIn} className="space-y-6">
               <div className="">
                 <Input
-                  className=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400"
-                  type=""
+                  className=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-black"
+                  type="email"
                   placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
-              <div className="relative" x-data="{ show: true }">
-                <input
+              <div className="relative">
+                <Input
+                  type="password"
                   placeholder="Password"
-                  className="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400"
+                  className="text-sm text-black px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-                <div className="flex items-center absolute inset-y-0 right-0 mr-3  text-sm leading-5"></div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="text-sm ml-auto">
@@ -62,10 +85,11 @@ const LoginPage = () => {
               </div>
               <div>
                 <Button
+                  type="submit"
+                  disabled={loading}
                   className="w-full flex justify-center text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500"
-                  onClick={() => signIn('email')}
                 >
-                  Sign In
+                  {loading ? 'Signing In...' : 'Sign In'}
                 </Button>
               </div>
               <div className="flex items-center justify-center space-x-2 my-5">
@@ -75,6 +99,7 @@ const LoginPage = () => {
               </div>
               <div className="flex justify-center gap-5 w-full ">
                 <button
+                  type="button"
                   className="w-full flex items-center justify-center mb-6 md:mb-0 border border-gray-300 hover:border-gray-900 hover:bg-gray-900 text-sm text-gray-500 p-3  rounded-lg tracking-wide font-medium  cursor-pointer transition ease-in duration-500"
                   onClick={() => signIn('google')}
                 >
@@ -89,6 +114,7 @@ const LoginPage = () => {
                 </button>
 
                 <button
+                  type="button"
                   className="w-full flex items-center justify-center mb-6 md:mb-0 border border-gray-300 hover:border-gray-900 hover:bg-gray-900 text-sm text-gray-500 p-3  rounded-lg tracking-wide font-medium  cursor-pointer transition ease-in duration-500 px-4"
                   onClick={() => signIn('github')}
                 >
@@ -102,7 +128,7 @@ const LoginPage = () => {
                   <span>Github</span>
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -23,13 +23,4 @@ const UploadFileStore = async (content: string, fileName: string) => {
   });
 };
 
-const CreatePostIndex = async (postId: string) => {
-  return await fetch(`/api/post/data`, {
-    method: 'POST',
-    body: JSON.stringify({
-      postId,
-    }),
-  });
-};
-
-export { UploadFileToGithub, UploadFileStore, CreatePostIndex };
+export { UploadFileToGithub, UploadFileStore };

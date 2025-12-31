@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { Bounce, ToastContainer } from 'react-toastify';
+import { NextAuthProvider } from '@/components/providers/NextAuthProvider';
 
 const roboto = Roboto({
   weight: ['400', '900'],
@@ -10,10 +11,25 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title:
-    'Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud',
-  description:
-    'Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices.',
+  title: 'Code Daze - Modern Web Development Tutorials',
+  description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices.',
+  keywords: ['.NET', '.NET Core', 'Angular', 'React.js', 'Node.js', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Docker', 'Microservices', 'Web Development', 'Tutorials'],
+  authors: [{ name: 'Kannan' }],
+  openGraph: {
+    title: 'Code Daze - Modern Web Development Tutorials',
+    description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development.',
+    url: 'https://codedaze.tech',
+    siteName: 'Code Daze',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Code Daze - Modern Web Development Tutorials',
+    description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development.',
+    creator: '@KannansMca',
+  },
+  metadataBase: new URL('https://codedaze.tech'),
 };
 
 export default function RootLayout({
@@ -25,63 +41,27 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="canonical" href="https://codedaze.tech" key="canonical" />
-        <meta
-          name="title"
-          content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"
-        />
-        <meta
-          name="description"
-          content="Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices."
-        />
-        <meta
-          name="keywords"
-          content=".NET, .NET Core, Angular, React.js, Node.js, TypeScript, Next.js, Tailwind CSS, Shadcn, Docker, Microservices, Web Development, Tutorials, JavaScript"
-        />
-        <meta
-          property="og:title"
-          content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"
-        />
-        <meta
-          property="og:description"
-          content="Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices."
-        />
-        <meta
-          property="og:image"
-          content="URL_of_an_image_representing_your_blog_content"
-        />
-        <meta property="og:url" content="URL_of_your_blog_homepage" />
-        <meta property="og:type" content="website" />
-        <meta
-          name="twitter:title"
-          content="Code Daze - Modern Web Development Tutorials & Best Practices for .NET, React, Angular & Cloud"
-        />
-        <meta
-          name="twitter:description"
-          content="Welcome to Code Daze, Discover expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development. Level up your skills with modern web development best practices."
-        />
-        <meta name="twitter:image" content="URL_of_an_image_for_Twitter_card" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="/logo.png" />
       </head>
       <body
-        className={` ${roboto.className} antialiased bg-[#F0F0F0] w-screen h-screen`}
+        className={`${roboto.className} antialiased bg-[#020617] text-gray-100 min-h-screen selection:bg-primary/30 selection:text-primary-foreground`}
       >
-        {children}
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          transition={Bounce}
-        />
-        <SpeedInsights />
+        <NextAuthProvider>
+          {children}
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Bounce}
+          />
+          <SpeedInsights />
+        </NextAuthProvider>
       </body>
     </html>
   );

@@ -1,38 +1,30 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { createServerClient } from '@supabase/ssr';
+import { getToken } from 'next-auth/jwt';
 
 export async function middleware(request: NextRequest) {
-  // Debug: log all cookies
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: request.cookies.getAll.bind(request.cookies),
-        setAll: () => {}, // No-op, since you can't set cookies in middleware
-      },
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET || "your-secret-key-change-this-in-production"
+  });
+
+  const { pathname } = request.nextUrl;
+
+  // Protect /new and /admin routes
+  if (pathname.startsWith('/new') || pathname.startsWith('/admin')) {
+    if (!token) {
+      // Redirect to adminlogin instead of login
+      const loginUrl = new URL('/adminlogin', request.url);
+      return NextResponse.redirect(loginUrl);
     }
-  );
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (request.nextUrl.pathname.startsWith('/new') && !user) {
-    const loginUrl = new URL('/login', request.url);
-    return NextResponse.redirect(loginUrl);
-  }
-  console.log('User:', user?.email);
-  if (
-    request.nextUrl.pathname.startsWith('/new') &&
-    !process.env.NEXT_PUBLIC_ADMIN_USERS?.split(',').includes(user?.email || '')
-  ) {
-    const loginUrl = new URL('/login', request.url);
-    return NextResponse.redirect(loginUrl);
+
+    // If user has a valid token, they are admin (since only admins can authenticate)
+    // No need to check NEXT_PUBLIC_ADMIN_USERS
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/new/:path*'],
+  matcher: ['/new/:path*', '/admin/:path*'],
 };

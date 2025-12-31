@@ -3,10 +3,14 @@ import { handleGeneratePost } from './handlers';
 
 const POST = async (req: NextRequest) => {
   try {
-    return await handleGeneratePost(req);
+    const response = await handleGeneratePost(req);
+    return response;
   } catch (e) {
-    console.log(e);
-    return NextResponse.json({ status: 500, error: 'Internal Server Error' });
+    console.error('API POST Error:', e);
+    return NextResponse.json({
+      status: 500,
+      error: e instanceof Error ? e.message : 'Internal Server Error'
+    });
   }
 };
 

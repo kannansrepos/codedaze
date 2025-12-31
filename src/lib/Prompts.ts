@@ -42,4 +42,21 @@ meta_description: "Meta Description of the blog"
 full_blog as Markdown content with headings, code blocks, and explanations.",
 Now begin.
 `,
+  linkedinPrompt: `Act as a Technical Thought Leader on LinkedIn. I have just published a new blog post.
+    Based on the blog content provided below, write a highly engaging, professional, and viral-style LinkedIn post.
+
+    GUIDELINES:
+    1. Start with a hook that grabs attention.
+    2. Use bullet points for readability.
+    3. Highlight the key technical benefits and value for developers.
+    4. MUST include relevant SEO hashtags and technology-specific tags (e.g., #NextJS, #WebDev).
+    5. Include 3-5 keywords that make my profile look like an expert in this field.
+    6. Maintain a friendly yet authoritative tone.
+    7. Do not use generic placeholders.
+    8. Use emojis sparingly to add personality but keep it professional.
+
+    BLOG CONTENT:
+    [BLOG_CONTENT]
+
+    Return only the post content text.`,
 };
