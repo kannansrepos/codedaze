@@ -1,6 +1,5 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
 import TextEditor from './_components/TextEditor';
 import { Sparkles } from 'lucide-react';
 

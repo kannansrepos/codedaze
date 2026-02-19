@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { MailIcon, Sparkles, Code2, Rocket } from 'lucide-react';
+import { Sparkles, Code2, Rocket } from 'lucide-react';
 
 const Banner = () =>
 {

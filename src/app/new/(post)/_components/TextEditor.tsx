@@ -4,35 +4,35 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import
-  {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-  } from '@/components/ui/form';
+{
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
-import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock, ChevronDown, Rocket } from 'lucide-react';
+import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock, Rocket } from 'lucide-react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import
-  {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from '@/components/ui/select';
+{
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { AIModels, Language } from '@/types/Language';
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 
 import { toast } from 'react-toastify';
 import
-  {
-    UploadFileStore,
-    UploadFileToGithub,
-  } from './actions';
+{
+  UploadFileStore,
+  UploadFileToGithub,
+} from './actions';
 
 const blogEditorFormSchema = z.object({
   model: z.string(),
@@ -305,19 +305,19 @@ const TextEditor = () =>
       {/* Token Expiry Warning Banner */}
       {tokenExpiryWarning && (
         <div className={`group rounded-[2rem] border px-6 py-5 flex items-center gap-5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 ${tokenExpiryWarning.includes('expired')
-            ? 'bg-red-500/[0.03] border-red-500/10 hover:border-red-500/20'
-            : 'bg-amber-500/[0.03] border-amber-500/10 hover:border-amber-500/20'
+          ? 'bg-red-500/[0.03] border-red-500/10 hover:border-red-500/20'
+          : 'bg-amber-500/[0.03] border-amber-500/10 hover:border-amber-500/20'
           }`}>
           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 ${tokenExpiryWarning.includes('expired')
-              ? 'bg-red-500/10'
-              : 'bg-amber-500/10'
+            ? 'bg-red-500/10'
+            : 'bg-amber-500/10'
             }`}>
             <span className="text-2xl">⚠️</span>
           </div>
           <div className="flex-1">
             <p className={`font-black text-xs uppercase tracking-[0.2em] ${tokenExpiryWarning.includes('expired')
-                ? 'text-red-500'
-                : 'text-amber-500'
+              ? 'text-red-500'
+              : 'text-amber-500'
               }`}>
               {tokenExpiryWarning}
             </p>
