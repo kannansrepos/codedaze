@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-const Languages = () => {
+const Languages = () =>
+{
   const images = [
     { name: 'Azure', file: 'azure.png' },
     { name: 'C#', file: 'c-sharp.png' },
@@ -14,10 +15,10 @@ const Languages = () => {
   return (
     <div className="w-full py-10">
       <div className="container mx-auto px-4">
-        <div className="bg-white/[0.07] backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-10 md:p-14 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden group">
-          {/* Animated Background Glow */}
-          <div className="absolute -top-24 -left-24 w-80 h-80 bg-primary/20 rounded-full blur-[100px] opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px] opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none" />
+        <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group">
+          {/* Subtle Background Glow */}
+          <div className="absolute -top-24 -left-24 w-80 h-80 bg-primary/10 rounded-full blur-[120px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-blue-500/5 rounded-full blur-[120px] opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none" />
 
           <div className="relative z-10 flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-24">
             {images.map((image, index) => (

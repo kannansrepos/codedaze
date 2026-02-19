@@ -7,15 +7,17 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Shield, Lock } from 'lucide-react';
+import { Shield, Lock, ChevronRight } from 'lucide-react';
 
-const AdminLoginPage = () => {
+const AdminLoginPage = () =>
+{
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSignIn = async (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) =>
+  {
     e.preventDefault();
     setLoading(true);
 
@@ -27,10 +29,12 @@ const AdminLoginPage = () => {
 
     setLoading(false);
 
-    if (result?.error) {
+    if (result?.error)
+    {
       toast.error('Invalid credentials');
       console.error('Login error:', result.error);
-    } else {
+    } else
+    {
       toast.success('Signed in successfully!');
       router.push('/');
       router.refresh();
@@ -38,60 +42,56 @@ const AdminLoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(147,51,234,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-      </div>
+    <div className="relative min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md relative">
+        {/* Subtle Ambient Glow behind the card */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
 
-      {/* Content */}
-      <div className="relative min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
+        {/* Content */}
+        <div className="relative space-y-8">
           {/* Admin Badge */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 backdrop-blur-sm border border-red-500/20 text-red-400 text-sm font-medium mb-4">
-              <Shield className="w-4 h-4" />
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/5 backdrop-blur-sm border border-red-500/10 text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">
+              <Shield className="w-3.5 h-3.5" />
               <span>Admin Access Only</span>
             </div>
-            <h1 className="text-4xl font-bold text-white mb-2">
-              Admin <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">Portal</span>
+            <h1 className="text-4xl lg:text-5xl font-black text-white tracking-tighter leading-none">
+              Control <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">Center</span>
             </h1>
-            <p className="text-gray-400">Secure authentication required</p>
+            <p className="text-slate-500 font-medium text-sm">Secure authentication required for engineers</p>
           </div>
 
-          {/* Login Card */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <Lock className="w-5 h-5 text-white" />
+          {/* Login Card - Premium Glassmorphism */}
+          <div className="bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] border border-white/[0.05] p-8 md:p-10 shadow-3xl">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <Lock className="w-5 h-5 text-primary" />
               </div>
-              <div>
-                <h2 className="text-xl font-bold text-white">Sign In</h2>
-                <p className="text-sm text-gray-400">Enter your credentials</p>
+              <div className="space-y-1">
+                <h2 className="text-xl font-black text-white tracking-tight">Identity Access</h2>
+                <p className="text-xs text-slate-500 font-black uppercase tracking-widest">Verification required</p>
               </div>
             </div>
 
-            <form onSubmit={handleSignIn} className="space-y-5">
-              <div>
-                <label className="block text-sm font-semibold text-white mb-2">Email Address</label>
+            <form onSubmit={handleSignIn} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Email Terminal</label>
                 <Input
-                  className="w-full bg-white/5 border-white/10 text-white placeholder:text-gray-500 hover:bg-white/10 transition-colors h-12"
+                  className="w-full bg-white/[0.03] border-white/[0.05] text-white placeholder:text-slate-600 focus:border-primary focus:ring-primary rounded-2xl h-14 px-6 transition-all"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="admin@codedaze.net"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-white mb-2">Password</label>
+              <div className="space-y-2">
+                <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Pass-key</label>
                 <Input
                   type="password"
-                  placeholder="Enter your password"
-                  className="w-full bg-white/5 border-white/10 text-white placeholder:text-gray-500 hover:bg-white/10 transition-colors h-12"
+                  placeholder="••••••••"
+                  className="w-full bg-white/[0.03] border-white/[0.05] text-white placeholder:text-slate-600 focus:border-primary focus:ring-primary rounded-2xl h-14 px-6 transition-all"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -101,17 +101,22 @@ const AdminLoginPage = () => {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold h-12 shadow-lg hover:shadow-xl transition-all mt-6"
+                className="w-full bg-primary hover:bg-primary/90 text-white font-black h-14 rounded-2xl shadow-[0_0_20px_rgba(var(--primary),0.3)] group transition-all"
               >
-                {loading ? 'Signing In...' : 'Sign In'}
+                {loading ? 'Authenticating...' : (
+                  <span className="flex items-center justify-center gap-2 uppercase text-xs tracking-[0.2em]">
+                    Initialize Access
+                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                )}
               </Button>
             </form>
           </div>
 
           {/* Security Notice */}
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
-              🔒 This is a secure admin portal. Unauthorized access attempts are logged.
+          <div className="text-center">
+            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.15em] max-w-[280px] mx-auto leading-loose">
+              Security Protocol: Unauthorized access attempts are encrypted and logged for review.
             </p>
           </div>
         </div>

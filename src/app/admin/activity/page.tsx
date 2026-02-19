@@ -28,13 +28,44 @@ const NextJobCountdown = () => {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
 
   useEffect(() => {
+    // Parse cron schedule from env variable (format: */N * * * * or * * * * *)
+    const getCronInterval = () => {
+      const schedule = process.env.NEXT_PUBLIC_CRON_SCHEDULE || '*/5 * * * *';
+      try {
+        const parts = schedule.split(' ');
+        // Handle */N format (e.g., */5 means every 5 minutes)
+        if (parts[0].startsWith('*/')) {
+          const mins = parseInt(parts[0].replace('*/', ''));
+          return isNaN(mins) ? 5 : mins;
+        }
+        // Handle * format (every minute)
+        if (parts[0] === '*') {
+          return 1;
+        }
+      } catch (e) {
+        console.error('Failed to parse NEXT_PUBLIC_CRON_SCHEDULE:', e);
+      }
+      return 1; // Default to 5 minutes
+    };
+
+    const intervalMinutes = getCronInterval();
+
     const calculateTime = () => {
       const now = new Date();
       const next = new Date(now);
-      const mins = now.getMinutes();
-      // Calculate next 5-minute mark
-      const nextMins = (Math.floor(mins / 5) + 1) * 5;
-      next.setMinutes(nextMins, 0, 0);
+
+      if (intervalMinutes === 1) {
+        // For every minute, just go to the next minute mark (00 seconds)
+        next.setSeconds(0, 0);
+        if (next <= now) {
+          next.setMinutes(next.getMinutes() + 1);
+        }
+      } else {
+        // For interval-based schedules (e.g., every 5, 10, 15 minutes)
+        const mins = now.getMinutes();
+        const nextMins = (Math.floor(mins / intervalMinutes) + 1) * intervalMinutes;
+        next.setMinutes(nextMins, 0, 0);
+      }
 
       const diff = next.getTime() - now.getTime();
 

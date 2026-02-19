@@ -1,10 +1,36 @@
 import axios from 'axios';
+import { ModelRotation } from './ModelRotation';
 
-const GetOpenRouterResponse = async (prompt: string, model: string) => {
+interface OpenRouterOptions {
+  apiKey?: string;
+  model?: string;
+  useRotation?: boolean;
+}
+
+const GetOpenRouterResponse = async (
+  prompt: string,
+  options?: OpenRouterOptions
+) => {
   try {
-    const apiKey = process.env.OPENROUTER_API_KEY;
-    const apiUrl = "https://openrouter.ai/api/v1";
+    let apiKey: string;
+    let model: string;
+    // Use rotation by default, or if explicitly requested
+    if (options?.useRotation !== false && (!options?.apiKey || !options?.model)) {
+      const nextModel = await ModelRotation.getNextModel();
+      apiKey = nextModel.apiKey;
+      model = nextModel.model;
+      console.log(`[OpenRouter] Using rotated model: ${nextModel.name} (${model})`);
+    } else {
+      // Use provided credentials or fallback to env
+      apiKey = options?.apiKey || process.env.OPENROUTER_API_KEY || '';
+      model = options?.model || process.env.OPENROUTER_API_MODEL || 'openai/gpt-4o-mini';
+    }
 
+    if (!apiKey) {
+      throw new Error('No API key available. Please configure OPENROUTER_API_KEY or model rotation keys.');
+    }
+
+    const apiUrl = "https://openrouter.ai/api/v1";
     const apiHeaders = {
       Authorization: `Bearer ${apiKey}`,
       'HTTP-Referer': process.env.APP_HOST || 'http://localhost:3000',
@@ -17,7 +43,8 @@ const GetOpenRouterResponse = async (prompt: string, model: string) => {
       headers: apiHeaders,
       validateStatus: (status) => status < 500, // Handle 4xx errors manually
     });
-
+    console.log(apiKey)
+console.log(model)
     const apiResponse = await api.post('/chat/completions', {
       model: model,
       messages: [{ role: 'user', content: prompt }],
@@ -40,3 +67,4 @@ const GetOpenRouterResponse = async (prompt: string, model: string) => {
 };
 
 export { GetOpenRouterResponse };
+

@@ -91,11 +91,10 @@ export async function POST(req: Request) {
 
             // AUTO-POST TO LINKEDIN
             try {
-                const modelName = process.env.GEMINI_AI_MODEL || 'google/gemini-2.0-flash-exp:free';
                 const linkedinPrompt = AIPrompts.linkedinPrompt.replace('[BLOG_CONTENT]', cleanedContent.substring(0, 3000));
 
                 console.log('[LinkedIn] Generating AI social post...');
-                const aiResponse = await GetOpenRouterResponse(linkedinPrompt, modelName);
+                const aiResponse = await GetOpenRouterResponse(linkedinPrompt);
 
                 if (aiResponse.status === 200) {
                     const liContent = aiResponse.data?.choices?.[0]?.message?.content;
