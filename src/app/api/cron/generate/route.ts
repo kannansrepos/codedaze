@@ -24,8 +24,6 @@ export async function GET() {
     // Ensure data directory exists
     await fs.mkdir(path.join(process.cwd(), 'data'), { recursive: true });
 
-    const modelName = process.env.GEMINI_AI_MODEL || 'google/gemini-2.0-flash-exp:free';
-
     // Get all tech keys from Language enum
     const techKeys = Object.keys(Language).filter(key => isNaN(Number(key)));
     const language = techKeys[Math.floor(Math.random() * techKeys.length)];
@@ -58,9 +56,9 @@ export async function GET() {
 
     Make sure the suggestion is completely new and unique.
     Return STRICTLY a JSON array of strings containing exactly 1 topic. Do not use markdown code blocks. Example: ["Topic 1"]`;
-
-    const trendResponse = await GetOpenRouterResponse(trendPrompt, modelName);
-
+    // console.clear();
+    const trendResponse = await GetOpenRouterResponse(trendPrompt);
+    console.log(trendResponse);
     if (trendResponse.status !== 200) {
         const errorMsg = trendResponse.status === 429
           ? 'Rate limit hit (429) on OpenRouter. Please increase your cron interval to more than 5 minutes.'
@@ -91,42 +89,43 @@ export async function GET() {
     // Small delay to avoid burst rate limits
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    const generated = [];
+    // const generated = [];
 
-    // 2. Generate Posts
-    for (const topic of topics) {
-        const postPrompt = AIPrompts.prompt
-            .replace('[CUSTOM_PROMPT]', topic)
-            .replace('[LANGUAGE_ATTR]', language);
+    // // 2. Generate Posts
+    // for (const topic of topics) {
+    //     const postPrompt = AIPrompts.prompt
+    //         .replace('[CUSTOM_PROMPT]', topic)
+    //         .replace('[LANGUAGE_ATTR]', language);
 
-        const postResponse = await GetOpenRouterResponse(postPrompt, modelName);
+    //     const postResponse = await GetOpenRouterResponse(postPrompt, modelName);
 
-        if (postResponse.status !== 200) {
-            console.error(`Failed to generate post for topic "${topic}":`, postResponse.message);
-            if (postResponse.status === 429) {
-              logData.status = generated.length > 0 ? 'partial' : 'failed';
-              logData.error = 'Rate limit hit during generation. Partial execution logged.';
-              break; // Stop loop but continue to save whatever was finished
-            }
-            continue;
-        }
+    //     if (postResponse.status !== 200) {
+    //         console.error(`Failed to generate post for topic "${topic}":`, postResponse.message);
+    //         if (postResponse.status === 429) {
+    //           logData.status = generated.length > 0 ? 'partial' : 'failed';
+    //           logData.error = 'Rate limit hit during generation. Partial execution logged.';
+    //           break; // Stop loop but continue to save whatever was finished
+    //         }
+    //         continue;
+    //     }
 
-        const content = postResponse.data?.choices?.[0]?.message?.content;
+    //     const content = postResponse.data?.choices?.[0]?.message?.content;
 
-        // Extract Title
-        const titleMatch = content.match(/title:\s*["']?(.*?)["']?(\r\n|\n|$)/);
-        const title = titleMatch ? titleMatch[1] : topic;
-        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        const filename = `${new Date().toISOString().split('T')[0]}-${slug}.md`;
+    //     // Extract Title
+    //     const titleMatch = content.match(/title:\s*["']?(.*?)["']?(\r\n|\n|$)/);
+    //     const title = titleMatch ? titleMatch[1] : topic;
+    //     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    //     const filename = `${new Date().toISOString().split('T')[0]}-${slug}.md`;
 
-        // Save to drafts
-        const fileDir = path.join(process.cwd(), 'posts', 'auto-drafts');
-        await fs.mkdir(fileDir, { recursive: true });
-        await fs.writeFile(path.join(fileDir, filename), content, 'utf-8');
-        generated.push(filename);
-    }
+    //     // Save to drafts
+    //     const fileDir = path.join(process.cwd(), 'posts', 'auto-drafts');
+    //     await fs.mkdir(fileDir, { recursive: true });
+    //     await fs.writeFile(path.join(fileDir, filename), content, 'utf-8');
+    //     generated.push(filename);
+    //     await new Promise(resolve => setTimeout(resolve, 12000));
+    // }
 
-    logData.files = generated;
+    // logData.files = generated;
 
     // Save to history
     let history = [];
@@ -142,7 +141,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: logData.status !== 'failed',
-      files: generated,
+      // files: generated,
       message: logData.error
     });
   } catch (error: unknown) {

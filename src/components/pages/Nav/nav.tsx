@@ -9,34 +9,38 @@ import { navMenuData } from '@/lib/data';
 import Image from 'next/image';
 
 
-const Nav = () => {
+const Nav = () =>
+{
   const { data: session } = useSession();
   const [isAdminUser, setIsAdminUser] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     setIsAdminUser(!!session?.user?.email);
   }, [session]);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  useEffect(() =>
+  {
+    const handleScroll = () =>
+    {
       setScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLogout = async () => {
+  const handleLogout = async () =>
+  {
     await signOut({ callbackUrl: '/' });
   };
 
   return (
     <header
-      className={`fixed top-0 z-[100] w-full transition-all duration-500 ease-in-out ${
-        scrolled
-          ? 'py-3 bg-white/75 dark:bg-gray-950/75 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] border-b border-white/20 dark:border-white/5'
-          : 'py-6 bg-transparent'
-      }`}
+      className={`fixed top-0 z-[100] w-full transition-all duration-500 ease-in-out ${scrolled
+        ? 'py-3 bg-white/95 dark:bg-white/95 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] border-b border-gray-200/50 dark:border-gray-200/20'
+        : 'py-6 bg-transparent'
+        }`}
     >
       <div className="container mx-auto flex max-w-7xl items-center justify-between px-6 md:px-8">
         <Link
@@ -48,18 +52,18 @@ const Nav = () => {
         </Link>
 
         <nav className="hidden items-center gap-10 font-medium md:flex">
-          {navMenuData.map((item) => {
+          {navMenuData.map((item) =>
+          {
             if (item.requireAdmin && !isAdminUser) return null;
             return (
               <Link
                 key={item.name}
                 href={item.href}
                 prefetch={false}
-                className={`group relative text-sm font-bold tracking-wide transition-all duration-300 ${
-                  scrolled
-                    ? 'text-gray-800 dark:text-gray-200 hover:text-primary'
-                    : 'text-white/90 hover:text-white'
-                }`}
+                className={`group relative text-sm font-bold tracking-wide transition-all duration-300 ${scrolled
+                  ? 'text-gray-800 dark:text-gray-800 hover:text-primary'
+                  : 'text-white/90 hover:text-white'
+                  }`}
               >
                 {item.name}
                 <span className={`absolute -bottom-1 left-0 h-[2px] w-0 bg-primary transition-all duration-300 group-hover:w-full`} />
@@ -81,7 +85,7 @@ const Nav = () => {
                     />
                   </div>
                 )}
-                <span className={`text-xs font-bold leading-none max-w-[120px] truncate ${scrolled ? 'text-gray-700 dark:text-gray-200' : 'text-white'}`}>
+                <span className={`text-xs font-bold leading-none max-w-[120px] truncate ${scrolled ? 'text-gray-700 dark:text-gray-700' : 'text-white'}`}>
                   {session.user?.email?.split('@')[0]}
                 </span>
               </div>

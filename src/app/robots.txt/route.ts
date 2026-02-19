@@ -26,8 +26,8 @@ Disallow: /posts/auto-drafts/
 Disallow: /posts/rejected/
 
 # Sitemap location
-Sitemap: https://www.codedaze.net/sitemap.xml
-Sitemap: https://codedaze.net/sitemap.xml
+Sitemap: https://www.codedaze.tech/sitemap.xml
+Sitemap: https://codedaze.tech/sitemap.xml
 
 # Crawl delay (optional - helps prevent server overload)
 Crawl-delay: 1

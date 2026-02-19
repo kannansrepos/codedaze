@@ -8,11 +8,13 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { navMenuData } from '@/lib/data';
 
-const MobileNav = ({ scrolled }: { scrolled?: boolean }) => {
+const MobileNav = ({ scrolled }: { scrolled?: boolean }) =>
+{
   const { data: session } = useSession();
   const [isAdminUser, setIsAdminUser] = useState(false);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     // If user is logged in, they are admin (since only admins can authenticate)
     setIsAdminUser(!!session?.user?.email);
   }, [session]);
@@ -24,9 +26,8 @@ const MobileNav = ({ scrolled }: { scrolled?: boolean }) => {
           <Button
             variant="ghost"
             size="icon"
-            className={`rounded-full md:hidden transition-colors duration-300 ${
-              scrolled ? 'text-gray-900 dark:text-white' : 'text-white'
-            }`}
+            className={`rounded-full md:hidden transition-colors duration-300 ${scrolled ? 'text-gray-900 dark:text-gray-900' : 'text-white'
+              }`}
           >
             <MenuIcon className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
@@ -34,10 +35,13 @@ const MobileNav = ({ scrolled }: { scrolled?: boolean }) => {
         </SheetTrigger>
         <SheetContent side="right" className="md:hidden">
           <div className="grid gap-4 p-4">
-            {navMenuData.map((item) => {
-              if (item.requireAdmin && !isAdminUser) {
+            {navMenuData.map((item) =>
+            {
+              if (item.requireAdmin && !isAdminUser)
+              {
                 return null;
-              } else {
+              } else
+              {
                 return (
                   <Link
                     key={item.name}

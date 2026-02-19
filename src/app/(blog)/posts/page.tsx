@@ -11,17 +11,20 @@ const POSTS_DIR = path.join(process.cwd(), 'posts');
 export const metadata: Metadata = generate_Metadata({
   title: 'Blog Posts | Code Daze - Modern Web Development Tutorials',
   description: 'Explore our collection of technical articles, tutorials, and insights on .NET, React, Angular, and Cloud architecture.',
-  url: 'https://codedaze.net/posts',
+  url: 'https://codedaze.tech/posts',
   keywords: 'blog, tutorials, .NET, React, Angular, Next.js, Cloud, Web Development',
 });
 
-async function getAllPosts() {
-  try {
+async function getAllPosts()
+{
+  try
+  {
     const files = await fs.promises.readdir(POSTS_DIR);
     const posts = await Promise.all(
       files
         .filter(file => file.endsWith('.md'))
-        .map(async (file) => {
+        .map(async (file) =>
+        {
           const fullPath = path.join(POSTS_DIR, file);
           const fileContent = await fs.promises.readFile(fullPath, 'utf-8');
           const { data } = matter(fileContent);
@@ -40,13 +43,15 @@ async function getAllPosts() {
     );
 
     return posts;
-  } catch (e) {
+  } catch (e)
+  {
     console.error('Failed to read posts directory', e);
     return [];
   }
 }
 
-export default async function PostsPage() {
+export default async function PostsPage()
+{
   const allPosts = await getAllPosts();
 
   return <PostClient allPosts={allPosts} />;

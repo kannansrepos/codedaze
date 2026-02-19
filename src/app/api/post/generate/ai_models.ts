@@ -5,12 +5,11 @@ import { GetOpenRouterResponse } from '@/lib/OpenRouterService';
 
 const GeneratePostByGeminiAI = async (topic: string, language: string) => {
   try {
-    const modelName = process.env.GEMINI_AI_MODEL || 'google/gemini-2.0-flash-exp:free';
     const prompt = AIPrompts.prompt
       .replace('[CUSTOM_PROMPT]', topic!)
       .replace('[LANGUAGE_ATTR]', language!);
 
-    const apiResponse = await GetOpenRouterResponse(prompt, modelName);
+    const apiResponse = await GetOpenRouterResponse(prompt);
 
     if (apiResponse.status !== 200) {
       return NextResponse.json({

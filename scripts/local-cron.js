@@ -8,25 +8,32 @@ const url = `http://localhost:${port}/api/cron/generate`;
 console.log(`[Local Cron] Initialized with schedule: ${schedule}`);
 console.log(`[Local Cron] Targeting: ${url}`);
 
-// Simple parser for */N * * * * format
+// Simple parser for cron format
 function getIntervalMs(cron)
 {
   try
   {
     const parts = cron.split(' ');
+    // Handle */N format (e.g., */5 means every 5 minutes)
     if (parts[0].startsWith('*/'))
     {
       const mins = parseInt(parts[0].replace('*/', ''));
-      // Minimum 15 minutes for local testing to avoid 429
-      const safeMins = Math.max(mins, 15);
-      return safeMins * 60 * 1000;
+      return mins * 60 * 1000;
     }
-  } catch (e) { }
-  return 15 * 60 * 1000; // Default 15 mins
+    // Handle * format (every minute)
+    if (parts[0] === '*')
+    {
+      return 1 * 60 * 1000; // 1 minute
+    }
+  } catch (e)
+  {
+    console.error('[Local Cron] Failed to parse schedule:', e);
+  }
+  return 5 * 60 * 1000; // Default 5 mins
 }
 
-const interval = 15 * 60 * 1000;
-console.log(`[Local Cron] FORCED: Running every 15 minutes to avoid rate limits`);
+const interval = getIntervalMs(schedule);
+console.log(`[Local Cron] Running every ${interval / 60000} minute(s)`);
 
 async function triggerCron()
 {

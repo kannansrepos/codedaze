@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
       .map(f => f.replace(/\.md$/, '').replace(/-/g, ' ').replace(/_/g, ' '))
       .join(', ');
 
-    const modelName = process.env.GEMINI_AI_MODEL || 'google/gemini-2.0-flash-exp:free';
     const prompt = `Act as a Tech Blog SEO Expert. Give me 5 highly trending and popular blog post titles/topics for "${language}" that developers are searching for right now.
 
     CRITICAL: Exclude the following existing topics which we have already covered:
@@ -40,7 +39,7 @@ export async function POST(req: NextRequest) {
     Focus on modern features, best practices, or comparison topics.
     Return STRICTLY a JSON array of strings. Do not use markdown code blocks. Example: ["Topic 1", "Topic 2"]`;
 
-    const apiResponse = await GetOpenRouterResponse(prompt, modelName);
+    const apiResponse = await GetOpenRouterResponse(prompt);
 
     if (apiResponse.status !== 200) {
         throw new Error('Failed to fetch from OpenRouter');

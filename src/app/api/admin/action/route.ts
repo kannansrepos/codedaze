@@ -79,7 +79,7 @@ export async function POST(req: Request) {
             const cleanFilename = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '');
             const githubPath = `posts/${cleanFilename}`;
             const slug = cleanFilename.replace('.md', '');
-            const publicUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.codedaze.net'}/blog/${slug}`;
+            const publicUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.codedaze.tech'}/blog/${slug}`;
 
             // Push to GitHub
             const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
@@ -91,11 +91,10 @@ export async function POST(req: Request) {
 
             // AUTO-POST TO LINKEDIN
             try {
-                const modelName = process.env.GEMINI_AI_MODEL || 'google/gemini-2.0-flash-exp:free';
                 const linkedinPrompt = AIPrompts.linkedinPrompt.replace('[BLOG_CONTENT]', cleanedContent.substring(0, 3000));
 
                 console.log('[LinkedIn] Generating AI social post...');
-                const aiResponse = await GetOpenRouterResponse(linkedinPrompt, modelName);
+                const aiResponse = await GetOpenRouterResponse(linkedinPrompt);
 
                 if (aiResponse.status === 200) {
                     const liContent = aiResponse.data?.choices?.[0]?.message?.content;

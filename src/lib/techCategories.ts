@@ -3,7 +3,7 @@ export const techCategories = {
   dotnet: {
     name: '.NET',
     color: '#512BD4',
-    gradient: 'from-purple-600 via-purple-500 to-blue-600',
+    gradient: 'from-[#512BD4] to-[#6d46f5]',
     bgGradient: 'from-purple-50 to-blue-50',
     darkBgGradient: 'from-purple-900/20 to-blue-900/20',
     icon: '⚡',
@@ -12,16 +12,16 @@ export const techCategories = {
   csharp: {
     name: 'C#',
     color: '#239120',
-    gradient: 'from-green-600 via-green-500 to-purple-600',
+    gradient: 'from-[#239120] to-[#2ecc71]',
     bgGradient: 'from-green-50 to-purple-50',
     darkBgGradient: 'from-green-900/20 to-purple-900/20',
-    icon: '#️⃣',
+    icon: '🎯',
     pattern: 'grid',
   },
   react: {
     name: 'React',
     color: '#61DAFB',
-    gradient: 'from-cyan-400 via-cyan-300 to-blue-500',
+    gradient: 'from-[#61DAFB] to-[#00a8cc]',
     bgGradient: 'from-cyan-50 to-blue-50',
     darkBgGradient: 'from-cyan-900/20 to-blue-900/20',
     icon: '⚛️',
@@ -30,7 +30,7 @@ export const techCategories = {
   nextjs: {
     name: 'Next.js',
     color: '#000000',
-    gradient: 'from-gray-900 via-gray-800 to-gray-700',
+    gradient: 'from-slate-900 to-slate-700',
     bgGradient: 'from-gray-50 to-gray-100',
     darkBgGradient: 'from-gray-800/20 to-gray-900/20',
     icon: '▲',
@@ -39,7 +39,7 @@ export const techCategories = {
   javascript: {
     name: 'JavaScript',
     color: '#F7DF1E',
-    gradient: 'from-yellow-400 via-yellow-300 to-orange-500',
+    gradient: 'from-[#F7DF1E] to-[#f39c12]',
     bgGradient: 'from-yellow-50 to-orange-50',
     darkBgGradient: 'from-yellow-900/20 to-orange-900/20',
     icon: 'JS',
@@ -48,7 +48,7 @@ export const techCategories = {
   typescript: {
     name: 'TypeScript',
     color: '#3178C6',
-    gradient: 'from-blue-600 via-blue-500 to-blue-800',
+    gradient: 'from-[#3178C6] to-[#2980b9]',
     bgGradient: 'from-blue-50 to-blue-100',
     darkBgGradient: 'from-blue-900/20 to-blue-800/20',
     icon: '📘',
@@ -57,7 +57,7 @@ export const techCategories = {
   aws: {
     name: 'AWS',
     color: '#FF9900',
-    gradient: 'from-orange-500 via-orange-400 to-yellow-600',
+    gradient: 'from-[#FF9900] to-[#f39c12]',
     bgGradient: 'from-orange-50 to-yellow-50',
     darkBgGradient: 'from-orange-900/20 to-yellow-900/20',
     icon: '☁️',
@@ -66,7 +66,7 @@ export const techCategories = {
   azure: {
     name: 'Azure',
     color: '#0078D4',
-    gradient: 'from-blue-600 via-blue-500 to-cyan-500',
+    gradient: 'from-[#0078D4] to-[#00b4db]',
     bgGradient: 'from-blue-50 to-cyan-50',
     darkBgGradient: 'from-blue-900/20 to-cyan-900/20',
     icon: '☁️',
@@ -75,7 +75,7 @@ export const techCategories = {
   angular: {
     name: 'Angular',
     color: '#DD0031',
-    gradient: 'from-red-600 via-red-500 to-pink-600',
+    gradient: 'from-[#DD0031] to-[#e91e63]',
     bgGradient: 'from-red-50 to-pink-50',
     darkBgGradient: 'from-red-900/20 to-pink-900/20',
     icon: '🅰️',
@@ -84,7 +84,7 @@ export const techCategories = {
   docker: {
     name: 'Docker',
     color: '#2496ED',
-    gradient: 'from-blue-500 via-blue-400 to-cyan-400',
+    gradient: 'from-[#2496ED] to-[#00bcd4]',
     bgGradient: 'from-blue-50 to-cyan-50',
     darkBgGradient: 'from-blue-900/20 to-cyan-900/20',
     icon: '🐳',
@@ -93,7 +93,7 @@ export const techCategories = {
   kubernetes: {
     name: 'Kubernetes',
     color: '#326CE5',
-    gradient: 'from-blue-600 via-blue-500 to-indigo-600',
+    gradient: 'from-[#326CE5] to-[#1565c0]',
     bgGradient: 'from-blue-50 to-indigo-50',
     darkBgGradient: 'from-blue-900/20 to-indigo-900/20',
     icon: '☸️',
@@ -102,7 +102,7 @@ export const techCategories = {
   sql: {
     name: 'SQL',
     color: '#CC2927',
-    gradient: 'from-red-600 via-red-500 to-orange-600',
+    gradient: 'from-[#CC2927] to-[#e74c3c]',
     bgGradient: 'from-red-50 to-orange-50',
     darkBgGradient: 'from-red-900/20 to-orange-900/20',
     icon: '🗄️',
@@ -111,7 +111,7 @@ export const techCategories = {
   postgresql: {
     name: 'PostgreSQL',
     color: '#336791',
-    gradient: 'from-blue-700 via-blue-600 to-blue-900',
+    gradient: 'from-[#336791] to-[#2c3e50]',
     bgGradient: 'from-blue-50 to-blue-100',
     darkBgGradient: 'from-blue-900/20 to-blue-950/20',
     icon: '🐘',
@@ -120,7 +120,7 @@ export const techCategories = {
   mongodb: {
     name: 'MongoDB',
     color: '#47A248',
-    gradient: 'from-green-600 via-green-500 to-green-800',
+    gradient: 'from-[#47A248] to-[#1e824c]',
     bgGradient: 'from-green-50 to-green-100',
     darkBgGradient: 'from-green-900/20 to-green-950/20',
     icon: '🍃',
@@ -129,7 +129,7 @@ export const techCategories = {
   entityframework: {
     name: 'Entity Framework',
     color: '#512BD4',
-    gradient: 'from-purple-700 via-purple-600 to-indigo-700',
+    gradient: 'from-[#512BD4] to-[#4b12ab]',
     bgGradient: 'from-purple-50 to-indigo-50',
     darkBgGradient: 'from-purple-900/20 to-indigo-900/20',
     icon: '🔗',
@@ -138,7 +138,7 @@ export const techCategories = {
   general: {
     name: 'General',
     color: '#6B7280',
-    gradient: 'from-gray-600 to-gray-800',
+    gradient: 'from-slate-700 to-slate-500',
     bgGradient: 'from-gray-50 to-gray-100',
     darkBgGradient: 'from-gray-800/20 to-gray-900/20',
     icon: '📝',

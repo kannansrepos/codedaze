@@ -5,67 +5,69 @@ import { LayoutDashboard, FileText, CheckCircle2 } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
-export default async function ReviewPage() {
-  const draftsDir = path.join(process.cwd(), 'posts', 'auto-drafts');
-  let files: string[] = [];
-  try {
-      await fs.mkdir(draftsDir, { recursive: true });
-      const allFiles = await fs.readdir(draftsDir);
-      files = allFiles.filter(f => f.endsWith('.md')).sort().reverse();
-  } catch (e) {
-      console.error('Failed to read drafts directory', e);
-  }
+export default async function ReviewPage()
+{
+    const draftsDir = path.join(process.cwd(), 'posts', 'auto-drafts');
+    let files: string[] = [];
+    try
+    {
+        await fs.mkdir(draftsDir, { recursive: true });
+        const allFiles = await fs.readdir(draftsDir);
+        files = allFiles.filter(f => f.endsWith('.md')).sort().reverse();
+    } catch (e)
+    {
+        console.error('Failed to read drafts directory', e);
+    }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 pt-24 pb-12 text-white selection:bg-blue-500/30">
-      {/* Background Effects */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(147,51,234,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-      </div>
-
-      <div className="container mx-auto px-4 max-w-5xl">
-        {/* Header */}
-        <div className="mb-12 text-center text-white">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 text-blue-400 text-sm font-medium mb-4">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Content Quality Control</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                Review <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">Draft Posts</span>
-            </h1>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-                Review and manage your auto-generated AI blog posts. Approved posts are moved to the posts folder.
-            </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-3xl shadow-xl">
-                <div className="flex items-center gap-4 mb-2">
-                    <div className="p-2 rounded-xl bg-blue-500/10">
-                        <FileText className="w-6 h-6 text-blue-400" />
+    return (
+        <div className="min-h-screen pt-28 pb-12 selection:bg-primary/30">
+            <div className="container mx-auto px-4 max-w-5xl">
+                {/* Header */}
+                <div className="mb-12 text-center space-y-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] backdrop-blur-sm border border-white/[0.1] text-primary text-[10px] font-black uppercase tracking-[0.2em]">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Content Quality Control</span>
                     </div>
-                    <div>
-                        <h3 className="text-2xl font-bold">{files.length}</h3>
-                        <p className="text-sm text-gray-400 uppercase tracking-wider font-semibold">Pending Drafts</p>
+                    <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none">
+                        Draft <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">Review Queue</span>
+                    </h1>
+                    <p className="text-slate-500 font-medium text-lg max-w-2xl mx-auto leading-relaxed">
+                        Review and manage your auto-generated AI blog posts. Approved posts are moved to the production directory.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] p-8 rounded-[2rem] shadow-2xl relative overflow-hidden group hover:border-primary/20 transition-all duration-500">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full" />
+                        <div className="relative flex items-center justify-between">
+                            <div className="space-y-1">
+                                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Pending Revisions</p>
+                                <h3 className="text-5xl font-black text-white">{files.length}</h3>
+                            </div>
+                            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <FileText className="w-8 h-8 text-primary" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] p-8 rounded-[2rem] shadow-2xl flex items-center gap-6 relative overflow-hidden group hover:border-indigo-500/20 transition-all duration-500">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl rounded-full" />
+                        <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <LayoutDashboard className="w-8 h-8 text-indigo-400" />
+                        </div>
+                        <div className="flex-1">
+                            <h4 className="text-white font-black text-sm mb-1">Instant Deployment</h4>
+                            <p className="text-xs text-slate-500 font-medium italic leading-relaxed">Approved posts are synced to your main blog directory instantly on confirmation.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-3xl shadow-xl flex items-center gap-4">
-                <div className="p-2 rounded-xl bg-purple-500/10">
-                    <LayoutDashboard className="w-6 h-6 text-purple-400" />
-                </div>
-                <p className="text-sm text-gray-400 italic">Approved posts are synced to your main blog directory instantly.</p>
+
+                <main className="relative">
+                    <div className="relative">
+                        <ReviewList files={files} />
+                    </div>
+                </main>
             </div>
         </div>
-
-        <main className="relative">
-            <div className="relative">
-                <ReviewList files={files} />
-            </div>
-        </main>
-      </div>
-    </div>
-  );
+    );
 }

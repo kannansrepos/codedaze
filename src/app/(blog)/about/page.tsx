@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { NewsLetter, Footer, SocialLinks } from '@/components';
 import { Code2, Rocket, Award, Users, BookOpen, Zap } from 'lucide-react';
 
-const AboutPage = () => {
+const AboutPage = () =>
+{
   const certificates = [
     {
       image: '/images/certificates/ai-102.svg',
@@ -24,16 +25,16 @@ const AboutPage = () => {
   ];
 
   const skills = [
-    { name: 'C#', color: 'from-green-500 to-green-600' },
-    { name: 'ASP.NET Core', color: 'from-purple-500 to-purple-600' },
-    { name: 'Next.js', color: 'from-gray-700 to-gray-900' },
-    { name: 'React', color: 'from-cyan-500 to-blue-500' },
-    { name: 'TypeScript', color: 'from-blue-500 to-blue-600' },
-    { name: 'Azure', color: 'from-blue-600 to-cyan-500' },
-    { name: 'SQL Server', color: 'from-red-500 to-red-600' },
-    { name: 'Angular', color: 'from-red-600 to-pink-600' },
-    { name: 'PostgreSQL', color: 'from-blue-700 to-blue-900' },
-    { name: 'Docker', color: 'from-blue-500 to-cyan-400' },
+    { name: 'C#', color: 'from-green-500/20 to-green-600/20' },
+    { name: 'ASP.NET Core', color: 'from-purple-500/20 to-purple-600/20' },
+    { name: 'Next.js', color: 'from-slate-700/20 to-slate-900/20' },
+    { name: 'React', color: 'from-cyan-500/20 to-blue-500/20' },
+    { name: 'TypeScript', color: 'from-blue-500/20 to-blue-600/20' },
+    { name: 'Azure', color: 'from-blue-600/20 to-cyan-500/20' },
+    { name: 'SQL Server', color: 'from-red-500/20 to-red-600/20' },
+    { name: 'Angular', color: 'from-red-600/20 to-pink-600/20' },
+    { name: 'PostgreSQL', color: 'from-blue-700/20 to-blue-900/20' },
+    { name: 'Docker', color: 'from-blue-500/20 to-cyan-400/20' },
   ];
 
   const highlights = [
@@ -64,110 +65,108 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 pt-20">
-      {/* Background Effects */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-      </div>
-
+    <div className="min-h-screen pt-28">
       <div className="container mx-auto px-4 py-12 max-w-6xl">
         {/* Hero Section */}
-        <div className="mb-16 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
-            <BookOpen className="w-4 h-4" />
-            <span>About Code Daze</span>
+        <div className="mb-20 text-center space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] backdrop-blur-md border border-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Founding Stories</span>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            Meet <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">Kannan S</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-[0.9]">
+            Meet <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40">Kannan S</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium">
             Empowering Digital Solutions with .NET Full-Stack Expertise
           </p>
         </div>
 
-        {/* Main Content Card */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 overflow-hidden mb-12 shadow-2xl">
-          <div className="grid md:grid-cols-3 gap-8 p-8 md:p-12">
+        {/* Main Content Card - Premium Glassmorphism */}
+        <div className="bg-white/[0.02] backdrop-blur-xl rounded-[3rem] border border-white/[0.05] overflow-hidden mb-16 shadow-2xl">
+          <div className="grid md:grid-cols-3 gap-12 p-8 md:p-16">
             {/* Profile Section */}
-            <div className="text-center space-y-6">
+            <div className="text-center space-y-8">
               <div className="relative inline-block">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-xl opacity-50"></div>
+                <div className="absolute inset-0 bg-primary/20 rounded-full blur-[60px] opacity-40"></div>
                 <Image
                   src="/images/profile_n.jpg"
-                  height={200}
-                  width={200}
+                  height={240}
+                  width={240}
                   alt="Kannan S - Lead Software Engineer"
-                  className="relative rounded-full w-48 h-48 mx-auto border-4 border-white/20 shadow-xl"
+                  className="relative rounded-full w-56 h-56 mx-auto border-2 border-white/10 shadow-3xl object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                 />
               </div>
 
-              <div>
-                <h2 className="text-3xl font-bold text-white mb-2">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-black text-white tracking-tight">
                   Kannan S
                 </h2>
-                <p className="text-blue-300 font-semibold mb-4">Lead Software Engineer</p>
+                <p className="text-primary font-black text-xs uppercase tracking-widest">Lead Software Engineer</p>
+              </div>
 
-                {/* Certificates */}
-                <div className="flex justify-center gap-3 mb-6">
-                  {certificates.map((cert, index) => (
-                    <a
-                      key={index}
-                      href={`https://learn.microsoft.com/en-us/users/kannan-s-299/credentials/${cert.ref}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative"
-                      title={cert.name}
-                    >
-                      <div className="absolute inset-0 bg-blue-500 rounded-lg blur-md opacity-0 group-hover:opacity-50 transition-opacity"></div>
-                      <Image
-                        src={cert.image}
-                        alt={`${cert.name} Certificate`}
-                        width={48}
-                        height={48}
-                        className="relative w-12 h-12 transition-transform group-hover:scale-110"
-                      />
-                    </a>
-                  ))}
-                </div>
+              {/* Certificates - Minimalist */}
+              <div className="flex justify-center gap-4">
+                {certificates.map((cert, index) => (
+                  <a
+                    key={index}
+                    href={`https://learn.microsoft.com/en-us/users/kannan-s-299/credentials/${cert.ref}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative flex items-center justify-center p-3 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:border-primary/50 transition-all duration-500"
+                    title={cert.name}
+                  >
+                    <Image
+                      src={cert.image}
+                      alt={`${cert.name} Certificate`}
+                      width={40}
+                      height={40}
+                      className="w-10 h-10 transition-transform group-hover:scale-110"
+                    />
+                  </a>
+                ))}
+              </div>
 
-                {/* Social Links */}
-                <div className="flex justify-center">
-                  <SocialLinks size={32} />
+              {/* Social Links */}
+              <div className="pt-4">
+                <div className="inline-block p-4 bg-white/[0.02] rounded-3xl border border-white/[0.05]">
+                  <SocialLinks size={24} />
                 </div>
               </div>
             </div>
 
             {/* Content Section */}
-            <div className="md:col-span-2 space-y-8">
-              <div>
-                <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Zap className="w-8 h-8 text-yellow-400" />
-                  About Me
-                </h3>
-                <p className="text-4xl mb-6">👋 Hi, I&apos;m Kannan S</p>
-                <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  As a dedicated .NET Full-Stack Developer with <span className="text-blue-400 font-semibold">14+ years of experience</span>,
-                  I specialize in crafting robust, scalable, and user-centric applications that bridge the gap between innovative
-                  ideas and real-world solutions. My journey in software development is driven by a passion for continuous learning
-                  and a commitment to excellence in every line of code.
-                </p>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  I focus on <span className="text-purple-400 font-semibold">system architecture</span>,
-                  <span className="text-pink-400 font-semibold"> performance optimization</span>, and
-                  <span className="text-blue-400 font-semibold"> clean code principles</span> to deliver
-                  exceptional digital experiences.
-                </p>
+            <div className="md:col-span-2 space-y-12">
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Zap className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-black text-white tracking-tight">The Mission</h3>
+                </div>
+                <div className="space-y-6 text-slate-400 font-medium text-lg leading-relaxed">
+                  <p className="text-3xl text-white font-black leading-tight italic opacity-90">👋 Hi, I&apos;m Kannan</p>
+                  <p>
+                    As a dedicated .NET Full-Stack Developer with <span className="text-white font-black">14+ years of experience</span>,
+                    I specialize in crafting robust, scalable, and user-centric applications that bridge the gap between innovative
+                    ideas and real-world solutions.
+                  </p>
+                  <p>
+                    I focus on <span className="text-white font-black italic">system architecture</span>,
+                    <span className="text-white font-black italic"> performance optimization</span>, and
+                    <span className="text-white font-black italic"> clean code principles</span> to deliver
+                    exceptional digital experiences.
+                  </p>
+                </div>
               </div>
 
-              {/* Skills */}
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-4">Technical Skills</h3>
-                <div className="flex flex-wrap gap-3">
+              {/* Skills - Modern Pill Style */}
+              <div className="space-y-6 pt-6 border-t border-white/[0.05]">
+                <h3 className="text-xs font-black text-slate-500 uppercase tracking-[0.2em]">Core Expertise</h3>
+                <div className="flex flex-wrap gap-2">
                   {skills.map((skill) => (
                     <span
                       key={skill.name}
-                      className={`group relative px-4 py-2 rounded-lg bg-gradient-to-r ${skill.color} text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default`}
+                      className={`px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.05] text-slate-300 font-black text-[10px] uppercase tracking-widest hover:border-primary/40 hover:text-white transition-all duration-300`}
                     >
                       {skill.name}
                     </span>
@@ -178,30 +177,32 @@ const AboutPage = () => {
           </div>
         </div>
 
-        {/* Highlights Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Highlights Grid - Premium Minimalist Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {highlights.map((highlight, index) => (
             <div
               key={index}
-              className="group bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 hover:bg-white/10 hover:border-blue-500/50 transition-all duration-300 hover:scale-105"
+              className="group relative overflow-hidden bg-white/[0.02] border border-white/[0.05] rounded-[2rem] p-8 hover:bg-white/[0.04] hover:border-primary/20 transition-all duration-500"
             >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${highlight.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+              <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${highlight.color} flex items-center justify-center mb-6 shadow-2xl group-hover:scale-110 transition-transform`}>
                 <highlight.icon className="w-6 h-6 text-white" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">{highlight.title}</h4>
-              <p className="text-sm text-gray-400">{highlight.description}</p>
+              <h4 className="text-lg font-black text-white mb-3 tracking-tight">{highlight.title}</h4>
+              <p className="text-sm text-slate-500 font-medium leading-relaxed">{highlight.description}</p>
             </div>
           ))}
         </div>
 
-        {/* Mission Statement */}
-        <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl border border-white/10 p-8 md:p-12 text-center mb-12">
-          <h3 className="text-3xl font-bold text-white mb-4">My Mission</h3>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            To empower developers and businesses with cutting-edge .NET solutions, sharing knowledge through
-            <span className="text-blue-400 font-semibold"> Code Daze</span>, and building a community of passionate
-            developers who strive for excellence in software craftsmanship.
-          </p>
+        {/* Vision Section */}
+        <div className="relative p-12 md:p-20 bg-white/[0.02] rounded-[3rem] border border-white/[0.05] text-center space-y-8 overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-primary/5 blur-[100px] pointer-events-none" />
+          <div className="relative space-y-4">
+            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">Crafting the Future of <br /> Engineering Content</h3>
+            <p className="text-slate-400 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+              To empower developers and businesses with cutting-edge .NET solutions, building a community of passionate
+              craftsmanship through <span className="text-white font-black italic">Code Daze</span>.
+            </p>
+          </div>
         </div>
       </div>
 

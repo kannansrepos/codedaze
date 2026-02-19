@@ -1,38 +1,38 @@
 import { Youtube, ExternalLink } from 'lucide-react';
 
-const RecentVideos = () => {
+const RecentVideos = () =>
+{
   const video = {
     src: 'https://www.youtube.com/embed/mM5icOG7sxI',
     title: 'Build an AI App with Semantic Kernel in C# | Step-by-Step Tutorial',
   };
   return (
-    <section className="w-full py-20 px-4 relative overflow-hidden">
-      {/* Decorative background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
-
+    <section className="w-full py-24 px-4 relative overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="bg-[#111827]/60 backdrop-blur-2xl border border-white/10 rounded-[3rem] p-8 md:p-14 shadow-2xl relative z-10">
-          <div className="flex flex-col gap-10 items-center">
-            {/* Header */}
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold uppercase tracking-widest">
-                <Youtube className="w-4 h-4" />
-                <span>Latest Content</span>
+        <div className="bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-[3rem] p-8 md:p-16 shadow-2xl relative z-10 overflow-hidden">
+          {/* Subtle Background Glow */}
+          <div className="absolute -top-[20%] -right-[10%] w-[40%] h-[40%] bg-red-600/5 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="flex flex-col gap-12 items-center">
+            {/* Header - Refined & Focused */}
+            <div className="text-center space-y-6 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/5 border border-red-500/10 text-red-400 text-[10px] font-black uppercase tracking-[0.2em]">
+                <Youtube className="w-3.5 h-3.5" />
+                <span>Premium Video Tutorials</span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-white capitalize">
-                Mastering <span className="text-red-500">.NET</span> on YouTube
+              <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
+                Watch & <span className="text-red-500/90">Code</span>
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl">
-                Visual tutorials on scaling architecture, AI integration, and fullstack performance.
+              <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed leading-7">
+                Visual guides on cloud architecture, .NET performance, and modern engineering practices.
               </p>
             </div>
 
-            {/* Video Player Container */}
-            <div className="w-full max-w-[900px] aspect-video relative group">
-              {/* Cinematic Frame */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-[2rem] blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            {/* Video Player Container - Cinematic Frame */}
+            <div className="w-full max-w-[960px] aspect-video relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-red-600/10 via-white/5 to-primary/10 rounded-[2rem] blur-xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
 
-              <div className="relative h-full w-full bg-black rounded-[1.5rem] overflow-hidden border border-white/10 shadow-2xl">
+              <div className="relative h-full w-full bg-black rounded-[1.5rem] overflow-hidden border border-white/10 shadow-3xl">
                 <iframe
                   width="100%"
                   height="100%"
@@ -41,21 +41,21 @@ const RecentVideos = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
-                  className="w-full h-full"
+                  className="w-full h-full grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                 ></iframe>
               </div>
             </div>
 
-            {/* Call to Action */}
+            {/* Action - Clean & Impactful */}
             <a
               href="https://youtube.com/@CodeDaze"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 text-white font-bold bg-red-600 hover:bg-red-700 px-8 py-4 rounded-2xl transition-all hover:scale-105 shadow-xl shadow-red-600/20"
+              className="group flex items-center gap-3 text-white font-black bg-red-600/90 hover:bg-red-600 px-10 py-5 rounded-2xl transition-all hover:scale-[1.02] shadow-2xl shadow-red-600/20 text-sm uppercase tracking-widest"
             >
               <Youtube className="w-5 h-5" />
-              Subscribe for More
-              <ExternalLink className="w-4 h-4 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              Join the Channel
+              <ExternalLink className="w-4 h-4 opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>
