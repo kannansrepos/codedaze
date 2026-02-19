@@ -133,7 +133,7 @@ export default function ReviewList({ files }: { files: string[] })
                                 variant="destructive"
                                 size="sm"
                                 onClick={() => handleAction(file, 'reject')}
-                                className="bg-red-500/10 hover:bg-red-500 text-white border border-red-500/20 hover:border-red-600 h-14 px-8 rounded-2xl transition-all active:scale-95 font-black text-xs uppercase tracking-[0.2em] group/reject"
+                                className="bg-red-500/20 hover:bg-red-500 text-white border border-red-500/40 hover:border-red-600 h-14 px-8 rounded-2xl transition-all active:scale-95 font-black text-xs uppercase tracking-[0.2em] group/reject"
                             >
                                 <Trash2 className="w-5 h-5 mr-2 group-hover/reject:scale-110 transition-transform" />
                                 Reject

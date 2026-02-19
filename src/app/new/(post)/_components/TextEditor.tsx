@@ -4,35 +4,35 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import
-{
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+  {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+  } from '@/components/ui/form';
 
 import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock, ChevronDown, Rocket } from 'lucide-react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import
-{
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+  {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from '@/components/ui/select';
 import { AIModels, Language } from '@/types/Language';
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 
 import { toast } from 'react-toastify';
 import
-{
-  UploadFileStore,
-  UploadFileToGithub,
-} from './actions';
+  {
+    UploadFileStore,
+    UploadFileToGithub,
+  } from './actions';
 
 const blogEditorFormSchema = z.object({
   model: z.string(),
@@ -305,19 +305,19 @@ const TextEditor = () =>
       {/* Token Expiry Warning Banner */}
       {tokenExpiryWarning && (
         <div className={`group rounded-[2rem] border px-6 py-5 flex items-center gap-5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 ${tokenExpiryWarning.includes('expired')
-          ? 'bg-red-500/[0.03] border-red-500/10 hover:border-red-500/20'
-          : 'bg-amber-500/[0.03] border-amber-500/10 hover:border-amber-500/20'
+            ? 'bg-red-500/[0.03] border-red-500/10 hover:border-red-500/20'
+            : 'bg-amber-500/[0.03] border-amber-500/10 hover:border-amber-500/20'
           }`}>
           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 ${tokenExpiryWarning.includes('expired')
-            ? 'bg-red-500/10'
-            : 'bg-amber-500/10'
+              ? 'bg-red-500/10'
+              : 'bg-amber-500/10'
             }`}>
             <span className="text-2xl">⚠️</span>
           </div>
           <div className="flex-1">
             <p className={`font-black text-xs uppercase tracking-[0.2em] ${tokenExpiryWarning.includes('expired')
-              ? 'text-red-500'
-              : 'text-amber-500'
+                ? 'text-red-500'
+                : 'text-amber-500'
               }`}>
               {tokenExpiryWarning}
             </p>
@@ -359,12 +359,12 @@ const TextEditor = () =>
               size="sm"
               onClick={triggerCron}
               disabled={isCronLoading}
-              className="bg-primary/20 border-primary/30 hover:bg-primary border hover:border-primary text-white h-12 px-6 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all shadow-xl active:scale-95 group/cron"
+              className="bg-primary hover:bg-primary/90 text-white shadow-[0_10px_30px_rgba(var(--primary),0.3)] h-12 px-8 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all active:scale-95 group/cron border-none"
             >
               {isCronLoading ? (
                 <Loader2Icon className="w-4 h-4 animate-spin mr-2" />
               ) : (
-                <Zap className="w-4 h-4 mr-2 text-primary group-hover/cron:text-white" />
+                <Zap className="w-4 h-4 mr-2" />
               )}
               Execute Cron
             </Button>
@@ -510,7 +510,6 @@ const TextEditor = () =>
         </Form>
       </div>
 
-      {/* Publish Section - Only shown when markdown exists */}
       {markdown && (
         <div className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/[0.05] p-10 shadow-3xl relative overflow-hidden transition-all animate-in zoom-in-95 duration-700">
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 blur-[120px] rounded-full" />
