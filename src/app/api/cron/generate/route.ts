@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { AIPrompts } from '@/lib/Prompts';
 import fs from 'fs/promises';
 import path from 'path';
 import { Language } from '@/types/Language';

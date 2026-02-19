@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { LogIn, Github, Mail, Sparkles, ChevronRight, User } from 'lucide-react';
+import { LogIn, Github, Sparkles, ChevronRight, User } from 'lucide-react';
 
 const LoginPage = () =>
 {
@@ -194,7 +194,7 @@ const LoginPage = () =>
 
 export default LoginPage;
 
-const Loader2Icon = (props: any) => (
+const Loader2Icon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"

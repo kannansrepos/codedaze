@@ -10,7 +10,7 @@ import
     DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Eye, Check, X, Loader2, FileText, ChevronRight, Newspaper, Globe, Trash2 } from 'lucide-react';
+import { Eye, Check, X, Loader2, Newspaper, Globe, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export default function ReviewList({ files }: { files: string[] })

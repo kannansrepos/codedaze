@@ -13,7 +13,7 @@ import
   FormMessage,
 } from '@/components/ui/form';
 
-import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock, Rocket } from 'lucide-react';
+import { Brain, Loader2Icon, SaveIcon, FileText, Sparkles, Zap, Clock, Rocket } from 'lucide-react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import
 {

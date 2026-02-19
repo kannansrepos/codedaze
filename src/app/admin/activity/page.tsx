@@ -2,20 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import
-  {
-    Activity,
-    CheckCircle2,
-    XCircle,
-    Clock,
-    Tag,
-    FileCode,
-    Calendar,
-    RefreshCw,
-    Terminal,
-    Cpu,
-    History,
-    AlertCircle
-  } from 'lucide-react';
+{
+  CheckCircle2,
+  XCircle,
+  Clock,
+  Tag,
+  FileCode,
+  Calendar,
+  RefreshCw,
+  Terminal,
+  Cpu,
+  History,
+  AlertCircle
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'react-toastify';
 
