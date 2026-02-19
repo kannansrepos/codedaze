@@ -9,9 +9,11 @@ import generate_Metadata from '@/lib/generateMetadata';
 
 const POSTS_DIR = path.join(process.cwd(), 'posts');
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata>
+{
   const postPath = path.join(POSTS_DIR, `${params.slug}.md`);
-  if (!fs.existsSync(postPath)) {
+  if (!fs.existsSync(postPath))
+  {
     return { title: 'Post Not Found' };
   }
   const fileContent = await fs.promises.readFile(postPath, 'utf-8');
@@ -23,16 +25,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return generate_Metadata({
     title: `${title} | Code Daze`,
     description,
-    url: `https://codedaze.net/blog/${params.slug}`,
-    image: `https://codedaze.net/img/${data.language || 'default'}.png`,
+    url: `https://codedaze.tech/blog/${params.slug}`,
+    image: `https://codedaze.tech/img/${data.language || 'default'}.png`,
     keywords,
     type: 'article',
   });
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: { slug: string } })
+{
   const postPath = path.join(POSTS_DIR, `${params.slug}.md`);
-  if (!fs.existsSync(postPath)) {
+  if (!fs.existsSync(postPath))
+  {
     notFound();
   }
 

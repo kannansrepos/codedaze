@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Code Daze - Modern Web Development Tutorials',
     description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development.',
-    url: 'https://codedaze.net',
+    url: 'https://codedaze.tech',
     siteName: 'Code Daze',
     locale: 'en_US',
     type: 'website',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development.',
     creator: '@KannansMca',
   },
-  metadataBase: new URL('https://codedaze.net'),
+  metadataBase: new URL('https://codedaze.tech'),
 };
 
 export default function RootLayout({

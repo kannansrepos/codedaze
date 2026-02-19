@@ -79,7 +79,7 @@ export async function POST(req: Request) {
             const cleanFilename = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '');
             const githubPath = `posts/${cleanFilename}`;
             const slug = cleanFilename.replace('.md', '');
-            const publicUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.codedaze.net'}/blog/${slug}`;
+            const publicUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.codedaze.tech'}/blog/${slug}`;
 
             // Push to GitHub
             const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || process.env.GITHUB_TOKEN;

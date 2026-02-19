@@ -15,7 +15,7 @@ const generate_Metadata = ({
   title,
   description,
   url,
-  image = 'https://www.codedaze.net/img/default.png',
+  image = 'https://www.codedaze.tech/img/default.png',
   type = 'website',
   locale = 'en_US',
   siteName = 'Code Daze',
