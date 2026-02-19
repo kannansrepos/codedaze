@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { LogIn, Github, Sparkles, ChevronRight, User } from 'lucide-react';
+import { Sparkles, ChevronRight, User } from 'lucide-react';
 
 const LoginPage = () =>
 {
