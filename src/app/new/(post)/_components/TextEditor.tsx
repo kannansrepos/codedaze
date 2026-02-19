@@ -4,35 +4,35 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import
-  {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-  } from '@/components/ui/form';
+{
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
-import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock, ChevronRight } from 'lucide-react';
+import { Brain, Loader2Icon, SaveIcon, Wand2, FileText, Sparkles, Zap, Clock, ChevronDown, Rocket } from 'lucide-react';
 import MarkdownEditor from '@uiw/react-markdown-editor';
 import
-  {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from '@/components/ui/select';
+{
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { AIModels, Language } from '@/types/Language';
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 
 import { toast } from 'react-toastify';
 import
-  {
-    UploadFileStore,
-    UploadFileToGithub,
-  } from './actions';
+{
+  UploadFileStore,
+  UploadFileToGithub,
+} from './actions';
 
 const blogEditorFormSchema = z.object({
   model: z.string(),
@@ -301,27 +301,27 @@ const TextEditor = () =>
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-10">
       {/* Token Expiry Warning Banner */}
       {tokenExpiryWarning && (
-        <div className={`rounded-3xl border px-6 py-5 flex items-center gap-4 transition-all animate-in fade-in slide-in-from-top-4 ${tokenExpiryWarning.includes('expired')
-            ? 'bg-red-500/5 border-red-500/10'
-            : 'bg-amber-500/5 border-amber-500/10'
+        <div className={`group rounded-[2rem] border px-6 py-5 flex items-center gap-5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 ${tokenExpiryWarning.includes('expired')
+          ? 'bg-red-500/[0.03] border-red-500/10 hover:border-red-500/20'
+          : 'bg-amber-500/[0.03] border-amber-500/10 hover:border-amber-500/20'
           }`}>
-          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${tokenExpiryWarning.includes('expired')
-              ? 'bg-red-500/10'
-              : 'bg-amber-500/10'
+          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 ${tokenExpiryWarning.includes('expired')
+            ? 'bg-red-500/10'
+            : 'bg-amber-500/10'
             }`}>
-            <span className="text-xl">⚠️</span>
+            <span className="text-2xl">⚠️</span>
           </div>
           <div className="flex-1">
-            <p className={`font-black text-sm uppercase tracking-widest ${tokenExpiryWarning.includes('expired')
-                ? 'text-red-500'
-                : 'text-amber-500'
+            <p className={`font-black text-xs uppercase tracking-[0.2em] ${tokenExpiryWarning.includes('expired')
+              ? 'text-red-500'
+              : 'text-amber-500'
               }`}>
               {tokenExpiryWarning}
             </p>
-            <p className="text-xs text-slate-500 font-medium mt-1 uppercase tracking-wider leading-relaxed">
+            <p className="text-[11px] text-slate-500 font-bold mt-1.5 uppercase tracking-widest leading-relaxed">
               Required action: Renew <span className="text-slate-400">NEXT_PUBLIC_GITHUB_TOKEN</span> in environment configuration.
             </p>
           </div>
@@ -329,25 +329,28 @@ const TextEditor = () =>
       )}
 
       {/* Generation Section */}
-      <div className="bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] border border-white/[0.05] p-8 md:p-10 shadow-2xl relative overflow-hidden group">
-        <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full" />
+      <div className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/[0.05] p-10 shadow-3xl relative overflow-hidden group/card transition-all hover:border-white/[0.08]">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full group-hover/card:bg-primary/8 transition-colors" />
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 relative z-10">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Brain className="w-7 h-7 text-primary" />
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-12 relative z-10">
+          <div className="flex items-center gap-5">
+            <div className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/10 flex items-center justify-center group-hover/card:scale-105 transition-all duration-500">
+              <Brain className="w-8 h-8 text-primary shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-white tracking-tight">Generate Brainstorm</h2>
-              <p className="text-xs text-slate-500 font-black uppercase tracking-widest mt-1">AI Content Pipeline</p>
+              <h2 className="text-3xl font-black text-white tracking-tighter">Brainstorm Hub</h2>
+              <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.25em] mt-1.5 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary/50 animate-pulse" />
+                AI Content Synthesis
+              </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-4">
             {process.env.NEXT_PUBLIC_CRON_SCHEDULE && (
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.05] text-[10px] font-black uppercase tracking-widest text-slate-500">
-                <Clock className="w-3.5 h-3.5" />
-                <span>Schedule: {process.env.NEXT_PUBLIC_CRON_SCHEDULE}</span>
+              <div className="flex items-center gap-2.5 px-5 py-2.5 rounded-2xl bg-white/[0.03] border border-white/[0.05] text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <Clock className="w-4 h-4 text-primary" />
+                <span>Sync: {process.env.NEXT_PUBLIC_CRON_SCHEDULE}</span>
               </div>
             )}
             <Button
@@ -356,14 +359,14 @@ const TextEditor = () =>
               size="sm"
               onClick={triggerCron}
               disabled={isCronLoading}
-              className="bg-primary/10 border-primary/20 hover:bg-primary/20 text-primary h-10 px-4 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all"
+              className="bg-primary/20 border-primary/30 hover:bg-primary border hover:border-primary text-white h-12 px-6 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all shadow-xl active:scale-95 group/cron"
             >
               {isCronLoading ? (
-                <Loader2Icon className="w-3.5 h-3.5 animate-spin" />
+                <Loader2Icon className="w-4 h-4 animate-spin mr-2" />
               ) : (
-                <Zap className="w-3.5 h-3.5 mr-2" />
+                <Zap className="w-4 h-4 mr-2 text-primary group-hover/cron:text-white" />
               )}
-              Initialize Cron
+              Execute Cron
             </Button>
           </div>
         </div>
@@ -371,28 +374,28 @@ const TextEditor = () =>
         <Form {...blogEditorForm}>
           <form
             onSubmit={blogEditorForm.handleSubmit(onSubmit, onErrors)}
-            className="space-y-8 relative z-10"
+            className="space-y-10 relative z-10"
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <FormField
                 control={blogEditorForm.control}
                 name="model"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Compute Model</FormLabel>
+                    <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 mb-3 block">Neural Architecture</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
-                        <SelectTrigger className="bg-white/[0.03] border-white/[0.05] text-white hover:bg-white/[0.05] h-14 rounded-2xl px-6 transition-all">
-                          <SelectValue placeholder="Model Architecture" />
+                        <SelectTrigger className="bg-white/[0.03] border-white/[0.08] hover:border-primary/30 text-white h-16 rounded-2xl px-6 transition-all shadow-inner group/trigger">
+                          <SelectValue placeholder="Select Engine" />
                         </SelectTrigger>
-                        <SelectContent className="bg-slate-900 border-white/[0.05]">
+                        <SelectContent className="bg-slate-900 border-white/[0.1] rounded-2xl p-2 shadow-3xl text-white outline-none">
                           {Object.entries(AIModels)
                             .filter(([key]) => isNaN(Number(key)))
                             .map(([key]) => (
-                              <SelectItem key={key} value={key.toString()} className="text-xs font-bold py-3 hover:bg-primary/10 focus:bg-primary/10">
+                              <SelectItem key={key} value={key.toString()} className="text-xs font-black uppercase tracking-widest py-3.5 px-4 rounded-xl text-slate-300 hover:bg-primary/20 hover:text-white focus:bg-primary/20 focus:text-white transition-all cursor-pointer mb-1 last:mb-0">
                                 {key.toUpperCase()}
                               </SelectItem>
                             ))}
@@ -409,20 +412,20 @@ const TextEditor = () =>
                 name="language"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Stack Ecosystem</FormLabel>
+                    <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 mb-3 block">Core Ecosystem</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
-                        <SelectTrigger className="bg-white/[0.03] border-white/[0.05] text-white hover:bg-white/[0.05] h-14 rounded-2xl px-6 transition-all">
-                          <SelectValue placeholder="Technical Language" />
+                        <SelectTrigger className="bg-white/[0.03] border-white/[0.08] hover:border-primary/30 text-white h-16 rounded-2xl px-6 transition-all shadow-inner">
+                          <SelectValue placeholder="Select Stack" />
                         </SelectTrigger>
-                        <SelectContent className="bg-slate-900 border-white/[0.05]">
+                        <SelectContent className="bg-slate-900 border-white/[0.1] rounded-2xl p-2 shadow-3xl text-white outline-none">
                           {Object.entries(Language)
                             .filter(([key]) => isNaN(Number(key)))
                             .map(([key]) => (
-                              <SelectItem key={key} value={key.toString()} className="text-xs font-bold py-3 hover:bg-primary/10 focus:bg-primary/10">
+                              <SelectItem key={key} value={key.toString()} className="text-xs font-black uppercase tracking-widest py-3.5 px-4 rounded-xl text-slate-300 hover:bg-primary/20 hover:text-white focus:bg-primary/20 focus:text-white transition-all cursor-pointer mb-1 last:mb-0">
                                 {key.toUpperCase()}
                               </SelectItem>
                             ))}
@@ -439,33 +442,33 @@ const TextEditor = () =>
                 name="topic"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex justify-between items-center mb-1">
-                      <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Subject Matter</FormLabel>
+                    <div className="flex justify-between items-center mb-3 px-2">
+                      <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Project Scope</FormLabel>
                       <button
                         type="button"
                         onClick={fetchTrendingTopics}
                         disabled={isTrendingLoading}
-                        className="text-[9px] font-black uppercase tracking-widest text-primary hover:text-primary/80 transition-all flex items-center gap-1.5"
+                        className="text-[9px] font-black uppercase tracking-[0.2em] text-primary hover:text-white transition-all flex items-center gap-1.5 group/trending"
                       >
                         {isTrendingLoading ? (
-                          <Loader2Icon className="w-3 h-3 animate-spin" />
+                          <Loader2Icon className="w-3.5 h-3.5 animate-spin" />
                         ) : (
-                          <Sparkles className="w-3 h-3" />
+                          <Sparkles className="w-3.5 h-3.5 group-hover/trending:scale-110 transition-transform" />
                         )}
-                        Explore Trends
+                        Research Trends
                       </button>
                     </div>
                     <FormControl>
                       <Input
-                        placeholder="System Architecture in .NET..."
+                        placeholder="Advanced Patterns in .NET..."
                         {...field}
-                        className="bg-white/[0.03] border-white/[0.05] text-white placeholder:text-slate-600 hover:bg-white/[0.05] h-14 rounded-2xl px-6 transition-all"
+                        className="bg-white/[0.03] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-primary/50 focus:ring-primary/20 h-16 rounded-2xl px-6 transition-all shadow-inner text-sm font-medium"
                       />
                     </FormControl>
 
                     {/* Trending Topics Suggestions */}
                     {trendingTopics.length > 0 && (
-                      <div className="mt-4 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2">
+                      <div className="mt-5 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2 duration-500">
                         {trendingTopics.map((topic, index) => (
                           <button
                             key={index}
@@ -475,7 +478,7 @@ const TextEditor = () =>
                               blogEditorForm.setValue('topic', topic);
                               setTrendingTopics([]);
                             }}
-                            className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] text-slate-400 hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all"
+                            className="text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.05] text-slate-400 hover:bg-primary/20 hover:text-white hover:border-primary/40 transition-all shadow-lg hover:-translate-y-0.5"
                           >
                             {topic}
                           </button>
@@ -491,16 +494,17 @@ const TextEditor = () =>
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-black h-14 rounded-2xl shadow-[0_0_20px_rgba(var(--primary),0.3)] transition-all flex items-center justify-center gap-3 overflow-hidden group"
+              className="w-full bg-primary hover:bg-primary/90 text-white font-black h-16 rounded-2xl shadow-[0_10px_40px_rgba(var(--primary),0.3)] hover:shadow-[0_15px_50px_rgba(var(--primary),0.4)] transition-all flex items-center justify-center gap-4 group/btn"
             >
-              <div className="relative z-10 flex items-center gap-3">
+              <div className="relative z-10 flex items-center gap-4">
                 {isLoading ? (
-                  <Loader2Icon className="w-5 h-5 animate-spin" />
+                  <Loader2Icon className="w-6 h-6 animate-spin" />
                 ) : (
-                  <Brain className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <Rocket className="w-6 h-6 group-hover/btn:-translate-y-1 group-hover/btn:translate-x-1 transition-transform duration-500" />
                 )}
-                <span className="uppercase text-xs tracking-[0.2em]">{isLoading ? 'Processing Neural Engine...' : 'Initialize Generation'}</span>
+                <span className="uppercase text-sm tracking-[0.3em] ml-1">{isLoading ? 'Initializing Neural Matrix...' : 'Generate Article'}</span>
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_2s_infinite] transition-transform" />
             </Button>
           </form>
         </Form>
@@ -508,36 +512,36 @@ const TextEditor = () =>
 
       {/* Publish Section - Only shown when markdown exists */}
       {markdown && (
-        <div className="bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] border border-white/[0.05] p-8 md:p-10 shadow-2xl relative overflow-hidden transition-all animate-in zoom-in-95 duration-500">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 blur-3xl rounded-full" />
+        <div className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/[0.05] p-10 shadow-3xl relative overflow-hidden transition-all animate-in zoom-in-95 duration-700">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 blur-[120px] rounded-full" />
 
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center">
-              <FileText className="w-7 h-7 text-emerald-500" />
+          <div className="flex items-center gap-5 mb-10 text-emerald-500">
+            <div className="w-16 h-16 rounded-[1.5rem] bg-emerald-500/10 border border-emerald-500/10 flex items-center justify-center">
+              <FileText className="w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-white tracking-tight">Deployment Terminal</h2>
-              <p className="text-xs text-slate-500 font-black uppercase tracking-widest mt-1">Publish to Production</p>
+              <h2 className="text-3xl font-black text-white tracking-tighter leading-none">Final Manifest</h2>
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] mt-1.5 opacity-60">Ready for Production</p>
             </div>
           </div>
 
           <Form {...blogPublishForm}>
             <form
               onSubmit={blogPublishForm.handleSubmit(onPublishFormSubmit)}
-              className="space-y-6"
+              className="space-y-8"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <FormField
                   control={blogPublishForm.control}
                   name="fileName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Slug Manifest</FormLabel>
+                      <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 mb-3 block">Deployment Slug</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="modern-system-design"
+                          placeholder="architecture-patterns-2024"
                           {...field}
-                          className="bg-white/[0.03] border-white/[0.05] text-white placeholder:text-slate-600 hover:bg-white/[0.05] h-14 rounded-2xl px-6 transition-all"
+                          className="bg-white/[0.03] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20 h-16 rounded-2xl px-6 transition-all shadow-inner"
                         />
                       </FormControl>
                       <FormMessage />
@@ -545,48 +549,50 @@ const TextEditor = () =>
                   )}
                 />
 
-                {githubToken ? (
-                  <FormItem>
-                    <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Authentication</FormLabel>
-                    <div className="bg-primary/5 border border-primary/10 rounded-2xl h-14 px-6 flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                      <span className="text-primary font-black text-[10px] uppercase tracking-widest">Environment Token Secured</span>
+                <div className="space-y-4">
+                  <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] ml-2 mb-3 block">Security Protocol</FormLabel>
+                  {githubToken ? (
+                    <div className="bg-emerald-500/[0.05] border border-emerald-500/10 rounded-2xl h-16 px-6 flex items-center gap-4 shadow-inner">
+                      <div className="relative">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <div className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-emerald-500 blur-[4px] animate-pulse" />
+                      </div>
+                      <span className="text-emerald-500 font-black text-[10px] uppercase tracking-[0.2em]">OAuth Handshake Secured</span>
                     </div>
-                  </FormItem>
-                ) : (
-                  <FormField
-                    control={blogPublishForm.control}
-                    name="token"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Access Token</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="password"
-                            placeholder="ghp_••••••••"
-                            {...field}
-                            className="bg-white/[0.03] border-white/[0.05] text-white placeholder:text-slate-600 hover:bg-white/[0.05] h-14 rounded-2xl px-6 transition-all"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                )}
+                  ) : (
+                    <FormField
+                      control={blogPublishForm.control}
+                      name="token"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="password"
+                              placeholder="ghp_••••••••••••••••••••••••"
+                              {...field}
+                              className="bg-white/[0.03] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-emerald-500/50 focus:ring-emerald-500/20 h-16 rounded-2xl px-6 transition-all shadow-inner"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
+                </div>
               </div>
 
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black h-14 rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all flex items-center justify-center gap-3 group"
+                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black h-16 rounded-2xl shadow-[0_10px_40px_rgba(16,185,129,0.2)] hover:shadow-[0_15px_50px_rgba(16,185,129,0.3)] transition-all flex items-center justify-center gap-4 group/publish"
               >
-                <div className="relative z-10 flex items-center gap-3">
+                <div className="relative z-10 flex items-center gap-4">
                   {isLoading ? (
-                    <Loader2Icon className="w-5 h-5 animate-spin" />
+                    <Loader2Icon className="w-6 h-6 animate-spin" />
                   ) : (
-                    <SaveIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <SaveIcon className="w-6 h-6 group-hover/publish:scale-110 transition-transform" />
                   )}
-                  <span className="uppercase text-xs tracking-[0.2em]">{isLoading ? 'Deploying Manifest...' : 'Execute Deployment'}</span>
+                  <span className="uppercase text-sm tracking-[0.3em]">{isLoading ? 'Deploying Manifest...' : 'Push to Production'}</span>
                 </div>
               </Button>
             </form>
@@ -595,32 +601,36 @@ const TextEditor = () =>
       )}
 
       {/* Markdown Editor Section */}
-      <div className="bg-white/[0.02] backdrop-blur-xl rounded-[2.5rem] border border-white/[0.05] overflow-hidden shadow-2xl transition-all" data-color-mode="dark">
-        <div className="bg-white/[0.03] px-8 py-6 border-b border-white/[0.05] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/[0.05] overflow-hidden shadow-3xl transition-all hover:border-white/[0.1] group/editor" data-color-mode="dark">
+        <div className="bg-white/[0.03] px-10 py-8 border-b border-white/[0.05] flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <h3 className="text-lg font-black text-white flex items-center gap-2 tracking-tight">
-              <FileText className="w-5 h-5 text-primary" />
-              Source Terminal
-            </h3>
-            <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1">
-              {markdown ? 'Active Manifest: Editing in progress' : 'Standby: Pending neural generation'}
+            <div className="flex items-center gap-3">
+              <FileText className="w-6 h-6 text-primary group-hover/editor:rotate-3 transition-transform" />
+              <h3 className="text-2xl font-black text-white tracking-tight">Source Manifest</h3>
+            </div>
+            <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.3em] mt-2 flex items-center gap-2">
+              <span className={`w-1.5 h-1.5 rounded-full ${markdown ? 'bg-primary animate-pulse' : 'bg-slate-600'}`} />
+              {markdown ? 'Active Revision: Synthesis Complete' : 'Awaiting Neural Stream'}
             </p>
           </div>
         </div>
-        <div className="p-1 editor-container relative">
+        <div className="p-2 editor-container relative">
           {!markdown && (
-            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-              <div className="text-center space-y-4 opacity-20">
-                <Brain className="w-16 h-16 text-slate-500 mx-auto" />
-                <p className="text-sm font-black uppercase tracking-[0.3em] text-slate-500">Awaiting Neural Data</p>
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none p-10">
+              <div className="text-center space-y-6 opacity-20">
+                <Brain className="w-20 h-20 text-slate-400 mx-auto animate-pulse" />
+                <div className="space-y-2">
+                  <p className="text-sm font-black uppercase tracking-[0.4em] text-slate-400">Initialize Neural Feed</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Configure parameters above to start generation</p>
+                </div>
               </div>
             </div>
           )}
           <MarkdownEditor
             value={markdown}
-            height="600px"
+            height="700px"
             onChange={(value) => setMarkdown(value || '')}
-            className={`transition-all duration-700 ${!markdown ? 'opacity-5 blur-sm' : 'opacity-100 blur-0'}`}
+            className={`transition-all duration-1000 ${!markdown ? 'opacity-5 blur-md grayscale' : 'opacity-100 blur-0'}`}
           />
         </div>
 
@@ -630,19 +640,20 @@ const TextEditor = () =>
             border: none !important;
           }
           .editor-container .w-md-editor-toolbar {
-            background-color: rgba(255, 255, 255, 0.02) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-            padding: 12px 24px !important;
+            background-color: rgba(255, 255, 255, 0.01) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+            padding: 16px 32px !important;
           }
           .editor-container .w-md-editor-toolbar ul li button {
-            color: #94a3b8 !important;
-            padding: 8px !important;
-            border-radius: 12px !important;
+            color: #64748b !important;
+            padding: 10px !important;
+            border-radius: 14px !important;
             transition: all 0.3s;
           }
           .editor-container .w-md-editor-toolbar ul li button:hover {
             background-color: rgba(59, 130, 246, 0.1) !important;
             color: #3b82f6 !important;
+            transform: translateY(-1px);
           }
           .editor-container .w-md-editor-content {
             background-color: transparent !important;
@@ -651,10 +662,15 @@ const TextEditor = () =>
             --md-editor-background-color: transparent;
           }
           .editor-container .w-md-editor-input {
-            padding: 24px !important;
+            padding: 40px !important;
             font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
-            font-size: 14px !important;
-            line-height: 1.8 !important;
+            font-size: 15px !important;
+            line-height: 2 !important;
+            color: #cbd5e1 !important;
+          }
+           @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
           }
         `}</style>
       </div>

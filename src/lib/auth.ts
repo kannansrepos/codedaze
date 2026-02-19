@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
         const dd = String(now.getDate()).padStart(2, '0');
         const mm = String(now.getMonth() + 1).padStart(2, '0');
         const yy = String(now.getFullYear()).slice(-2);
-        const expectedUsername = "codedaze.net@gmail.com";
+        const expectedUsername = "codedaze.tech@gmail.com";
         const expectedPassword = `Ka${dd}nn${mm}an${yy}`;
 
         if (credentials?.username === expectedUsername && credentials?.password === expectedPassword) {
