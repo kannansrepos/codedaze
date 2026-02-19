@@ -5,7 +5,7 @@ import { PostIndex } from '@/types/BlogPost';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { Calendar, Clock, ChevronRight, Rocket, TrendingUp } from 'lucide-react';
+import { Calendar, Clock, ChevronRight, TrendingUp } from 'lucide-react';
 import { getTechConfig } from '@/lib/techCategories';
 import { motion } from 'framer-motion';
 

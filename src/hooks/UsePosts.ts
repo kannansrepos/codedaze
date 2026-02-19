@@ -103,7 +103,7 @@ export const usePosts = (pageSize: number = 3): UsePostsReturn => {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [fetchPosts]);
 
   return { posts, loading, hasMore, fetchMore, error };
 };
