@@ -29,7 +29,20 @@ export const metadata: Metadata = {
     description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development.',
     creator: '@KannansMca',
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Code Daze',
+  },
+  formatDetection: {
+    telephone: false,
+  },
   metadataBase: new URL('https://codedaze.tech'),
+};
+
+export const viewport = {
+  themeColor: '#020617',
 };
 
 export default function RootLayout({
