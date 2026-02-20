@@ -24,9 +24,9 @@ const Banner = () =>
         {/* Main Heading - Focused & Powerful */}
         <div className="space-y-6 text-center max-w-4xl mx-auto">
           <h1 className="font-black text-5xl md:text-7xl lg:text-8xl text-white tracking-tight leading-[0.9]">
-            Master the Art of <br />
+            Master Modern .NET <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50">
-              Modern .NET
+              with Code Daze
             </span>
           </h1>
 
