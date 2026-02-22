@@ -49,8 +49,8 @@ const LoginPage = () =>
   return (
     <div className="relative min-h-screen flex items-center justify-center p-6 bg-[#020617] overflow-hidden">
       {/* Dynamic Background Elements */}
-      <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] opacity-30 animate-pulse transition-all duration-[10s]" />
-      <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] opacity-20 animate-pulse transition-all duration-[15s]" />
+      <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] opacity-30 animate-pulse" style={{ animationDuration: '10s' }} />
+      <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] opacity-20 animate-pulse" style={{ animationDuration: '15s' }} />
 
       <div className="w-full max-w-[440px] relative z-10">
         <div className="space-y-10">
