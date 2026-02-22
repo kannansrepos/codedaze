@@ -55,6 +55,13 @@
     "uuid": "^11.0.3",
     "zod": "^3.23.8"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 0.5%",
+    "not dead",
+    "not op_mini all",
+    "not IE 11"
+  ],
   "devDependencies": {
     "@types/marked": "^6.0.0",
     "@types/node": "^20",

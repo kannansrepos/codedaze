@@ -69,15 +69,19 @@ const NewsLetter = () =>
           <Input
             type="email"
             placeholder="jason@company.com"
+            aria-label="Email address for newsletter"
             className="flex-1 h-14 bg-transparent border-none text-white placeholder:text-slate-500 focus-visible:ring-0 focus-visible:ring-offset-0 text-lg px-6"
           />
-          <Button className="h-14 px-10 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg transition-all duration-300 shadow-xl shadow-primary/20 flex items-center justify-center gap-3 group">
+          <Button
+            aria-label="Subscribe to newsletter"
+            className="h-14 px-10 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg transition-all duration-300 shadow-xl shadow-primary/20 flex items-center justify-center gap-3 group"
+          >
             Free Subscribe
             <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </Button>
         </motion.div>
 
-        <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 bg-white/[0.02] py-3 px-8 rounded-full border border-white/[0.05]">
+        <div className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 bg-white/[0.02] py-3 px-8 rounded-full border border-white/[0.05]">
           <span className="flex items-center gap-2"><Sparkles className="w-3 h-3 text-primary" /> No Spam</span>
           <span className="w-1 h-1 rounded-full bg-slate-800" />
           <span>One-Click Unsubscribe</span>

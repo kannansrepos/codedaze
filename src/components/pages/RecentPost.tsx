@@ -75,12 +75,12 @@ const RecentPost = () =>
             </p>
           </div>
 
-          <Link href="/posts">
-            <Button className="hidden md:flex rounded-full px-8 h-12 bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-all font-bold gap-2">
+          <Button asChild className="hidden md:flex rounded-full px-8 h-12 bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-all font-bold gap-2">
+            <Link href="/posts" aria-label="View all articles and tutorials">
               View All Articles
               <ChevronRight className="w-4 h-4" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
 
         {/* Posts Grid */}
@@ -154,12 +154,12 @@ const RecentPost = () =>
         </div>
 
         <div className="mt-12 md:hidden flex justify-center">
-          <Link href="/posts">
-            <Button className="rounded-full px-8 h-12 bg-primary text-white font-bold gap-2">
+          <Button asChild className="rounded-full px-8 h-12 bg-primary text-white font-bold gap-2">
+            <Link href="/posts" aria-label="View all articles and tutorials">
               View All Articles
               <ChevronRight className="w-4 h-4" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

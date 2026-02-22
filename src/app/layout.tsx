@@ -56,6 +56,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
         className={`${roboto.className} antialiased bg-[#020617] text-gray-100 min-h-screen selection:bg-primary/30 selection:text-primary-foreground`}

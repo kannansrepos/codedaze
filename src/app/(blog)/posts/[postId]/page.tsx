@@ -66,6 +66,7 @@ export default async function PostDetail({ params }: Props)
         <div className="relative container mx-auto px-4 pt-28 pb-16 md:pt-36 md:pb-24 max-w-5xl">
           <Link
             href="/posts"
+            aria-label="Back to all articles"
             className="inline-flex items-center gap-2 text-slate-500 hover:text-white transition-colors font-black group mb-12 text-xs uppercase tracking-[0.2em]"
           >
             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
