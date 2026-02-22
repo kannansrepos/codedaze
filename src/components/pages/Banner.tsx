@@ -50,7 +50,7 @@ const Banner = () =>
               Get Started Free
             </Button>
           </div>
-          <div className="flex items-center justify-center gap-8 text-xs font-bold text-slate-500 uppercase tracking-widest">
+          <div className="flex items-center justify-center gap-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
             <span className="flex items-center gap-1.5"><Rocket className="w-3 h-3" /> Saturday Edition</span>
             <span className="w-1 h-1 rounded-full bg-slate-700"></span>
             <span className="flex items-center gap-1.5"><Code2 className="w-3 h-3" /> Monday Tips</span>
@@ -83,9 +83,9 @@ const Banner = () =>
               <div className={`w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 ${feature.color}`}>
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+              <h2 className="text-xl font-bold text-white mb-3 tracking-tight">
                 {feature.title}
-              </h3>
+              </h2>
               <p className="text-sm text-slate-400 leading-relaxed font-medium">
                 {feature.desc}
               </p>
@@ -105,7 +105,7 @@ const Banner = () =>
               10K+
             </div>
           </div>
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-tighter">
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter">
             Join <span className="text-slate-300">10,000+</span> engineers leveling up their craft
           </p>
         </div>

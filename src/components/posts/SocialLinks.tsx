@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const SocialLinks = ({ size = 80 }: { size?: number }) => {
+const SocialLinks = ({ size = 80 }: { size?: number }) =>
+{
   const socialLink = [
     {
       name: 'LinkedIn',
@@ -30,6 +31,7 @@ const SocialLinks = ({ size = 80 }: { size?: number }) => {
         <Link
           key={link.name}
           href={link.link}
+          aria-label={`Visit my ${link.name} profile`}
           className="flex items-center gap-2"
         >
           <Image src={link.icon} alt={link.name} width={size} height={size} />

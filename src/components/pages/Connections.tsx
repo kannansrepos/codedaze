@@ -19,7 +19,7 @@ const Connections = () =>
 
           <div className="relative z-10 flex flex-col items-center text-center gap-10">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
                 <Users className="w-3.5 h-3.5" />
                 <span>Join the Community</span>
               </div>

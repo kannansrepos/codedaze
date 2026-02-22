@@ -63,7 +63,7 @@ const RecentPost = () =>
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-blue-400 text-xs font-bold uppercase tracking-wider">
               <TrendingUp className="w-3 h-3" />
               <span>Trending Now</span>
             </div>
@@ -110,7 +110,7 @@ const RecentPost = () =>
                           <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r ${techConfig.gradient} text-[10px] font-black uppercase tracking-widest text-white shadow-lg`}>
                             {techConfig.name}
                           </span>
-                          <div className="flex items-center gap-3 text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
+                          <div className="flex items-center gap-3 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
                             <div className="flex items-center gap-1">
                               <Calendar className="w-3 h-3" />
                               <span>{new Date(post.frontmatter?.date || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
