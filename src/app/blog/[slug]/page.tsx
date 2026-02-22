@@ -42,7 +42,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
   const fileContent = await fs.promises.readFile(postPath, 'utf-8');
   const { data, content } = matter(fileContent);
-  const html = marked(content);
+  const html = await marked(content);
 
   const postData = {
     title: data.title || params.slug.replace(/_/g, ' '),

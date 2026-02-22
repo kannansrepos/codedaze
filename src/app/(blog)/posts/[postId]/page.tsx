@@ -38,7 +38,7 @@ export default async function PostDetail({ params }: Props)
     notFound();
   }
 
-  const htmlContent = marked(post.content);
+  const htmlContent = await marked(post.content);
   const techConfig = getTechConfig(post.frontmatter.language || 'general');
 
   return (
