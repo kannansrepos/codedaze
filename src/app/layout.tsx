@@ -8,6 +8,7 @@ import { NextAuthProvider } from '@/components/providers/NextAuthProvider';
 const roboto = Roboto({
   weight: ['400', '900'],
   subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {

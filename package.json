@@ -12,6 +12,7 @@
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
     "@google/generative-ai": "^0.21.0",
+    "@next/third-parties": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@next/mdx": "^15.3.4",
     "@octokit/app": "^16.0.1",

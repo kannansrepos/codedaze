@@ -1,11 +1,18 @@
-import { Youtube, ExternalLink } from 'lucide-react';
+'use client';
+
+import { Youtube, ExternalLink, Play } from 'lucide-react';
+import { useState } from 'react';
+import Image from 'next/image';
 
 const RecentVideos = () =>
 {
+  const [isPlaying, setIsPlaying] = useState(false);
   const video = {
-    src: 'https://www.youtube.com/embed/mM5icOG7sxI',
+    id: 'mM5icOG7sxI',
     title: 'Build an AI App with Semantic Kernel in C# | Step-by-Step Tutorial',
+    thumbnail: 'https://i.ytimg.com/vi/mM5icOG7sxI/maxresdefault.jpg',
   };
+
   return (
     <section className="w-full py-24 px-4 relative overflow-hidden">
       <div className="container mx-auto max-w-6xl">
@@ -33,16 +40,37 @@ const RecentVideos = () =>
               <div className="absolute -inset-1 bg-gradient-to-r from-red-600/10 via-white/5 to-primary/10 rounded-[2rem] blur-xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
 
               <div className="relative h-full w-full bg-black rounded-[1.5rem] overflow-hidden border border-white/10 shadow-3xl">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={video.src}
-                  title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  className="w-full h-full grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
-                ></iframe>
+                {!isPlaying ? (
+                  <div
+                    className="relative w-full h-full cursor-pointer group/player"
+                    onClick={() => setIsPlaying(true)}
+                  >
+                    <Image
+                      src={video.thumbnail}
+                      alt={video.title}
+                      fill
+                      className="object-cover grayscale-[0.2] group-hover/player:grayscale-0 transition-all duration-700"
+                      sizes="(max-width: 960px) 100vw, 960px"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover/player:bg-black/10 transition-colors duration-500" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-20 h-20 rounded-full bg-red-600 flex items-center justify-center text-white shadow-2xl shadow-red-600/50 group-hover/player:scale-110 transition-transform duration-500">
+                        <Play className="w-8 h-8 fill-current translate-x-1" />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${video.id}?autoplay=1`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    className="w-full h-full"
+                  ></iframe>
+                )}
               </div>
             </div>
 
