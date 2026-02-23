@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Code Daze - Modern Web Development Tutorials',
     description: 'Expert tutorials and guides on .NET, React, Angular, Node.js, and cloud development.',
-    url: 'https://codedaze.tech',
+    url: 'https://www.codedaze.tech',
     siteName: 'Code Daze',
     locale: 'en_US',
     type: 'website',
@@ -39,7 +39,10 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  metadataBase: new URL('https://codedaze.tech'),
+  metadataBase: new URL('https://www.codedaze.tech'),
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export const viewport = {

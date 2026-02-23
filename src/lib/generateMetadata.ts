@@ -52,6 +52,11 @@ const generate_Metadata = ({
     icons: {
       icon: '/favicon.ico',
     },
+    ...(url && {
+      alternates: {
+        canonical: url,
+      },
+    }),
   };
 };
 

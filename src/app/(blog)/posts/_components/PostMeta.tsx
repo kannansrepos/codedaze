@@ -36,7 +36,8 @@ export async function generateMetadata({
   return generate_Metadata({
     title: slagData.title,
     description: slagData.subtitle,
-    url: `https://codedaze.tech/img/${getImage(slagData?.language)}.png`,
+    url: `https://www.codedaze.tech/blog/${params.postId}`,
+    image: `https://www.codedaze.tech/img/${getImage(slagData?.language)}.png`,
     keywords: slagData.SEO_Keywords_List,
   });
 }

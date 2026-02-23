@@ -20,8 +20,8 @@ Failed to compile.
 Type error: Type '{} | undefined' is not assignable to type 'string | undefined'.
   Type '{}' is not assignable to type 'string'.
 
-  23 |     url: `https://codedaze.tech/blog/${params.postId}`,
-  24 |     image: `https://codedaze.tech/img/${post.frontmatter.language || 'default'}.png`,
+  23 |     url: `https://www.codedaze.tech/blog/${params.postId}`,
+  24 |     image: `https://www.codedaze.tech/img/${post.frontmatter.language || 'default'}.png`,
 > 25 |     keywords: post.frontmatter.SEO_Keywords_List || post.frontmatter.keywords,
      |     ^
   26 |     type: 'article',

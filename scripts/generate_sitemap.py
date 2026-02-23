@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 # Configuration
-base_url = "https://codedaze.tech"
+base_url = "https://www.codedaze.tech"
 directory = "posts"
 changefreq = "monthly"
 priority = "0.8"

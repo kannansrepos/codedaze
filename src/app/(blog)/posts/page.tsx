@@ -11,7 +11,7 @@ const POSTS_DIR = path.join(process.cwd(), 'posts');
 export const metadata: Metadata = generate_Metadata({
   title: 'Blog Posts | Code Daze - Modern Web Development Tutorials',
   description: 'Explore our collection of technical articles, tutorials, and insights on .NET, React, Angular, and Cloud architecture.',
-  url: 'https://codedaze.tech/posts',
+  url: 'https://www.codedaze.tech/posts',
   keywords: 'blog, tutorials, .NET, React, Angular, Next.js, Cloud, Web Development',
 });
 

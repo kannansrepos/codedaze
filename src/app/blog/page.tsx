@@ -41,6 +41,9 @@ async function getAllPosts()
 export const metadata: Metadata = {
   title: 'Blog – CodeDaze',
   description: 'All blog posts sorted by newest first',
+  alternates: {
+    canonical: 'https://www.codedaze.tech/blog',
+  },
 };
 
 export default async function BlogPage({ searchParams }: { searchParams?: { [key: string]: string | string[] } })

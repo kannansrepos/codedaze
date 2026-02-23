@@ -92,6 +92,22 @@ const nextConfig = {
       },
     ];
   },
+  async redirects()
+  {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'codedaze.tech',
+          },
+        ],
+        destination: 'https://www.codedaze.tech/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withPWA(nextConfig);

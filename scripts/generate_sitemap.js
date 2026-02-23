@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const baseUrl = 'https://codedaze.tech';
+const baseUrl = 'https://www.codedaze.tech';
 const directory = 'posts';
 const changefreq = 'monthly';
 const priority = '0.8';
@@ -20,6 +20,18 @@ let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
         <priority>1.0</priority>
     </url>
 `;
+
+// Static pages
+const staticPages = ['/blog', '/posts', '/about'];
+staticPages.forEach((page) =>
+{
+  sitemap += `    <url>
+        <loc>${baseUrl}${page}</loc>
+        <lastmod>${currentDate}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>\n`;
+});
 
 const postsPath = path.join(process.cwd(), directory);
 const files = fs.readdirSync(postsPath);
